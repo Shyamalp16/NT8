@@ -1,0 +1,101 @@
+project:
+  name: nt8-pattern-research
+  created_date: 2026-07-28
+  timezone: America/New_York
+  mcp_mode: demo
+  mcp_read_only: true
+
+instruments:
+  primary_product: MNQ
+  confirmation_product: NQ
+  current_primary_contract: MNQU6
+  current_confirmation_contract: NQU6
+  exchange: CME
+  tick_size: 0.25
+  mnq_tick_value_usd: 0.50
+  mnq_value_per_point_usd: 2.00
+  nq_tick_value_usd: 5.00
+  nq_value_per_point_usd: 20.00
+
+research_period:
+  latest_fully_completed_session: 2026-07-27
+  start_date: 2021-07-28
+  end_date: 2026-07-27
+  exclude_current_incomplete_session: true
+  final_test_fraction: 0.20
+  validation_fraction: 0.20
+  development_fraction: 0.60
+
+sessions:
+  rth:
+    start: "09:30:00"
+    end: "16:00:00"
+  core_active_window:
+    start: "09:30:00"
+    end: "12:00:00"
+  secondary_window:
+    start: "12:00:00"
+    end: "16:00:00"
+  analyze_eth_and_rth_separately: true
+  daylight_saving_aware: true
+
+data_policy:
+  broad_discovery_bar_type: Minute
+  broad_discovery_bar_size: 1
+  broad_discovery_chunk: 1 month
+  finalist_validation_preference:
+    - true_trade_ticks
+    - provider_tick_or_range_bars
+    - one_minute_bars_with_volume_profile
+    - NinjaTrader_high_fill_resolution
+    - Market_Replay_or_Historical_Playback_sample
+  tick_data_policy: finalists_only
+  full_period_tick_download_allowed: false
+  provider_record_cap_per_request: 10000
+  cache_existing_downloads: true
+  preserve_raw_data: true
+  request_retry_max_attempts: 5
+  request_retry_backoff_seconds: [1, 2, 4, 8, 16]
+
+execution_assumptions:
+  position_size_contracts: 1
+  pyramiding: false
+  max_simultaneous_positions: 1
+  base_slippage_ticks_per_side: 1
+  stress_slippage_ticks_per_side: [2, 3]
+  commission_usd_per_round_turn: null
+  commission_required: true
+  order_fill_model: conservative
+  same_bar_entry_exit_allowed: false
+  same_bar_stop_target_rule: adverse_if_sequence_unknown
+  limit_fill_on_touch_assumed: false
+
+validation:
+  chronological_splits_required: true
+  final_test_is_untouched: true
+  walk_forward:
+    method: anchored_or_rolling
+    purge_overlapping_labels: true
+    embargo_required: true
+  multiple_testing:
+    record_all_hypotheses: true
+    correction: benjamini_hochberg
+    bootstrap_confidence_intervals: true
+    randomized_null_tests: true
+  independent_confirmation:
+    python_backtest: true
+    ninjatrader_strategy_analyzer_backtest: true
+    ninjatrader_walk_forward_optimization: true
+    ninjatrader_monte_carlo: true
+    market_replay_selected_sessions: true
+
+acceptance_gates:
+  min_out_of_sample_trades: 150
+  min_trades_per_walk_forward_fold: 30
+  require_positive_net_expectancy_base_costs: true
+  require_positive_net_expectancy_two_tick_stress: true
+  preferred_final_test_profit_factor_min: 1.20
+  max_single_trade_profit_share: 0.10
+  max_single_month_profit_share: 0.25
+  max_single_year_profit_share: 0.50
+

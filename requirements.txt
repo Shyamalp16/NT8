@@ -1,0 +1,10 @@
+duckdb
+numpy
+pandas
+polars
+pyarrow
+pyyaml
+scipy
+statsmodels
+pytest
+
