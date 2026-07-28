@@ -56,6 +56,18 @@ data_policy:
   preserve_raw_data: true
   request_retry_max_attempts: 5
   request_retry_backoff_seconds: [1, 2, 4, 8, 16]
+  minute_request_max_calendar_days: 7
+  raw_response_format: json
+  raw_response_checksum: sha256
+  overwrite_raw_responses: false
+
+contract_rolls:
+  quarterly_months: [3, 6, 9, 12]
+  volume_crossover_lookback_calendar_days: 35
+  volume_crossover_confirmation_sessions: 2
+  fallback_business_days_before_expiry: 5
+  decision_uses_completed_daily_bars_only: true
+  activate_new_contract_next_session: true
 
 execution_assumptions:
   position_size_contracts: 1
@@ -98,4 +110,3 @@ acceptance_gates:
   max_single_trade_profit_share: 0.10
   max_single_month_profit_share: 0.25
   max_single_year_profit_share: 0.50
-

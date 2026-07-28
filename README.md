@@ -27,5 +27,6 @@ The current MCP audit found usable minute and daily bars for individual MNQ cont
 
 ## Current Phase
 
-Phase 1 is in progress: MCP capability audit and repository scaffold. No broad data download or pattern mining has started.
-
+Phase 1 is complete at Git checkpoint `3eadb90`. Phase 2 data-acquisition
+infrastructure is in progress. The full sequence and phase gates are documented
+in `reports/project_execution_plan.md`.

@@ -1,0 +1,12 @@
+# Large, reproducible data products stay local. Their manifests and checksums are tracked.
+data/raw/**
+!data/raw/.gitkeep
+data/normalized/**
+!data/normalized/.gitkeep
+data/features/**
+!data/features/.gitkeep
+
+__pycache__/
+.pytest_cache/
+*.py[cod]
+
