@@ -1,0 +1,18 @@
+{
+  "artifact": "data/normalized/mnq_1m.parquet",
+  "bytes": 40460012,
+  "compression": "zstd",
+  "created_by": "python -m src.data_audit run",
+  "exclusions": "data/manifests/exclusions.jsonl",
+  "format": "parquet",
+  "max_timestamp_utc": "2026-07-27T20:59:00Z",
+  "min_timestamp_utc": "2021-07-28T04:00:00Z",
+  "observed_session_count": 1292,
+  "row_count": 1769795,
+  "session_quality": "data/manifests/session_quality.csv",
+  "sha256": "0f3b5fe3153c77fc0c28bdee34656a82905ada011822d1bb0adce6a99fe02157",
+  "source_ledger": "data/manifests/download_ledger.jsonl",
+  "source_manifest": "data/manifests/minute_requests.jsonl",
+  "usable_row_count": 1701735,
+  "usable_session_count": 1241
+}

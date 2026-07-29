@@ -1,0 +1,52 @@
+{
+  "calendar": {
+    "bar_interval": "[timestamp, timestamp + 1 minute)",
+    "name": "CME Globex Equity",
+    "timezone": "America/New_York"
+  },
+  "conflicting_duplicate_keys": 0,
+  "early_close_session_count": 50,
+  "exact_duplicate_rows_removed": 0,
+  "excluded_session_count": 53,
+  "expected_session_count": 1294,
+  "gate_passed": true,
+  "invalid_bar_rows": 0,
+  "issue_record_count": 76,
+  "missing_minutes": 2969,
+  "missing_rth_minutes": 30,
+  "normalized_rows": 1769795,
+  "nq_confirmation_status": "deferred_until_strong_mnq_candidates_exist_per_phase_2_scope",
+  "outside_research_rows_removed": 360,
+  "phase": 3,
+  "quality_record_count": 1294,
+  "research_end": "2026-07-27",
+  "research_start": "2021-07-28",
+  "roll_sessions_excluded": 20,
+  "sessions_with_missing_minutes": 32,
+  "source_request_count": 265,
+  "source_rows": 1770155,
+  "split_summary": {
+    "development": {
+      "excluded_sessions": 33,
+      "observed_rows": 1063787,
+      "quality_records": 777,
+      "usable_sessions": 744
+    },
+    "final_untouched_test": {
+      "excluded_sessions": 12,
+      "observed_rows": 354157,
+      "quality_records": 259,
+      "usable_sessions": 247
+    },
+    "validation": {
+      "excluded_sessions": 8,
+      "observed_rows": 351851,
+      "quality_records": 258,
+      "usable_sessions": 250
+    }
+  },
+  "status": "complete",
+  "unexpected_minutes": 4,
+  "usable_rows": 1701735,
+  "usable_session_count": 1241
+}

@@ -47,13 +47,19 @@ present in the failed-request log. No period is silently skipped.
 
 ## Phase 3: Data-quality audit
 
+Status: complete as of 2026-07-28. All 265 raw minute responses passed checksum
+and schema verification. The audit created 1,294 session-quality records,
+retained 1,241 usable sessions, and machine-excluded 53 sessions with missing
+coverage, out-of-calendar timestamps, or mixed-contract roll boundaries. See
+`reports/data_quality_audit.md`.
+
 Normalize timestamps to daylight-saving-aware Eastern time while preserving
 UTC. Deduplicate only through explicit deterministic rules. Audit OHLCV
 integrity, expected session coverage, missing bars, DST, holidays, early closes,
 roll gaps, and MNQ/NQ differences. Produce a machine-readable exclusion list.
 
 Gate: severe issues are corrected or excluded and every session has a quality
-record.
+record. Gate passed.
 
 ## Phase 4: Feature construction
 

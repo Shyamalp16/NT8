@@ -1,10 +1,12 @@
 duckdb
+exchange-calendars
 numpy
 pandas
+pandas-market-calendars
 polars
 pyarrow
+pytz
 pyyaml
 scipy
 statsmodels
 pytest
-
