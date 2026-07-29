@@ -93,14 +93,32 @@ is presented as a strategy. Gate passed.
 
 ## Phase 6: Event studies
 
+Status: complete as of 2026-07-28 for preregistration `phase6_v1` and
+2026-07-29 for the separately frozen `phase6_v2`. V1 retained all 21
+hypotheses across four families and found no survivor. V2 retained four tests
+across two genuinely new families, evaluated 7,269 event observations, used
+session-cluster bootstrap and randomized nulls, and added a cumulative
+Benjamini-Hochberg sensitivity across all 25 v1+v2 tests. The 15-minute and
+30-minute volatility-state transition hypotheses survived every frozen gate;
+the signed pressure family did not. See `reports/event_studies_report.md` and
+`reports/event_studies_v2_report.md`.
+
 Preregister interpretable event families, record every test, estimate bootstrap
 intervals and permuted nulls, and apply Benjamini-Hochberg correction within
 families.
 
-Gate: the full hypothesis ledger includes winners and failures, with no final
-test data used.
+Gate: the full hypothesis ledgers include winners and failures, with no
+validation or final-test data used. Gate passed. V1 is null; v2 supplies two
+non-directional volatility-range survivors.
 
 ## Phase 7: Candidate strategy generation
+
+Status: not started, but narrowly unblocked by Phase 6 v2. Candidate generation
+may use only the frozen high-volatility state and 15/30-minute range-expansion
+finding. The result does not select long versus short. Any breakout,
+straddle-like stop-entry, or directional mechanism is a new executable rule
+that must be frozen before outcomes are measured. The failed signed-pressure
+family is not eligible.
 
 Freeze simple candidates with objective setup, trigger, next-event entry, stop,
 exit, maximum hold, cutoff, and missing-data behavior. Measure raw excursions

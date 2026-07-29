@@ -1,0 +1,180 @@
+{
+  "analysis_class": "preregistered_event_study_not_strategy",
+  "artifacts": {
+    "event_observations": {
+      "bytes": 395265,
+      "column_count": 14,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase6/event_observations.parquet",
+      "row_count": 14447,
+      "schema": "family_id: large_string\nhypothesis_id: large_string\nevent_label: large_string\nsession_date: timestamp[us]\ncalendar_year: int64\ntrigger_clock_minute: int64\nentry_clock_minute: int64\nhorizon_minutes: int64\nevent_direction: double\nevent_magnitude_bps: double\nentry_price: double\nexit_price: double\nforward_return_bps: double\neffect_bps: double\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 1872",
+      "sha256": "5e431e3a2746bdecafedcabe7187084392ccf6ef3689613b948a173f4366120b"
+    },
+    "family_summary": {
+      "bytes": 6677,
+      "column_count": 9,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase6/family_summary.parquet",
+      "row_count": 4,
+      "schema": "family_id: large_string\nhypotheses: int64\nsample_sufficient_hypotheses: int64\nbh_rejections: int64\nadvancing_hypotheses: int64\nminimum_p_value: double\nminimum_q_value: double\nmaximum_observations: int64\nminimum_observations: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 1273",
+      "sha256": "ad5b0bf3b332950f175a8d1258aefa372bfae505bd794ef5ac50cc107ea84dd4"
+    },
+    "hypothesis_ledger": {
+      "bytes": 21666,
+      "column_count": 29,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase6/hypothesis_ledger.parquet",
+      "row_count": 21,
+      "schema": "family_id: large_string\nhypothesis_id: large_string\nhypothesis_label: large_string\nfamily_description: large_string\nevent_type: large_string\nhorizon_minutes: int64\nanchor_minute: double\nreference_range: large_string\neffect_definition: large_string\neffect_interpretation: large_string\nalternative: large_string\nrandomized_null: large_string\nobservations: int64\nyears: int64\nfirst_session: timestamp[us]\nlast_session: timestamp[us]\nmean_effect_bps: double\nmedian_effect_bps: double\nstandard_deviation_bps: double\npositive_effect_rate: double\nbootstrap_ci_low: double\nbootstrap_ci_high: double\npermutation_p_value: double\nsample_sufficient: bool\nbh_q_value: double\nbh_reject: bool\nbootstrap_ci_excludes_zero: bool\nadvances_to_phase7: bool\nresult: large_string\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 3801",
+      "sha256": "4497bde16bfd5d9da995467ab9c78a8fdd215851f04ee75965abdc10334317d1"
+    },
+    "hypothesis_year_stability": {
+      "bytes": 7673,
+      "column_count": 7,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase6/hypothesis_year_stability.parquet",
+      "row_count": 84,
+      "schema": "family_id: large_string\nhypothesis_id: large_string\ncalendar_year: int64\nobservations: int64\nmean_effect_bps: double\nmedian_effect_bps: double\npositive_effect_rate: double\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 980",
+      "sha256": "26e48c63a9263225c636ead16e000feab0dc319b267200a74a7f0eaad5871f35"
+    },
+    "phase6_manifest": {
+      "path": "data/manifests/phase6_manifest.json"
+    }
+  },
+  "coverage": {
+    "advancing_hypotheses": 0,
+    "bh_rejections": 0,
+    "development_rows": 1021050,
+    "development_sessions": 744,
+    "event_observations": 14447,
+    "final_test_rows_used": 0,
+    "hypotheses": 21,
+    "sample_sufficient_hypotheses": 21,
+    "validation_rows_used": 0
+  },
+  "created_at_utc": "2026-07-29T03:21:02.170132+00:00",
+  "created_by": "python -m src.event_studies run",
+  "findings": {
+    "advancing_hypotheses": [],
+    "interpretation": "Positive directional effects indicate continuation and negative effects indicate reversal. Advancement is an event-study screen, not evidence of tradability."
+  },
+  "forbidden_splits": [
+    "validation",
+    "final_untouched_test"
+  ],
+  "gate_passed": true,
+  "input_split": "development",
+  "limitations": [
+    "All Phase 6 results use the same development period that informed the Phase 5 descriptive map.",
+    "Benjamini-Hochberg correction is applied within prespecified families, not across every conceivable event definition.",
+    "One-minute OHLC bars do not reveal within-bar path or executable fill sequence.",
+    "No commissions, slippage, orders, stops, targets, or position sizing are part of this event study.",
+    "Validation and final-test outcomes remain untouched."
+  ],
+  "method": {
+    "alternative": "two_sided",
+    "bootstrap": "session-level percentile bootstrap",
+    "bootstrap_replicates": 5000,
+    "minimum_observations": 100,
+    "multiple_testing": "Benjamini-Hochberg within family at alpha=0.05",
+    "permutation_replicates": 5000,
+    "randomized_nulls": [
+      "permute_event_direction_across_sessions",
+      "rademacher_sign_flip"
+    ]
+  },
+  "phase": 6,
+  "preregistration": {
+    "config_path": "config/phase6.yaml",
+    "families": 4,
+    "hypotheses": 21,
+    "sha256": "e250c690e6826e586e21ac6876c6de6e2ecd05730eedd8e57e83e192de98ea3b"
+  },
+  "runtime_versions": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "pyarrow": "25.0.0",
+    "python": "3.12.13",
+    "pyyaml": "6.0.3",
+    "scipy": "1.18.0"
+  },
+  "source_hashes": {
+    "bar_features": "a7642c40cd8802c410bfc57c6a64c221d2313f2daee6778484f2af68f7a3f393",
+    "feature_manifest": "2a0a0ce757c08902282cecbb1a14a03991dd21311b05a7bd42f4f78ad70baeed",
+    "phase5_manifest": "0efeeee56d547283b4a9938d95559d043d71fcec667bae5e6e72fac8385c2475",
+    "phase6_preregistration": "e250c690e6826e586e21ac6876c6de6e2ecd05730eedd8e57e83e192de98ea3b",
+    "pipeline_code": "3eb4035d7a968b52d89ec9eb7f7bef0dea196a4871256d5b1c1464a884310443",
+    "research_config": "1649e5716cfb8f51457499e57a3adfa5b74d2f90bf2b3255161ec45df4f26b4d",
+    "split_config": "4e23a0871ad107c3061855fab7c2e22aff034570ae9b4ca283a0f30ddc7021b9",
+    "statistics_code": "dc3f0189bd097731c530bc0452aff28d277ea2120b9ea07254cb40b775ea49cb"
+  },
+  "validation": {
+    "checks": {
+      "advancement_rule_enforced": true,
+      "all_failures_retained": true,
+      "analysis_is_event_study_not_strategy": true,
+      "bh_q_values_valid": true,
+      "bootstrap_intervals_valid": true,
+      "byte_reproducible_rebuild": true,
+      "development_split_only": true,
+      "event_observations_nonempty": true,
+      "family_summary_complete": true,
+      "full_hypothesis_ledger_retained": true,
+      "hypothesis_ids_unique": true,
+      "locked_final_rows_absent": true,
+      "no_unregistered_observations": true,
+      "one_observation_per_session_hypothesis": true,
+      "permutation_p_values_valid": true,
+      "phase4_development_row_count_preserved": true,
+      "preregistration_flag_frozen": true,
+      "sample_sizes_visible": true
+    },
+    "details": {
+      "advancing_hypotheses": 0,
+      "bh_rejections": 0,
+      "development_rows": 1021050,
+      "development_sessions": 744,
+      "event_observations": 14447,
+      "families": 4,
+      "final_test_rows_used": 0,
+      "hypotheses": 21,
+      "observed_splits": [
+        "development"
+      ],
+      "reproducibility": {
+        "artifacts": {
+          "event_observations": {
+            "byte_identical": true,
+            "original_sha256": "5e431e3a2746bdecafedcabe7187084392ccf6ef3689613b948a173f4366120b",
+            "rebuilt_sha256": "5e431e3a2746bdecafedcabe7187084392ccf6ef3689613b948a173f4366120b"
+          },
+          "family_summary": {
+            "byte_identical": true,
+            "original_sha256": "ad5b0bf3b332950f175a8d1258aefa372bfae505bd794ef5ac50cc107ea84dd4",
+            "rebuilt_sha256": "ad5b0bf3b332950f175a8d1258aefa372bfae505bd794ef5ac50cc107ea84dd4"
+          },
+          "hypothesis_ledger": {
+            "byte_identical": true,
+            "original_sha256": "4497bde16bfd5d9da995467ab9c78a8fdd215851f04ee75965abdc10334317d1",
+            "rebuilt_sha256": "4497bde16bfd5d9da995467ab9c78a8fdd215851f04ee75965abdc10334317d1"
+          },
+          "hypothesis_year_stability": {
+            "byte_identical": true,
+            "original_sha256": "26e48c63a9263225c636ead16e000feab0dc319b267200a74a7f0eaad5871f35",
+            "rebuilt_sha256": "26e48c63a9263225c636ead16e000feab0dc319b267200a74a7f0eaad5871f35"
+          }
+        },
+        "byte_identical": true
+      },
+      "sample_sufficient_hypotheses": 21,
+      "validation_rows_used": 0
+    },
+    "failed_checks": [],
+    "gate_passed": true
+  },
+  "version": "phase6_v1"
+}

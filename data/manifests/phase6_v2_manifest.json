@@ -1,0 +1,233 @@
+{
+  "analysis_class": "preregistered_second_wave_event_study_not_strategy",
+  "artifacts": {
+    "cumulative_hypothesis_ledger": {
+      "bytes": 5001,
+      "column_count": 6,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase6_v2/cumulative_hypothesis_ledger.parquet",
+      "row_count": 25,
+      "schema": "family_id: large_string\nhypothesis_id: large_string\npermutation_p_value: double\nwave: large_string\ncumulative_bh_q_value: double\ncumulative_bh_reject: bool\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 850",
+      "sha256": "c919a0f81b367901b2cd8b1f9fea8a162553a97aa5ef4c9f94f011f05556a277"
+    },
+    "event_observations": {
+      "bytes": 424978,
+      "column_count": 21,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase6_v2/event_observations.parquet",
+      "row_count": 7269,
+      "schema": "family_id: large_string\nhypothesis_id: large_string\nevent_label: large_string\nsession_date: timestamp[us]\ncalendar_year: int64\ntrigger_clock_minute: int64\nentry_clock_minute: int64\nhorizon_minutes: int64\nevent_state: large_string\nevent_direction: double\nevent_value: double\nevent_activity: double\nthreshold_primary: double\nthreshold_secondary: double\nbaseline_history_observations: int64\nentry_price: double\nexit_price: double\nforward_return_bps: double\nforward_abs_return_bps: double\nforward_range_bps: double\neffect_bps: double\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 2812",
+      "sha256": "4d89bf07d0c104525202e0139303fe0f84bbfb672c3950384df9c926766e1660"
+    },
+    "family_summary": {
+      "bytes": 8275,
+      "column_count": 11,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase6_v2/family_summary.parquet",
+      "row_count": 2,
+      "schema": "family_id: large_string\nhypotheses: int64\nsample_sufficient_hypotheses: int64\nwithin_family_bh_rejections: int64\ncumulative_bh_rejections: int64\nadvancing_hypotheses: int64\nminimum_p_value: double\nminimum_within_family_q_value: double\nminimum_cumulative_q_value: double\nminimum_observations: int64\nmaximum_observations: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 1627",
+      "sha256": "8cb3434113810e044122615e574ffb908a836088f3e5d8299b2a6dfcb82b0ffb"
+    },
+    "hypothesis_ledger": {
+      "bytes": 25068,
+      "column_count": 35,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase6_v2/hypothesis_ledger.parquet",
+      "row_count": 4,
+      "schema": "family_id: large_string\nhypothesis_id: large_string\nhypothesis_label: large_string\nfamily_description: large_string\nevent_type: large_string\nhorizon_minutes: int64\neffect_definition: large_string\neffect_interpretation: large_string\nalternative: large_string\nrandomized_null: large_string\nobservations: int64\nsession_clusters: int64\nyears: int64\nfirst_session: timestamp[us]\nlast_session: timestamp[us]\nhigh_state_observations: int64\nlow_state_observations: int64\nhigh_state_mean_outcome_bps: double\nlow_state_mean_outcome_bps: double\nmean_effect_bps: double\nmedian_effect_bps: double\nstandard_deviation_bps: double\npositive_effect_rate: double\nbootstrap_ci_low: double\nbootstrap_ci_high: double\npermutation_p_value: double\ngroup_sample_sufficient: bool\nsample_sufficient: bool\nbh_q_value: double\nbh_reject: bool\ncumulative_bh_q_value: double\ncumulative_bh_reject: bool\nbootstrap_ci_excludes_zero: bool\nadvances_to_phase7: bool\nresult: large_string\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 4688",
+      "sha256": "7208aa655b77e5b022721941b9ec04c44b04e6816012de3a69a0ad71b9b9c6cf"
+    },
+    "hypothesis_year_stability": {
+      "bytes": 4791,
+      "column_count": 6,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase6_v2/hypothesis_year_stability.parquet",
+      "row_count": 16,
+      "schema": "family_id: large_string\nhypothesis_id: large_string\ncalendar_year: int64\nobservations: int64\nsession_clusters: int64\nmean_effect_bps: double\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 833",
+      "sha256": "d598a074cfddf7c5575e73b78fffe9ed55d8997b40e799a2da678ff6917549df"
+    },
+    "phase6_v2_manifest": {
+      "path": "data/manifests/phase6_v2_manifest.json"
+    }
+  },
+  "coverage": {
+    "advancing_hypotheses": 2,
+    "cumulative_bh_rejections_among_v2": 2,
+    "development_rows": 1021050,
+    "development_sessions": 744,
+    "event_observations": 7269,
+    "final_test_rows_used": 0,
+    "hypotheses": 4,
+    "sample_sufficient_hypotheses": 4,
+    "validation_rows_used": 0,
+    "within_family_bh_rejections": 2
+  },
+  "created_at_utc": "2026-07-29T03:53:16.848750+00:00",
+  "created_by": "python -m src.event_studies_v2 run",
+  "findings": {
+    "advancing_hypotheses": [
+      {
+        "bh_q_value": 0.0001999600079984003,
+        "bootstrap_ci_high": 23.550738357893874,
+        "bootstrap_ci_low": 18.75500973845258,
+        "cumulative_bh_q_value": 0.002499500099980004,
+        "family_id": "volatility_state_transition",
+        "horizon_minutes": 15,
+        "hypothesis_id": "volatility_state_transition__15m",
+        "mean_effect_bps": 21.137538629648656,
+        "observations": 3114,
+        "permutation_p_value": 0.0001999600079984003,
+        "session_clusters": 658
+      },
+      {
+        "bh_q_value": 0.0001999600079984003,
+        "bootstrap_ci_high": 32.511075517210706,
+        "bootstrap_ci_low": 25.736581752846217,
+        "cumulative_bh_q_value": 0.002499500099980004,
+        "family_id": "volatility_state_transition",
+        "horizon_minutes": 30,
+        "hypothesis_id": "volatility_state_transition__30m",
+        "mean_effect_bps": 29.101763467754267,
+        "observations": 3109,
+        "permutation_p_value": 0.0001999600079984003,
+        "session_clusters": 658
+      }
+    ],
+    "interpretation": "Volatility effects are high-state minus low-state future range. Pressure effects are direction-aligned future return. Neither is a tradability claim."
+  },
+  "forbidden_splits": [
+    "validation",
+    "final_untouched_test"
+  ],
+  "gate_passed": true,
+  "input_split": "development",
+  "limitations": [
+    "Both v2 families are evaluated on the development period only.",
+    "The pressure feature is an uptick/downtick proxy, not true historical trade-aggressor imbalance.",
+    "One-minute OHLCV cannot establish intrabar paths or fills.",
+    "No costs, orders, stops, targets, sizing, or fill simulation are part of this event study.",
+    "Validation and final-test outcomes remain untouched."
+  ],
+  "method": {
+    "alternative": "two_sided",
+    "bootstrap": "session-cluster percentile bootstrap",
+    "bootstrap_replicates": 5000,
+    "cumulative_sensitivity": "Benjamini-Hochberg across 21 Phase 6 v1 plus 4 v2 hypotheses",
+    "permutation_replicates": 5000,
+    "randomized_nulls": [
+      "permute_pressure_direction_across_sessions",
+      "permute_state_within_entry_clock_minute"
+    ],
+    "within_family_multiple_testing": "Benjamini-Hochberg within each v2 family at alpha=0.05"
+  },
+  "phase": "6_v2",
+  "preregistration": {
+    "config_path": "config/phase6_v2.yaml",
+    "families": 2,
+    "hypotheses": 4,
+    "receipt_path": "data/manifests/phase6_v2_preregistration.json",
+    "registered_at_utc": "2026-07-29T03:46:12.5621362Z",
+    "sha256": "d5da295ea8928bd79e9a7b4a095ca15bdbbc6c45061c51b30eaa105f65ee3e99"
+  },
+  "provider_semantics": {
+    "signed_pressure_burst": "up_volume and down_volume are treated as provider-described uptick/downtick volume, not bid/ask aggressor volume"
+  },
+  "runtime_versions": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "pyarrow": "25.0.0",
+    "python": "3.12.13",
+    "pyyaml": "6.0.3",
+    "scipy": "1.18.0"
+  },
+  "source_hashes": {
+    "bar_features": "a7642c40cd8802c410bfc57c6a64c221d2313f2daee6778484f2af68f7a3f393",
+    "feature_manifest": "2a0a0ce757c08902282cecbb1a14a03991dd21311b05a7bd42f4f78ad70baeed",
+    "phase6_v1_hypothesis_ledger": "4497bde16bfd5d9da995467ab9c78a8fdd215851f04ee75965abdc10334317d1",
+    "phase6_v2_preregistration": "d5da295ea8928bd79e9a7b4a095ca15bdbbc6c45061c51b30eaa105f65ee3e99",
+    "pipeline_code": "7dde65b91d1aedf34f5cd37f27ed508be27e6f327529970ff715f1f57e218baf",
+    "preregistration_receipt": "297353093260852332e9cf0a4bf0f1492fd406649d4625c2e6c8c45474babb32",
+    "statistics_code": "6d25c2b59c3766d360bf6913415310907d5e5bb82a9ffedcf9d68fa069b95e46"
+  },
+  "validation": {
+    "checks": {
+      "advancement_rule_enforced": true,
+      "analysis_is_event_study_not_strategy": true,
+      "bootstrap_intervals_valid": true,
+      "byte_reproducible_rebuild": true,
+      "cumulative_q_values_valid": true,
+      "development_row_count_preserved": true,
+      "development_split_only": true,
+      "exactly_four_registered_hypotheses": true,
+      "family_summary_complete": true,
+      "first_pressure_event_per_session": true,
+      "forward_outcomes_finite": true,
+      "locked_final_rows_absent": true,
+      "next_bar_entry_enforced": true,
+      "only_registered_observations": true,
+      "permutation_p_values_valid": true,
+      "preregistered_before_outcomes": true,
+      "preregistration_hash_matches_receipt": true,
+      "pressure_thresholds_enforced": true,
+      "sample_sizes_visible": true,
+      "strictly_lagged_minimum_history_enforced": true,
+      "volatility_clock_events_unique": true,
+      "volatility_state_thresholds_enforced": true,
+      "within_family_q_values_valid": true
+    },
+    "details": {
+      "advancing_hypotheses": 2,
+      "cumulative_bh_rejections_among_v2": 2,
+      "development_rows": 1021050,
+      "development_sessions": 744,
+      "event_observations": 7269,
+      "families": 2,
+      "final_test_rows_used": 0,
+      "hypotheses": 4,
+      "observed_splits": [
+        "development"
+      ],
+      "reproducibility": {
+        "artifacts": {
+          "cumulative_hypothesis_ledger": {
+            "byte_identical": true,
+            "original_sha256": "c919a0f81b367901b2cd8b1f9fea8a162553a97aa5ef4c9f94f011f05556a277",
+            "rebuilt_sha256": "c919a0f81b367901b2cd8b1f9fea8a162553a97aa5ef4c9f94f011f05556a277"
+          },
+          "event_observations": {
+            "byte_identical": true,
+            "original_sha256": "4d89bf07d0c104525202e0139303fe0f84bbfb672c3950384df9c926766e1660",
+            "rebuilt_sha256": "4d89bf07d0c104525202e0139303fe0f84bbfb672c3950384df9c926766e1660"
+          },
+          "family_summary": {
+            "byte_identical": true,
+            "original_sha256": "8cb3434113810e044122615e574ffb908a836088f3e5d8299b2a6dfcb82b0ffb",
+            "rebuilt_sha256": "8cb3434113810e044122615e574ffb908a836088f3e5d8299b2a6dfcb82b0ffb"
+          },
+          "hypothesis_ledger": {
+            "byte_identical": true,
+            "original_sha256": "7208aa655b77e5b022721941b9ec04c44b04e6816012de3a69a0ad71b9b9c6cf",
+            "rebuilt_sha256": "7208aa655b77e5b022721941b9ec04c44b04e6816012de3a69a0ad71b9b9c6cf"
+          },
+          "hypothesis_year_stability": {
+            "byte_identical": true,
+            "original_sha256": "d598a074cfddf7c5575e73b78fffe9ed55d8997b40e799a2da678ff6917549df",
+            "rebuilt_sha256": "d598a074cfddf7c5575e73b78fffe9ed55d8997b40e799a2da678ff6917549df"
+          }
+        },
+        "byte_identical": true
+      },
+      "sample_sufficient_hypotheses": 4,
+      "validation_rows_used": 0,
+      "within_family_bh_rejections": 2
+    },
+    "failed_checks": [],
+    "gate_passed": true
+  },
+  "version": "phase6_v2"
+}

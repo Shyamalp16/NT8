@@ -27,12 +27,18 @@ The current MCP audit found usable minute and daily bars for individual MNQ cont
 
 ## Current Phase
 
-Phases 1 through 5 are complete. Phase 5 used the development split only to
-build separate full-session and RTH market clocks at five-minute anchors across
-1, 5, 15, 30, and 60-minute horizons. It produced 1,734 unconditional
-clock/horizon cells, 43,350 year/quarter/weekday/lagged-regime stability cuts,
-and session high/low timing distributions. All outputs passed split-lock,
-coverage, interval, uniqueness, and byte-reproducibility gates. No validation
-or final-test outcomes were inspected, and no strategy or tradable performance
-was produced. Phase 6 event studies are next. The full sequence and phase gates
-are documented in `reports/project_execution_plan.md`.
+Phases 1 through 6 are complete. Phase 6 v1 retained all 21 development-only
+tests and found no multiplicity-adjusted directional-return event. A separately
+preregistered v2 then tested four genuinely new hypotheses: two
+volatility-state transitions and two signed uptick/downtick pressure bursts.
+Both volatility-state horizons survived within-family and cumulative 25-test
+Benjamini-Hochberg correction plus session-cluster interval gates; both pressure
+tests failed. Validation and final-test outcomes remain untouched.
+
+Phase 7 is now narrowly unblocked for volatility-conditioned candidate
+generation. The Phase 6 v2 result forecasts wider future ranges, not direction,
+so it does not itself define a long or short strategy. Any breakout,
+stop-entry, or other executable mechanism must be frozen before testing and
+must include costs, conservative next-event fills, and same-bar ambiguity
+rules. See `reports/event_studies_v2_report.md` and
+`reports/project_execution_plan.md`.

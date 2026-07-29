@@ -1,0 +1,104 @@
+version: phase6_v1
+analysis_class: preregistered_event_study_not_strategy
+timezone: America/New_York
+preregistered_before_phase6_outcomes: true
+
+data_scope:
+  allowed_split: development
+  forbidden_splits:
+    - validation
+    - final_untouched_test
+  require_usable_sessions: true
+
+outcome_semantics:
+  bar_timestamp_meaning: bar_open
+  fixed_clock_entry: anchor_bar_open
+  known_at_anchor_entry: anchor_bar_open
+  close_confirmed_event_entry: next_bar_open
+  exit: final_included_bar_close
+  require_contiguous_minutes: true
+  return_unit: basis_points
+  no_costs_or_fill_simulation: true
+
+inference:
+  confidence_level: 0.95
+  bootstrap_replicates: 5000
+  permutation_replicates: 5000
+  random_seed: 20260729
+  resampling_unit: session
+  alternative: two_sided
+  minimum_observations: 100
+  p_value_plus_one_correction: true
+  multiple_testing:
+    method: benjamini_hochberg
+    alpha: 0.05
+    scope: within_family
+
+event_families:
+  - family_id: rth_fixed_clock_30m
+    description: >
+      Every non-overlapping 30-minute RTH block is retained so the Phase 5
+      strongest and weakest blocks are not tested in isolation.
+    event_type: fixed_clock
+    scope: rth
+    anchor_minutes: [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360]
+    horizons_minutes: [30]
+    effect: raw_forward_return_bps
+    randomized_null: rademacher_sign_flip
+
+  - family_id: overnight_gap_response
+    description: >
+      Test whether material RTH opening gaps from the prior RTH close tend to
+      continue or reverse after the 09:30 open.
+    event_type: directional_anchor
+    scope: rth
+    anchor_minute: 0
+    direction_feature: rth_open_gap_from_prior_rth
+    validity_feature: overnight_valid
+    minimum_absolute_event_bps: 10.0
+    horizons_minutes: [30, 60]
+    effect: event_direction_times_forward_return_bps
+    randomized_null: permute_event_direction_across_sessions
+
+  - family_id: opening_30_response
+    description: >
+      Test whether a material first-30-minute RTH move tends to continue or
+      reverse from 10:00.
+    event_type: directional_anchor
+    scope: rth
+    anchor_minute: 30
+    direction_feature: opening_30_return
+    validity_feature: opening_30_valid
+    minimum_absolute_event_bps: 10.0
+    horizons_minutes: [30, 60]
+    effect: event_direction_times_forward_return_bps
+    randomized_null: permute_event_direction_across_sessions
+
+  - family_id: reference_level_break_response
+    description: >
+      Test the response after the first RTH close outside each pre-known
+      reference range. The confirming close is observed before entry at the
+      next bar open.
+    event_type: first_range_break
+    scope: rth
+    reference_ranges:
+      - range_id: prior_rth_range
+        upper_feature: prior_rth_high
+        lower_feature: prior_rth_low
+        validity_feature: prior_session_valid
+      - range_id: overnight_range
+        upper_feature: overnight_high
+        lower_feature: overnight_low
+        validity_feature: overnight_valid
+    first_eligible_trigger_minute: 0
+    last_eligible_trigger_minute: 240
+    horizons_minutes: [15, 30]
+    effect: break_direction_times_forward_return_bps
+    randomized_null: permute_event_direction_across_sessions
+
+reporting:
+  technical_audience: true
+  include_all_hypotheses: true
+  include_failures: true
+  prohibit_strategy_or_tradability_claims: true
+  advancement_rule: bh_reject_and_bootstrap_interval_excludes_zero

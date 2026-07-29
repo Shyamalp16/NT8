@@ -1,0 +1,89 @@
+version: phase6_v2
+analysis_class: preregistered_second_wave_event_study_not_strategy
+extends: phase6_v1
+timezone: America/New_York
+preregistered_before_phase6_v2_outcomes: true
+
+data_scope:
+  allowed_split: development
+  forbidden_splits:
+    - validation
+    - final_untouched_test
+  require_usable_sessions: true
+
+outcome_semantics:
+  bar_timestamp_meaning: bar_open
+  feature_observation: trigger_bar_close
+  entry: next_bar_open
+  exit: final_included_bar_close
+  require_contiguous_minutes: true
+  return_unit: basis_points
+  no_costs_or_fill_simulation: true
+
+inference:
+  confidence_level: 0.95
+  bootstrap_replicates: 5000
+  permutation_replicates: 5000
+  random_seed: 20260730
+  resampling_unit: session_cluster
+  alternative: two_sided
+  minimum_observations: 100
+  minimum_group_observations: 100
+  p_value_plus_one_correction: true
+  multiple_testing:
+    method: benjamini_hochberg
+    alpha: 0.05
+    primary_scope: within_new_family
+    sensitivity_scope: cumulative_phase6_v1_and_v2
+
+event_families:
+  - family_id: volatility_state_transition
+    description: >
+      Test whether an extreme trailing 30-minute realized-volatility state
+      predicts a different subsequent RTH price range. This is a
+      non-directional conditional-volatility question, not another fixed-clock
+      mean-return test.
+    event_type: lagged_same_clock_state
+    scope: rth
+    state_feature: realized_vol_30
+    entry_minutes: [60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
+    trigger_offset_minutes: -1
+    baseline_history_sessions: 60
+    minimum_history_sessions: 40
+    low_state_quantile: 0.20
+    high_state_quantile: 0.80
+    horizons_minutes: [15, 30]
+    effect: high_minus_low_forward_range_bps
+    randomized_null: permute_state_within_entry_clock_minute
+
+  - family_id: signed_pressure_burst
+    description: >
+      Test whether the first unusually large five-minute uptick-versus-downtick
+      volume-pressure proxy in a session is followed by continuation or
+      exhaustion. Provider fields are not interpreted as historical bid/ask
+      aggressor volume.
+    event_type: first_lagged_same_clock_extreme
+    scope: rth
+    up_feature: up_volume
+    down_feature: down_volume
+    total_feature: total_volume
+    trailing_minutes: 5
+    first_eligible_trigger_minute: 30
+    last_eligible_trigger_minute: 330
+    baseline_history_sessions: 60
+    minimum_history_sessions: 40
+    absolute_pressure_quantile: 0.90
+    activity_quantile: 0.50
+    horizons_minutes: [5, 15]
+    effect: pressure_direction_times_forward_return_bps
+    randomized_null: permute_pressure_direction_across_sessions
+
+reporting:
+  technical_audience: true
+  include_all_hypotheses: true
+  include_failures: true
+  prohibit_strategy_or_tradability_claims: true
+  advancement_rule: >
+    minimum sample requirements, within-family BH rejection, cumulative
+    Phase-6-v1-plus-v2 BH rejection, and a session-cluster bootstrap interval
+    excluding zero

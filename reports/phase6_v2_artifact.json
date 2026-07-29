@@ -1,0 +1,710 @@
+{
+  "manifest": {
+    "blocks": [
+      {
+        "body": "# MNQ Phase 6 v2 Event Studies",
+        "id": "title",
+        "type": "markdown"
+      },
+      {
+        "body": "## Technical summary\n\nThe genuinely new volatility-state family survived every frozen screen: both the **15-minute and 30-minute future-range tests advance to Phase 7**. High trailing-volatility states preceded ranges wider by **21.14 bps** and **29.10 bps**, respectively. Both cumulative q-values are **0.0025** after correcting across all 25 Phase 6 v1+v2 tests. The signed pressure family failed. This establishes conditional volatility persistence, not direction or tradability.",
+        "id": "technical_summary",
+        "sourceId": "phase6_v2_manifest",
+        "type": "markdown"
+      },
+      {
+        "cardIds": [
+          "advancement",
+          "range_gap_15m",
+          "range_gap_30m",
+          "later_split_usage"
+        ],
+        "id": "headline_metrics",
+        "type": "metric-strip"
+      },
+      {
+        "body": "## High trailing volatility predicts materially wider near-term ranges\n\nAt 15 minutes, high-state events averaged **40.97 bps** of future range versus **19.83 bps** in low states. At 30 minutes, the comparison was **56.13 bps** versus **27.03 bps**. The event feature is the sample standard deviation of the prior 30 one-minute log returns, observed at the trigger-bar close; the outcome begins at the next bar open, so feature and outcome windows do not overlap.",
+        "id": "range_finding",
+        "sourceId": "hypothesis_ledger",
+        "type": "markdown"
+      },
+      {
+        "chartId": "range_chart",
+        "id": "range_chart_block",
+        "type": "chart"
+      },
+      {
+        "body": "## The volatility-range difference is positive in every calendar-year cut\n\nThe high-minus-low effect remains positive for both horizons in 2021, 2022, 2023, and the development portion of 2024. These annual cuts are descriptive diagnostics, not additional selection tests.",
+        "id": "annual_finding",
+        "sourceId": "year_stability",
+        "type": "markdown"
+      },
+      {
+        "chartId": "annual_chart",
+        "id": "annual_chart_block",
+        "type": "chart"
+      },
+      {
+        "body": "## Signed pressure bursts do not predict continuation or reversal\n\nThe 5-minute direction-aligned mean was **-0.37 bps** and the 15-minute mean was **0.59 bps**; both confidence intervals include zero and both cumulative q-values are 0.841. The provider fields are uptick/downtick volume, not trade-aggressor volume.",
+        "id": "pressure_finding",
+        "sourceId": "hypothesis_ledger",
+        "type": "markdown"
+      },
+      {
+        "id": "ledger_table_block",
+        "tableId": "ledger_table",
+        "type": "table"
+      },
+      {
+        "body": "## Scope, data, and metric definitions\n\n- **Population:** 1,021,050 one-minute development bars from 744 usable MNQ sessions; later splits are excluded.\n- **Volatility state:** current trailing 30-bar realized volatility compared with a strictly prior 60-session same-clock baseline; low is at or below the lagged 20th percentile and high is at or above the lagged 80th.\n- **Future range:** interval maximum high minus minimum low, divided by entry-bar open, in basis points.\n- **Pressure burst:** first five-minute absolute uptick/downtick pressure above its lagged same-clock 90th percentile with activity above the lagged median.\n- **Entry timing:** every event enters its measurement window at the bar after the trigger close.",
+        "id": "scope",
+        "sourceId": "phase6_v2_config",
+        "type": "markdown"
+      },
+      {
+        "body": "## Inference preserves session dependence and the full search history\n\nIntervals use 5,000 session-cluster bootstrap replicates. Volatility labels are permuted within entry-clock strata; pressure directions are permuted across sessions. Two-sided p-values use the plus-one correction. Advancement requires at least 100 sessions, at least 100 observations per volatility group, within-family BH q\u22640.05, cumulative 25-test BH q\u22640.05, and a 95% cluster interval excluding zero.",
+        "id": "methodology",
+        "sourceId": "phase6_v2_manifest",
+        "type": "markdown"
+      },
+      {
+        "body": "## The positive result is a volatility forecast, not a directional edge\n\n- The result is still in-sample development evidence; validation and final-test outcomes remain untouched.\n- A wider future range does not say whether MNQ will rise or fall and cannot directly specify a long or short trade.\n- A breakout, straddle-like stop-entry, or volatility-conditioned directional rule would add a new mechanism that must be frozen and tested with realistic fills and costs.\n- One-minute bars cannot resolve intrabar order sequence.\n- No commissions, slippage, stops, targets, or sizing are included here.",
+        "id": "limitations",
+        "sourceId": "phase6_v2_manifest",
+        "type": "markdown"
+      },
+      {
+        "body": "## Recommended next step\n\nProceed to Phase 7 **only for volatility-conditioned candidate generation**. Freeze a very small set of mechanically distinct entry mechanisms before measuring tradable outcomes; preserve the current thresholds and clocks, model conservative next-event fills and costs, and use validation\u2014not the untouched final test\u2014for candidate selection. Drop the signed pressure family.",
+        "id": "next_steps",
+        "type": "markdown"
+      },
+      {
+        "body": "## Further questions\n\n- Which minimal futures mechanism can exploit range expansion without inventing direction after the fact?\n- Does the range expansion remain useful after delayed entries, stop-entry slippage, commissions, and same-bar ambiguity rules?\n- Is 15 or 30 minutes preferable once the candidate mechanism\u2014not this event study\u2014defines executable risk?",
+        "id": "further_questions",
+        "type": "markdown"
+      }
+    ],
+    "cards": [
+      {
+        "dataset": "headline",
+        "description": "Frozen v2 tests that cleared sample, interval, and both multiplicity gates.",
+        "id": "advancement",
+        "metrics": [
+          {
+            "field": "advancing_hypotheses",
+            "format": "number",
+            "label": "Advancing tests"
+          },
+          {
+            "field": "total_hypotheses",
+            "format": "number",
+            "label": "of v2 tests"
+          },
+          {
+            "field": "cumulative_q",
+            "format": "number",
+            "label": "Cumulative q"
+          }
+        ],
+        "sourceId": "phase6_v2_manifest"
+      },
+      {
+        "dataset": "headline",
+        "description": "High-state minus low-state 15-minute range.",
+        "id": "range_gap_15m",
+        "metrics": [
+          {
+            "field": "range_gap_15m_bps",
+            "format": "number",
+            "label": "15m range gap",
+            "signed": true,
+            "unit": "bps"
+          },
+          {
+            "field": "high_range_15m_bps",
+            "format": "number",
+            "label": "High state",
+            "unit": "bps"
+          },
+          {
+            "field": "low_range_15m_bps",
+            "format": "number",
+            "label": "Low state",
+            "unit": "bps"
+          }
+        ],
+        "sourceId": "hypothesis_ledger"
+      },
+      {
+        "dataset": "headline",
+        "description": "High-state minus low-state 30-minute range.",
+        "id": "range_gap_30m",
+        "metrics": [
+          {
+            "field": "range_gap_30m_bps",
+            "format": "number",
+            "label": "30m range gap",
+            "signed": true,
+            "unit": "bps"
+          },
+          {
+            "field": "high_range_30m_bps",
+            "format": "number",
+            "label": "High state",
+            "unit": "bps"
+          },
+          {
+            "field": "low_range_30m_bps",
+            "format": "number",
+            "label": "Low state",
+            "unit": "bps"
+          }
+        ],
+        "sourceId": "hypothesis_ledger"
+      },
+      {
+        "dataset": "headline",
+        "description": "Validation and final outcomes remain untouched.",
+        "id": "later_split_usage",
+        "metrics": [
+          {
+            "field": "later_split_rows_used",
+            "format": "number",
+            "label": "Later-split rows"
+          }
+        ],
+        "sourceId": "phase6_v2_manifest"
+      }
+    ],
+    "charts": [
+      {
+        "dataset": "range_by_state",
+        "description": "Mean future high-low range in basis points; 3,109\u20133,114 events across 658 development sessions.",
+        "encodings": {
+          "color": {
+            "field": "state_label",
+            "type": "nominal"
+          },
+          "x": {
+            "field": "horizon_label",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "mean_forward_range_bps",
+            "type": "quantitative"
+          }
+        },
+        "id": "range_chart",
+        "options": {
+          "grouping": "grouped",
+          "orientation": "vertical"
+        },
+        "showDescription": true,
+        "sourceId": "event_observations",
+        "title": "Forward range by trailing volatility state and horizon",
+        "type": "bar"
+      },
+      {
+        "dataset": "annual_stability",
+        "description": "Development-only diagnostic in basis points; 2021 and 2024 are partial sample years.",
+        "encodings": {
+          "color": {
+            "field": "horizon_label",
+            "type": "nominal"
+          },
+          "x": {
+            "field": "year_label",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "mean_effect_bps",
+            "type": "quantitative"
+          }
+        },
+        "id": "annual_chart",
+        "options": {
+          "grouping": "grouped",
+          "orientation": "vertical"
+        },
+        "showDescription": true,
+        "sourceId": "year_stability",
+        "title": "High-minus-low range difference by calendar year",
+        "type": "bar"
+      }
+    ],
+    "description": "Development-only preregistered tests of volatility-state transitions and signed uptick/downtick pressure bursts.",
+    "sources": [
+      {
+        "id": "phase6_v2_manifest",
+        "label": "Phase 6 v2 analysis manifest",
+        "path": "data/manifests/phase6_v2_manifest.json",
+        "query": {
+          "description": "Coverage, frozen methods, checksums, findings, and validation results.",
+          "engine": "duckdb",
+          "filters": [
+            "input_split = development"
+          ],
+          "language": "sql",
+          "metric_definitions": [
+            "advancing_hypotheses = sample-sufficient tests passing within-family and cumulative BH at 0.05 with a 95% session-cluster interval excluding zero",
+            "event_observations = eligible event-clock-horizon rows"
+          ],
+          "sql": "SELECT coverage, method, findings, validation FROM read_json_auto('data/manifests/phase6_v2_manifest.json')",
+          "tables_used": [
+            "data/manifests/phase6_v2_manifest.json"
+          ]
+        }
+      },
+      {
+        "id": "hypothesis_ledger",
+        "label": "Phase 6 v2 complete hypothesis ledger",
+        "path": "results/phase6_v2/hypothesis_ledger.parquet",
+        "query": {
+          "description": "All four frozen tests with clustered intervals, randomized-null p-values, and both multiplicity gates.",
+          "engine": "duckdb",
+          "filters": [
+            "development split only",
+            "all four frozen v2 hypotheses retained"
+          ],
+          "language": "sql",
+          "metric_definitions": [
+            "volatility mean_effect_bps = high-state minus low-state mean future high-low range divided by entry open, in basis points",
+            "pressure mean_effect_bps = mean pressure-direction times future return, in basis points",
+            "bootstrap_ci_low/high = 95% percentile interval from 5,000 session-cluster resamples",
+            "cumulative_bh_q_value = BH adjustment across 21 v1 and 4 v2 randomized-null p-values"
+          ],
+          "sql": "SELECT * FROM read_parquet('results/phase6_v2/hypothesis_ledger.parquet') ORDER BY cumulative_bh_q_value, permutation_p_value",
+          "tables_used": [
+            "results/phase6_v2/hypothesis_ledger.parquet"
+          ]
+        }
+      },
+      {
+        "id": "event_observations",
+        "label": "Phase 6 v2 event observations",
+        "path": "results/phase6_v2/event_observations.parquet",
+        "query": {
+          "description": "Event-level states, lagged thresholds, timing, and forward outcomes used to compute the v2 ledger.",
+          "engine": "duckdb",
+          "filters": [
+            "family_id = volatility_state_transition",
+            "development split only"
+          ],
+          "language": "sql",
+          "metric_definitions": [
+            "forward_range_bps = (maximum interval high - minimum interval low) / entry-bar open * 10,000",
+            "high/low state = current trailing 30-bar realized volatility above lagged same-clock 80th percentile or below lagged 20th percentile"
+          ],
+          "sql": "SELECT horizon_minutes, event_state, avg(forward_range_bps) AS mean_forward_range_bps, median(forward_range_bps) AS median_forward_range_bps, count(*) AS observations, count(DISTINCT session_date) AS sessions FROM read_parquet('results/phase6_v2/event_observations.parquet') WHERE family_id = 'volatility_state_transition' GROUP BY 1, 2",
+          "tables_used": [
+            "results/phase6_v2/event_observations.parquet"
+          ]
+        }
+      },
+      {
+        "id": "year_stability",
+        "label": "Phase 6 v2 calendar-year stability",
+        "path": "results/phase6_v2/hypothesis_year_stability.parquet",
+        "query": {
+          "description": "Descriptive calendar-year high-minus-low volatility-range differences by frozen horizon.",
+          "engine": "duckdb",
+          "filters": [
+            "family_id = volatility_state_transition",
+            "calendar-year diagnostics only"
+          ],
+          "language": "sql",
+          "metric_definitions": [
+            "mean_effect_bps = calendar-year high-state mean future range minus low-state mean future range"
+          ],
+          "sql": "SELECT calendar_year, hypothesis_id, mean_effect_bps, observations, session_clusters FROM read_parquet('results/phase6_v2/hypothesis_year_stability.parquet') WHERE family_id = 'volatility_state_transition' ORDER BY calendar_year, hypothesis_id",
+          "tables_used": [
+            "results/phase6_v2/hypothesis_year_stability.parquet"
+          ]
+        }
+      },
+      {
+        "id": "phase6_v2_config",
+        "label": "Phase 6 v2 frozen preregistration",
+        "path": "config/phase6_v2.yaml",
+        "query": {
+          "description": "Frozen families, thresholds, outcome semantics, inference, and advancement rules.",
+          "filters": [
+            "allowed_split = development",
+            "validation and final_untouched_test forbidden"
+          ],
+          "metric_definitions": [
+            "same-clock baseline = strictly prior 60 usable sessions with a minimum of 40",
+            "volatility thresholds = lagged 20th and 80th percentiles",
+            "pressure thresholds = lagged 90th percentile absolute pressure and median activity"
+          ],
+          "tables_used": [
+            "config/phase6_v2.yaml"
+          ]
+        }
+      }
+    ],
+    "surface": "report",
+    "tables": [
+      {
+        "columns": [
+          {
+            "field": "family_label",
+            "label": "Family",
+            "type": "text"
+          },
+          {
+            "field": "horizon_label",
+            "label": "Horizon",
+            "type": "text"
+          },
+          {
+            "field": "observations",
+            "format": "number",
+            "label": "Events",
+            "type": "number"
+          },
+          {
+            "field": "session_clusters",
+            "format": "number",
+            "label": "Sessions",
+            "type": "number"
+          },
+          {
+            "field": "mean_effect_bps",
+            "format": "number",
+            "label": "Effect",
+            "type": "number",
+            "unit": "bps"
+          },
+          {
+            "field": "bootstrap_ci_low",
+            "format": "number",
+            "label": "95% CI low",
+            "type": "number",
+            "unit": "bps"
+          },
+          {
+            "field": "bootstrap_ci_high",
+            "format": "number",
+            "label": "95% CI high",
+            "type": "number",
+            "unit": "bps"
+          },
+          {
+            "field": "permutation_p_value",
+            "format": "number",
+            "label": "Raw p",
+            "type": "number"
+          },
+          {
+            "field": "bh_q_value",
+            "format": "number",
+            "label": "Family q",
+            "type": "number"
+          },
+          {
+            "field": "cumulative_bh_q_value",
+            "format": "number",
+            "label": "Cumulative q",
+            "type": "number"
+          },
+          {
+            "field": "result_label",
+            "label": "Result",
+            "type": "text"
+          }
+        ],
+        "dataset": "ledger_table",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "cumulative_bh_q_value"
+        },
+        "description": "All four frozen tests, sorted by cumulative adjusted q-value; effects have family-specific meanings.",
+        "id": "ledger_table",
+        "showDescription": true,
+        "sourceId": "hypothesis_ledger",
+        "title": "Complete Phase 6 v2 hypothesis ledger"
+      }
+    ],
+    "title": "MNQ Phase 6 v2 Event Studies",
+    "version": 1
+  },
+  "snapshot": {
+    "datasets": {
+      "annual_stability": [
+        {
+          "horizon_label": "15 minutes",
+          "mean_effect_bps": 20.93625110515069,
+          "observations": 279,
+          "session_clusters": 61,
+          "year_label": "2021"
+        },
+        {
+          "horizon_label": "15 minutes",
+          "mean_effect_bps": 29.414492888797735,
+          "observations": 1065,
+          "session_clusters": 228,
+          "year_label": "2022"
+        },
+        {
+          "horizon_label": "15 minutes",
+          "mean_effect_bps": 15.556421315558037,
+          "observations": 1162,
+          "session_clusters": 237,
+          "year_label": "2023"
+        },
+        {
+          "horizon_label": "15 minutes",
+          "mean_effect_bps": 13.586892991265895,
+          "observations": 608,
+          "session_clusters": 132,
+          "year_label": "2024"
+        },
+        {
+          "horizon_label": "30 minutes",
+          "mean_effect_bps": 28.095729394506037,
+          "observations": 278,
+          "session_clusters": 61,
+          "year_label": "2021"
+        },
+        {
+          "horizon_label": "30 minutes",
+          "mean_effect_bps": 41.02030868142378,
+          "observations": 1064,
+          "session_clusters": 228,
+          "year_label": "2022"
+        },
+        {
+          "horizon_label": "30 minutes",
+          "mean_effect_bps": 20.981865753054713,
+          "observations": 1160,
+          "session_clusters": 237,
+          "year_label": "2023"
+        },
+        {
+          "horizon_label": "30 minutes",
+          "mean_effect_bps": 18.379176703264505,
+          "observations": 607,
+          "session_clusters": 132,
+          "year_label": "2024"
+        }
+      ],
+      "headline": [
+        {
+          "advancing_hypotheses": 2,
+          "cumulative_q": 0.002499500099980004,
+          "high_range_15m_bps": 40.96506424003125,
+          "high_range_30m_bps": 56.13424125783548,
+          "later_split_rows_used": 0,
+          "low_range_15m_bps": 19.827525610382597,
+          "low_range_30m_bps": 27.03247779008121,
+          "range_gap_15m_bps": 21.137538629648656,
+          "range_gap_30m_bps": 29.101763467754267,
+          "total_hypotheses": 4
+        }
+      ],
+      "ledger_table": [
+        {
+          "bh_q_value": 0.0001999600079984003,
+          "bootstrap_ci_high": 23.550738357893874,
+          "bootstrap_ci_low": 18.75500973845258,
+          "cumulative_bh_q_value": 0.002499500099980004,
+          "family_label": "Volatility-state transition",
+          "horizon_label": "15 minutes",
+          "mean_effect_bps": 21.137538629648656,
+          "observations": 3114,
+          "permutation_p_value": 0.0001999600079984003,
+          "result_label": "Advances to Phase 7",
+          "session_clusters": 658
+        },
+        {
+          "bh_q_value": 0.0001999600079984003,
+          "bootstrap_ci_high": 32.511075517210706,
+          "bootstrap_ci_low": 25.736581752846217,
+          "cumulative_bh_q_value": 0.002499500099980004,
+          "family_label": "Volatility-state transition",
+          "horizon_label": "30 minutes",
+          "mean_effect_bps": 29.101763467754267,
+          "observations": 3109,
+          "permutation_p_value": 0.0001999600079984003,
+          "result_label": "Advances to Phase 7",
+          "session_clusters": 658
+        },
+        {
+          "bh_q_value": 0.6004799040191962,
+          "bootstrap_ci_high": 2.733667923978122,
+          "bootstrap_ci_low": -1.552912272771959,
+          "cumulative_bh_q_value": 0.8412206447599369,
+          "family_label": "Signed pressure burst",
+          "horizon_label": "15 minutes",
+          "mean_effect_bps": 0.5933042427864311,
+          "observations": 523,
+          "permutation_p_value": 0.594881023795241,
+          "result_label": "Does not advance",
+          "session_clusters": 523
+        },
+        {
+          "bh_q_value": 0.6004799040191962,
+          "bootstrap_ci_high": 0.9207370891025668,
+          "bootstrap_ci_low": -1.7661115627360604,
+          "cumulative_bh_q_value": 0.8412206447599369,
+          "family_label": "Signed pressure burst",
+          "horizon_label": "5 minutes",
+          "mean_effect_bps": -0.3691385119281202,
+          "observations": 523,
+          "permutation_p_value": 0.6004799040191962,
+          "result_label": "Does not advance",
+          "session_clusters": 523
+        }
+      ],
+      "range_by_state": [
+        {
+          "horizon_label": "15 minutes",
+          "mean_forward_range_bps": 40.96506424003125,
+          "median_forward_range_bps": 33.947053051093654,
+          "observations": 1542,
+          "sessions": 396,
+          "state_label": "High trailing volatility"
+        },
+        {
+          "horizon_label": "15 minutes",
+          "mean_forward_range_bps": 19.827525610382597,
+          "median_forward_range_bps": 17.57194706195468,
+          "observations": 1572,
+          "sessions": 385,
+          "state_label": "Low trailing volatility"
+        },
+        {
+          "horizon_label": "30 minutes",
+          "mean_forward_range_bps": 56.13424125783548,
+          "median_forward_range_bps": 47.80929995597046,
+          "observations": 1540,
+          "sessions": 395,
+          "state_label": "High trailing volatility"
+        },
+        {
+          "horizon_label": "30 minutes",
+          "mean_forward_range_bps": 27.03247779008121,
+          "median_forward_range_bps": 23.998556477805845,
+          "observations": 1569,
+          "sessions": 385,
+          "state_label": "Low trailing volatility"
+        }
+      ]
+    },
+    "generatedAt": "2026-07-29T03:53:16.848750+00:00",
+    "status": "ready",
+    "version": 1
+  },
+  "sources": [
+    {
+      "id": "phase6_v2_manifest",
+      "label": "Phase 6 v2 analysis manifest",
+      "path": "data/manifests/phase6_v2_manifest.json",
+      "query": {
+        "description": "Coverage, frozen methods, checksums, findings, and validation results.",
+        "engine": "duckdb",
+        "filters": [
+          "input_split = development"
+        ],
+        "language": "sql",
+        "metric_definitions": [
+          "advancing_hypotheses = sample-sufficient tests passing within-family and cumulative BH at 0.05 with a 95% session-cluster interval excluding zero",
+          "event_observations = eligible event-clock-horizon rows"
+        ],
+        "sql": "SELECT coverage, method, findings, validation FROM read_json_auto('data/manifests/phase6_v2_manifest.json')",
+        "tables_used": [
+          "data/manifests/phase6_v2_manifest.json"
+        ]
+      }
+    },
+    {
+      "id": "hypothesis_ledger",
+      "label": "Phase 6 v2 complete hypothesis ledger",
+      "path": "results/phase6_v2/hypothesis_ledger.parquet",
+      "query": {
+        "description": "All four frozen tests with clustered intervals, randomized-null p-values, and both multiplicity gates.",
+        "engine": "duckdb",
+        "filters": [
+          "development split only",
+          "all four frozen v2 hypotheses retained"
+        ],
+        "language": "sql",
+        "metric_definitions": [
+          "volatility mean_effect_bps = high-state minus low-state mean future high-low range divided by entry open, in basis points",
+          "pressure mean_effect_bps = mean pressure-direction times future return, in basis points",
+          "bootstrap_ci_low/high = 95% percentile interval from 5,000 session-cluster resamples",
+          "cumulative_bh_q_value = BH adjustment across 21 v1 and 4 v2 randomized-null p-values"
+        ],
+        "sql": "SELECT * FROM read_parquet('results/phase6_v2/hypothesis_ledger.parquet') ORDER BY cumulative_bh_q_value, permutation_p_value",
+        "tables_used": [
+          "results/phase6_v2/hypothesis_ledger.parquet"
+        ]
+      }
+    },
+    {
+      "id": "event_observations",
+      "label": "Phase 6 v2 event observations",
+      "path": "results/phase6_v2/event_observations.parquet",
+      "query": {
+        "description": "Event-level states, lagged thresholds, timing, and forward outcomes used to compute the v2 ledger.",
+        "engine": "duckdb",
+        "filters": [
+          "family_id = volatility_state_transition",
+          "development split only"
+        ],
+        "language": "sql",
+        "metric_definitions": [
+          "forward_range_bps = (maximum interval high - minimum interval low) / entry-bar open * 10,000",
+          "high/low state = current trailing 30-bar realized volatility above lagged same-clock 80th percentile or below lagged 20th percentile"
+        ],
+        "sql": "SELECT horizon_minutes, event_state, avg(forward_range_bps) AS mean_forward_range_bps, median(forward_range_bps) AS median_forward_range_bps, count(*) AS observations, count(DISTINCT session_date) AS sessions FROM read_parquet('results/phase6_v2/event_observations.parquet') WHERE family_id = 'volatility_state_transition' GROUP BY 1, 2",
+        "tables_used": [
+          "results/phase6_v2/event_observations.parquet"
+        ]
+      }
+    },
+    {
+      "id": "year_stability",
+      "label": "Phase 6 v2 calendar-year stability",
+      "path": "results/phase6_v2/hypothesis_year_stability.parquet",
+      "query": {
+        "description": "Descriptive calendar-year high-minus-low volatility-range differences by frozen horizon.",
+        "engine": "duckdb",
+        "filters": [
+          "family_id = volatility_state_transition",
+          "calendar-year diagnostics only"
+        ],
+        "language": "sql",
+        "metric_definitions": [
+          "mean_effect_bps = calendar-year high-state mean future range minus low-state mean future range"
+        ],
+        "sql": "SELECT calendar_year, hypothesis_id, mean_effect_bps, observations, session_clusters FROM read_parquet('results/phase6_v2/hypothesis_year_stability.parquet') WHERE family_id = 'volatility_state_transition' ORDER BY calendar_year, hypothesis_id",
+        "tables_used": [
+          "results/phase6_v2/hypothesis_year_stability.parquet"
+        ]
+      }
+    },
+    {
+      "id": "phase6_v2_config",
+      "label": "Phase 6 v2 frozen preregistration",
+      "path": "config/phase6_v2.yaml",
+      "query": {
+        "description": "Frozen families, thresholds, outcome semantics, inference, and advancement rules.",
+        "filters": [
+          "allowed_split = development",
+          "validation and final_untouched_test forbidden"
+        ],
+        "metric_definitions": [
+          "same-clock baseline = strictly prior 60 usable sessions with a minimum of 40",
+          "volatility thresholds = lagged 20th and 80th percentiles",
+          "pressure thresholds = lagged 90th percentile absolute pressure and median activity"
+        ],
+        "tables_used": [
+          "config/phase6_v2.yaml"
+        ]
+      }
+    }
+  ],
+  "surface": "report"
+}

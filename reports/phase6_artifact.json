@@ -1,0 +1,1193 @@
+{
+  "manifest": {
+    "blocks": [
+      {
+        "body": "# MNQ Phase 6 Event Studies",
+        "id": "title",
+        "type": "markdown"
+      },
+      {
+        "body": "## Technical summary\n\nPhase 6 **passed its process gate but found no event that can advance**. All **21 preregistered hypotheses** were sufficiently populated, yet **zero survived within-family Benjamini\u2013Hochberg correction**. Validation and final-test rows used: **zero**. The defensible conclusion is a null event-study result, not a strategy candidate.",
+        "id": "technical_summary",
+        "sourceId": "phase6_manifest",
+        "type": "markdown"
+      },
+      {
+        "cardIds": [
+          "preregistered_tests",
+          "event_coverage",
+          "multiplicity_result",
+          "later_split_usage"
+        ],
+        "id": "headline_metrics",
+        "type": "metric-strip"
+      },
+      {
+        "body": "## Apparent effects are small or too uncertain after the prespecified family correction\n\nThe signed means span continuation and reversal, but none has a q-value at or below 0.05. Positive directional bars mean continuation; negative bars mean reversal. Fixed-clock bars retain their raw up/down return sign. The backing data keep sample size, bootstrap bounds, raw p-values, and adjusted q-values beside every plotted mean.",
+        "id": "effect_finding",
+        "sourceId": "hypothesis_ledger",
+        "type": "markdown"
+      },
+      {
+        "chartId": "effect_chart",
+        "id": "effect_chart_block",
+        "type": "chart"
+      },
+      {
+        "body": "## The 14:30\u201315:00 block is a multiplicity-adjusted failure\n\nIts mean is **2.47 bps** (95% bootstrap interval 0.35 to 4.57; n=721). The unadjusted randomization p-value is **0.024**, but the within-family q-value is **0.312**. Narrowing the family around this result after seeing it would be cherry-picking.",
+        "id": "near_miss",
+        "sourceId": "hypothesis_ledger",
+        "type": "markdown"
+      },
+      {
+        "id": "ledger_table_block",
+        "tableId": "ledger_table",
+        "type": "table"
+      },
+      {
+        "body": "## Every preregistered family ends with zero survivors\n\nThe null conclusion is not caused by missing samples: all 21 tests exceed the 100-session minimum. It is caused by weak or inconsistent effects relative to their prespecified family multiplicity. The complete family summary prevents failed families from disappearing from the record.",
+        "id": "family_finding",
+        "sourceId": "family_summary",
+        "type": "markdown"
+      },
+      {
+        "id": "family_table_block",
+        "tableId": "family_table",
+        "type": "table"
+      },
+      {
+        "body": "## Scope, data, and effect definitions\n\n- **Population:** 1,021,050 one-minute development bars from 744 usable sessions, 2021-07-29 through 2024-07-26.\n- **Fixed-clock family:** all 13 non-overlapping 30-minute RTH blocks, not only the Phase 5 extrema.\n- **Directional families:** material overnight gaps, first-30-minute moves, and first closes beyond prior-RTH or overnight ranges.\n- **Entry semantics:** anchor-bar open when the event is known at the anchor; next-bar open after a confirming range break close.\n- **Effect:** basis-point forward return; for directional events, positive means continuation and negative means reversal.",
+        "id": "scope",
+        "sourceId": "phase6_config",
+        "type": "markdown"
+      },
+      {
+        "body": "## Inference is session-aware, deterministic, and family-scoped\n\nEach hypothesis uses 5,000 session-bootstrap replicates and 5,000 randomized-null replicates. Fixed-clock means use a Rademacher sign-flip null; directional events permute event directions across sessions. Two-sided p-values use the plus-one correction. Benjamini\u2013Hochberg correction is applied within each frozen family at 5%, with deterministic hypothesis-specific seeds.",
+        "id": "methodology",
+        "sourceId": "phase6_manifest",
+        "type": "markdown"
+      },
+      {
+        "body": "## The null result does not test tradability\n\n- Phase 5 and Phase 6 use the same development period; this is not independent out-of-sample confirmation.\n- Correction covers the four preregistered families, not every event definition that could be imagined.\n- One-minute bars cannot reveal within-bar path or executable fill quality.\n- No commissions, slippage, orders, stops, targets, sizing, or same-bar fill model is part of Phase 6.\n- Validation and final-test outcomes remain untouched.",
+        "id": "limitations",
+        "sourceId": "phase6_manifest",
+        "type": "markdown"
+      },
+      {
+        "body": "## Recommended next step\n\nDo **not** manufacture a Phase 7 candidate from this ledger. Either close this branch with \u201cno sufficiently robust edge found,\u201d or remain in Phase 6 and preregister a genuinely new second wave of domain-motivated event families. A second wave must retain every test and may not redefine the clock family around the observed 14:30 result.",
+        "id": "next_steps",
+        "type": "markdown"
+      },
+      {
+        "body": "## Further questions\n\n- Are there genuinely new event families justified before looking at more outcomes, rather than variants of these failed tests?\n- Would external, pre-known event timestamps such as scheduled macro releases support a defensible Phase 6 v2?\n- If not, is the strongest conclusion to stop strategy generation and preserve the untouched later splits?",
+        "id": "further_questions",
+        "type": "markdown"
+      }
+    ],
+    "cards": [
+      {
+        "dataset": "headline",
+        "description": "Complete frozen hypothesis inventory.",
+        "id": "preregistered_tests",
+        "metrics": [
+          {
+            "field": "hypotheses",
+            "format": "number",
+            "label": "Preregistered tests"
+          },
+          {
+            "field": "families",
+            "format": "number",
+            "label": "Families"
+          }
+        ],
+        "sourceId": "phase6_manifest"
+      },
+      {
+        "dataset": "headline",
+        "description": "One observation per eligible session and hypothesis.",
+        "id": "event_coverage",
+        "metrics": [
+          {
+            "field": "event_observations",
+            "format": "number",
+            "label": "Event observations"
+          },
+          {
+            "field": "development_sessions",
+            "format": "number",
+            "label": "Development sessions"
+          }
+        ],
+        "sourceId": "phase6_manifest"
+      },
+      {
+        "dataset": "headline",
+        "description": "Tests surviving all Phase 6 statistical gates.",
+        "id": "multiplicity_result",
+        "metrics": [
+          {
+            "field": "bh_rejections",
+            "format": "number",
+            "label": "BH rejections"
+          },
+          {
+            "field": "advancing_hypotheses",
+            "format": "number",
+            "label": "Advancing tests"
+          }
+        ],
+        "sourceId": "phase6_manifest"
+      },
+      {
+        "dataset": "headline",
+        "description": "Later chronological outcomes remain untouched.",
+        "id": "later_split_usage",
+        "metrics": [
+          {
+            "field": "final_test_rows_used",
+            "format": "number",
+            "label": "Later-split rows used"
+          },
+          {
+            "field": "validation_rows_used",
+            "format": "number",
+            "label": "Validation rows"
+          }
+        ],
+        "sourceId": "phase6_manifest"
+      }
+    ],
+    "charts": [
+      {
+        "dataset": "ledger",
+        "description": "Development-only signed effects in basis points; none survives within-family BH correction.",
+        "encodings": {
+          "x": {
+            "field": "short_label",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "mean_effect_bps",
+            "type": "quantitative"
+          }
+        },
+        "id": "effect_chart",
+        "options": {
+          "grouping": "single",
+          "orientation": "horizontal"
+        },
+        "showDescription": true,
+        "sourceId": "hypothesis_ledger",
+        "title": "Mean effect across preregistered event studies",
+        "type": "bar"
+      }
+    ],
+    "description": "Development-only preregistered MNQ event studies with session-aware inference and within-family multiplicity control.",
+    "sources": [
+      {
+        "id": "phase6_manifest",
+        "label": "Phase 6 analysis manifest",
+        "path": "data/manifests/phase6_manifest.json",
+        "query": {
+          "description": "Phase 6 coverage, method, gate checks, checksums, and null result.",
+          "engine": "duckdb",
+          "filters": [
+            "input_split = development"
+          ],
+          "language": "sql",
+          "metric_definitions": [
+            "bh_rejections = hypotheses whose within-family Benjamini-Hochberg q-value is at most 0.05",
+            "advancing_hypotheses = sample-sufficient BH rejections whose 95% session-bootstrap interval excludes zero",
+            "event_observations = eligible hypothesis-session outcome rows"
+          ],
+          "sql": "SELECT coverage, method, findings, validation FROM read_json_auto('data/manifests/phase6_manifest.json')",
+          "tables_used": [
+            "data/manifests/phase6_manifest.json"
+          ]
+        }
+      },
+      {
+        "id": "hypothesis_ledger",
+        "label": "Phase 6 complete hypothesis ledger",
+        "path": "results/phase6/hypothesis_ledger.parquet",
+        "query": {
+          "description": "All preregistered tests with effect estimates, session-bootstrap intervals, randomized-null p-values, adjusted q-values, and outcomes.",
+          "engine": "duckdb",
+          "filters": [
+            "development split only",
+            "all preregistered hypotheses retained"
+          ],
+          "language": "sql",
+          "metric_definitions": [
+            "mean_effect_bps = average raw forward return for fixed-clock tests or average event-direction times forward return for directional tests",
+            "bootstrap_ci_low/high = 95% percentile interval from 5,000 session resamples",
+            "permutation_p_value = plus-one two-sided randomized-null p-value from 5,000 replicates",
+            "bh_q_value = Benjamini-Hochberg adjusted p-value within the preregistered family"
+          ],
+          "sql": "SELECT hypothesis_label, family_id, horizon_minutes, observations, mean_effect_bps, median_effect_bps, positive_effect_rate, bootstrap_ci_low, bootstrap_ci_high, permutation_p_value, bh_q_value, result FROM read_parquet('results/phase6/hypothesis_ledger.parquet') ORDER BY bh_q_value, permutation_p_value",
+          "tables_used": [
+            "results/phase6/hypothesis_ledger.parquet"
+          ]
+        }
+      },
+      {
+        "id": "family_summary",
+        "label": "Phase 6 family summary",
+        "path": "results/phase6/family_summary.parquet",
+        "query": {
+          "description": "Hypothesis, sample-sufficiency, rejection, and survivor counts by preregistered family.",
+          "engine": "duckdb",
+          "filters": [
+            "all four preregistered families"
+          ],
+          "language": "sql",
+          "metric_definitions": [
+            "sample_sufficient_hypotheses = family tests with at least 100 eligible sessions",
+            "minimum_q_value = smallest within-family adjusted q-value"
+          ],
+          "sql": "SELECT * FROM read_parquet('results/phase6/family_summary.parquet') ORDER BY minimum_q_value",
+          "tables_used": [
+            "results/phase6/family_summary.parquet"
+          ]
+        }
+      },
+      {
+        "id": "phase6_config",
+        "label": "Phase 6 frozen preregistration",
+        "path": "config/phase6.yaml",
+        "query": {
+          "description": "Frozen event families, hypotheses, outcome semantics, inference rules, and advancement gate.",
+          "filters": [
+            "allowed_split = development",
+            "validation and final_untouched_test forbidden"
+          ],
+          "metric_definitions": [
+            "minimum_observations = 100",
+            "bootstrap_replicates = 5,000",
+            "permutation_replicates = 5,000",
+            "multiple-testing alpha = 0.05 within family"
+          ],
+          "tables_used": [
+            "config/phase6.yaml"
+          ]
+        }
+      }
+    ],
+    "surface": "report",
+    "tables": [
+      {
+        "columns": [
+          {
+            "field": "short_label",
+            "label": "Hypothesis",
+            "type": "text"
+          },
+          {
+            "field": "family_label",
+            "label": "Family",
+            "type": "text"
+          },
+          {
+            "field": "observations",
+            "format": "number",
+            "label": "n",
+            "type": "number"
+          },
+          {
+            "field": "mean_effect_bps",
+            "format": "number",
+            "label": "Mean effect",
+            "type": "number",
+            "unit": "bps"
+          },
+          {
+            "field": "bootstrap_ci_low",
+            "format": "number",
+            "label": "95% CI low",
+            "type": "number",
+            "unit": "bps"
+          },
+          {
+            "field": "bootstrap_ci_high",
+            "format": "number",
+            "label": "95% CI high",
+            "type": "number",
+            "unit": "bps"
+          },
+          {
+            "field": "permutation_p_value",
+            "format": "number",
+            "label": "Raw p",
+            "type": "number"
+          },
+          {
+            "field": "bh_q_value",
+            "format": "number",
+            "label": "BH q",
+            "type": "number"
+          },
+          {
+            "field": "result_label",
+            "label": "Result",
+            "type": "text"
+          }
+        ],
+        "dataset": "ledger_table",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "bh_q_value"
+        },
+        "description": "All 21 preregistered tests, sorted by adjusted q-value.",
+        "id": "ledger_table",
+        "showDescription": true,
+        "sourceId": "hypothesis_ledger",
+        "title": "Complete Phase 6 hypothesis ledger"
+      },
+      {
+        "columns": [
+          {
+            "field": "family_label",
+            "label": "Family",
+            "type": "text"
+          },
+          {
+            "field": "hypotheses",
+            "format": "number",
+            "label": "Tests",
+            "type": "number"
+          },
+          {
+            "field": "sample_sufficient_hypotheses",
+            "format": "number",
+            "label": "Sufficient",
+            "type": "number"
+          },
+          {
+            "field": "bh_rejections",
+            "format": "number",
+            "label": "BH rejections",
+            "type": "number"
+          },
+          {
+            "field": "minimum_p_value",
+            "format": "number",
+            "label": "Minimum p",
+            "type": "number"
+          },
+          {
+            "field": "minimum_q_value",
+            "format": "number",
+            "label": "Minimum q",
+            "type": "number"
+          }
+        ],
+        "dataset": "families",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "minimum_q_value"
+        },
+        "description": "Every family is sufficiently populated and has zero survivors.",
+        "id": "family_table",
+        "showDescription": true,
+        "sourceId": "family_summary",
+        "title": "Phase 6 results by preregistered family"
+      }
+    ],
+    "title": "MNQ Phase 6 Event Studies",
+    "version": 1
+  },
+  "snapshot": {
+    "datasets": {
+      "families": [
+        {
+          "advancing_hypotheses": 0,
+          "bh_rejections": 0,
+          "family_label": "Opening response",
+          "hypotheses": 2,
+          "maximum_observations": 596,
+          "minimum_observations": 596,
+          "minimum_p_value": 0.5404919016196761,
+          "minimum_q_value": 0.9904019196160768,
+          "sample_sufficient_hypotheses": 2
+        },
+        {
+          "advancing_hypotheses": 0,
+          "bh_rejections": 0,
+          "family_label": "Overnight gaps",
+          "hypotheses": 2,
+          "maximum_observations": 598,
+          "minimum_observations": 598,
+          "minimum_p_value": 0.7546490701859628,
+          "minimum_q_value": 0.7868426314737053,
+          "sample_sufficient_hypotheses": 2
+        },
+        {
+          "advancing_hypotheses": 0,
+          "bh_rejections": 0,
+          "family_label": "RTH clock blocks",
+          "hypotheses": 13,
+          "maximum_observations": 743,
+          "minimum_observations": 721,
+          "minimum_p_value": 0.02399520095980804,
+          "minimum_q_value": 0.3119376124775045,
+          "sample_sufficient_hypotheses": 13
+        },
+        {
+          "advancing_hypotheses": 0,
+          "bh_rejections": 0,
+          "family_label": "Reference breaks",
+          "hypotheses": 4,
+          "maximum_observations": 666,
+          "minimum_observations": 600,
+          "minimum_p_value": 0.38192361527694463,
+          "minimum_q_value": 0.8620275944811038,
+          "sample_sufficient_hypotheses": 4
+        }
+      ],
+      "headline": [
+        {
+          "advancing_hypotheses": 0,
+          "bh_rejections": 0,
+          "closest_mean_bps": 2.4692455434601115,
+          "closest_q": 0.3119376124775045,
+          "closest_raw_p": 0.02399520095980804,
+          "development_sessions": 744,
+          "event_observations": 14447,
+          "families": 4,
+          "final_test_rows_used": 0,
+          "hypotheses": 21,
+          "validation_rows_used": 0
+        }
+      ],
+      "ledger": [
+        {
+          "bh_q_value": 0.4438612277544491,
+          "bootstrap_ci_high": 0.30008233523333966,
+          "bootstrap_ci_low": -3.5620098157786737,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -1.6585724395429502,
+          "median_effect_bps": -0.1673332106222336,
+          "observations": 743,
+          "permutation_p_value": 0.09238152369526095,
+          "positive_effect_rate": 0.49663526244952894,
+          "q_rank": 3,
+          "result_label": "Does not advance",
+          "short_label": "12:00-12:30 raw return"
+        },
+        {
+          "bh_q_value": 0.5514147170565887,
+          "bootstrap_ci_high": 1.2740726309140957,
+          "bootstrap_ci_low": -3.6768146597303337,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -1.2264113471027127,
+          "median_effect_bps": 0.8690966609314899,
+          "observations": 743,
+          "permutation_p_value": 0.33653269346130776,
+          "positive_effect_rate": 0.5168236877523553,
+          "q_rank": 5,
+          "result_label": "Does not advance",
+          "short_label": "10:30-11:00 raw return"
+        },
+        {
+          "bh_q_value": 0.8620275944811038,
+          "bootstrap_ci_high": 1.2758594623708142,
+          "bootstrap_ci_low": -3.4792595568978313,
+          "family_label": "Reference breaks",
+          "horizon_minutes": 15,
+          "mean_effect_bps": -1.0830338030687252,
+          "median_effect_bps": 1.066202284367157,
+          "observations": 666,
+          "permutation_p_value": 0.38192361527694463,
+          "positive_effect_rate": 0.521021021021021,
+          "q_rank": 16,
+          "result_label": "Does not advance",
+          "short_label": "Overnight break \u00b7 15m"
+        },
+        {
+          "bh_q_value": 0.5514147170565887,
+          "bootstrap_ci_high": 0.8229499651106492,
+          "bootstrap_ci_low": -2.8548693166015546,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -0.9951772391916431,
+          "median_effect_bps": 1.3687172078169496,
+          "observations": 721,
+          "permutation_p_value": 0.28574285142971406,
+          "positive_effect_rate": 0.5270457697642164,
+          "q_rank": 8,
+          "result_label": "Does not advance",
+          "short_label": "13:00-13:30 raw return"
+        },
+        {
+          "bh_q_value": 0.6561521029127507,
+          "bootstrap_ci_high": 1.8791507722546315,
+          "bootstrap_ci_low": -3.7847737081316626,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -0.9332887393618555,
+          "median_effect_bps": 0.4292336748124015,
+          "observations": 743,
+          "permutation_p_value": 0.510497900419916,
+          "positive_effect_rate": 0.5047106325706595,
+          "q_rank": 10,
+          "result_label": "Does not advance",
+          "short_label": "10:00-10:30 raw return"
+        },
+        {
+          "bh_q_value": 0.7868426314737053,
+          "bootstrap_ci_high": 4.5996812219245715,
+          "bootstrap_ci_low": -5.858521886561366,
+          "family_label": "Overnight gaps",
+          "horizon_minutes": 60,
+          "mean_effect_bps": -0.6826842866430891,
+          "median_effect_bps": 1.0193041222683608,
+          "observations": 598,
+          "permutation_p_value": 0.7868426314737053,
+          "positive_effect_rate": 0.5016722408026756,
+          "q_rank": 14,
+          "result_label": "Does not advance",
+          "short_label": "Overnight gap \u00b7 60m"
+        },
+        {
+          "bh_q_value": 0.6561521029127507,
+          "bootstrap_ci_high": 1.7206629018156945,
+          "bootstrap_ci_low": -3.079305684741818,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -0.6550109793184721,
+          "median_effect_bps": -1.4527041049272604,
+          "observations": 721,
+          "permutation_p_value": 0.5974805038992201,
+          "positive_effect_rate": 0.47711511789181693,
+          "q_rank": 12,
+          "result_label": "Does not advance",
+          "short_label": "15:30-16:00 raw return"
+        },
+        {
+          "bh_q_value": 0.7868426314737053,
+          "bootstrap_ci_high": 3.3076347458257858,
+          "bootstrap_ci_low": -4.421097113748211,
+          "family_label": "Overnight gaps",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -0.6408407979534618,
+          "median_effect_bps": -1.9938892315640722,
+          "observations": 598,
+          "permutation_p_value": 0.7546490701859628,
+          "positive_effect_rate": 0.48494983277591974,
+          "q_rank": 13,
+          "result_label": "Does not advance",
+          "short_label": "Overnight gap \u00b7 30m"
+        },
+        {
+          "bh_q_value": 0.6561521029127507,
+          "bootstrap_ci_high": 1.3636687667353395,
+          "bootstrap_ci_low": -2.530396631709082,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -0.584635032770292,
+          "median_effect_bps": 0.5531508857337109,
+          "observations": 721,
+          "permutation_p_value": 0.5484903019396121,
+          "positive_effect_rate": 0.507628294036061,
+          "q_rank": 11,
+          "result_label": "Does not advance",
+          "short_label": "14:00-14:30 raw return"
+        },
+        {
+          "bh_q_value": 0.8100379924015197,
+          "bootstrap_ci_high": 1.6968139048627182,
+          "bootstrap_ci_low": -2.2769682833090172,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -0.2470947659840724,
+          "median_effect_bps": 0.4973887092774021,
+          "observations": 721,
+          "permutation_p_value": 0.8100379924015197,
+          "positive_effect_rate": 0.5062413314840499,
+          "q_rank": 15,
+          "result_label": "Does not advance",
+          "short_label": "15:00-15:30 raw return"
+        },
+        {
+          "bh_q_value": 0.9904019196160768,
+          "bootstrap_ci_high": 3.3940185651596932,
+          "bootstrap_ci_low": -3.1583075519472366,
+          "family_label": "Opening response",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 0.017175706189606132,
+          "median_effect_bps": 1.4645332450491377,
+          "observations": 596,
+          "permutation_p_value": 0.9904019196160768,
+          "positive_effect_rate": 0.5234899328859061,
+          "q_rank": 20,
+          "result_label": "Does not advance",
+          "short_label": "Opening 30 \u00b7 30m"
+        },
+        {
+          "bh_q_value": 0.8620275944811038,
+          "bootstrap_ci_high": 3.1060192070651067,
+          "bootstrap_ci_low": -2.689630246854295,
+          "family_label": "Reference breaks",
+          "horizon_minutes": 15,
+          "mean_effect_bps": 0.2599750425984149,
+          "median_effect_bps": 2.146001170765799,
+          "observations": 600,
+          "permutation_p_value": 0.8620275944811038,
+          "positive_effect_rate": 0.5466666666666666,
+          "q_rank": 18,
+          "result_label": "Does not advance",
+          "short_label": "Prior RTH break \u00b7 15m"
+        },
+        {
+          "bh_q_value": 0.8620275944811038,
+          "bootstrap_ci_high": 3.7645038084257583,
+          "bootstrap_ci_low": -2.6976054473012687,
+          "family_label": "Reference breaks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 0.5103922547817727,
+          "median_effect_bps": 0.6170273992484043,
+          "observations": 666,
+          "permutation_p_value": 0.7546490701859628,
+          "positive_effect_rate": 0.5075075075075075,
+          "q_rank": 17,
+          "result_label": "Does not advance",
+          "short_label": "Overnight break \u00b7 30m"
+        },
+        {
+          "bh_q_value": 0.8620275944811038,
+          "bootstrap_ci_high": 4.236244883663165,
+          "bootstrap_ci_low": -3.1456405907278855,
+          "family_label": "Reference breaks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 0.6161925082905733,
+          "median_effect_bps": 1.81074475017029,
+          "observations": 600,
+          "permutation_p_value": 0.7486502699460108,
+          "positive_effect_rate": 0.5283333333333333,
+          "q_rank": 19,
+          "result_label": "Does not advance",
+          "short_label": "Prior RTH break \u00b7 30m"
+        },
+        {
+          "bh_q_value": 0.5514147170565887,
+          "bootstrap_ci_high": 2.3245073659481643,
+          "bootstrap_ci_low": -0.8583147004567468,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 0.7657208140024226,
+          "median_effect_bps": 2.3649607416520446,
+          "observations": 743,
+          "permutation_p_value": 0.33933213357328534,
+          "positive_effect_rate": 0.5612382234185733,
+          "q_rank": 7,
+          "result_label": "Does not advance",
+          "short_label": "12:30-13:00 raw return"
+        },
+        {
+          "bh_q_value": 0.6561521029127507,
+          "bootstrap_ci_high": 4.416705280308633,
+          "bootstrap_ci_low": -2.488361904508794,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 0.9202698835590398,
+          "median_effect_bps": 3.046829773620807,
+          "observations": 743,
+          "permutation_p_value": 0.6056788642271546,
+          "positive_effect_rate": 0.531628532974428,
+          "q_rank": 9,
+          "result_label": "Does not advance",
+          "short_label": "09:30-10:00 raw return"
+        },
+        {
+          "bh_q_value": 0.9904019196160768,
+          "bootstrap_ci_high": 5.722352075336235,
+          "bootstrap_ci_low": -2.95063307121588,
+          "family_label": "Opening response",
+          "horizon_minutes": 60,
+          "mean_effect_bps": 1.3727221437475938,
+          "median_effect_bps": -0.23563046859020886,
+          "observations": 596,
+          "permutation_p_value": 0.5404919016196761,
+          "positive_effect_rate": 0.4983221476510067,
+          "q_rank": 21,
+          "result_label": "Does not advance",
+          "short_label": "Opening 30 \u00b7 60m"
+        },
+        {
+          "bh_q_value": 0.5514147170565887,
+          "bootstrap_ci_high": 3.545654075813317,
+          "bootstrap_ci_low": -0.8715018043198058,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 1.3741316955186724,
+          "median_effect_bps": 1.260398285858333,
+          "observations": 743,
+          "permutation_p_value": 0.21255748850229955,
+          "positive_effect_rate": 0.5181695827725438,
+          "q_rank": 6,
+          "result_label": "Does not advance",
+          "short_label": "11:00-11:30 raw return"
+        },
+        {
+          "bh_q_value": 0.4438612277544491,
+          "bootstrap_ci_high": 3.368305797597567,
+          "bootstrap_ci_low": -0.3998291505189225,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 1.4600770960241367,
+          "median_effect_bps": 2.106184080488127,
+          "observations": 721,
+          "permutation_p_value": 0.1365726854629074,
+          "positive_effect_rate": 0.5478502080443828,
+          "q_rank": 4,
+          "result_label": "Does not advance",
+          "short_label": "13:30-14:00 raw return"
+        },
+        {
+          "bh_q_value": 0.4438612277544491,
+          "bootstrap_ci_high": 3.354643694829651,
+          "bootstrap_ci_low": -0.4474655873527378,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 1.4960135260184353,
+          "median_effect_bps": 3.1344032096281005,
+          "observations": 743,
+          "permutation_p_value": 0.1297740451909618,
+          "positive_effect_rate": 0.5652759084791387,
+          "q_rank": 2,
+          "result_label": "Does not advance",
+          "short_label": "11:30-12:00 raw return"
+        },
+        {
+          "bh_q_value": 0.3119376124775045,
+          "bootstrap_ci_high": 4.567190348957994,
+          "bootstrap_ci_low": 0.3507656603821831,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 2.4692455434601115,
+          "median_effect_bps": 3.0487804878043256,
+          "observations": 721,
+          "permutation_p_value": 0.02399520095980804,
+          "positive_effect_rate": 0.5617198335644937,
+          "q_rank": 1,
+          "result_label": "Does not advance",
+          "short_label": "14:30-15:00 raw return"
+        }
+      ],
+      "ledger_table": [
+        {
+          "bh_q_value": 0.3119376124775045,
+          "bootstrap_ci_high": 4.567190348957994,
+          "bootstrap_ci_low": 0.3507656603821831,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 2.4692455434601115,
+          "median_effect_bps": 3.0487804878043256,
+          "observations": 721,
+          "permutation_p_value": 0.02399520095980804,
+          "positive_effect_rate": 0.5617198335644937,
+          "q_rank": 1,
+          "result_label": "Does not advance",
+          "short_label": "14:30-15:00 raw return"
+        },
+        {
+          "bh_q_value": 0.4438612277544491,
+          "bootstrap_ci_high": 0.30008233523333966,
+          "bootstrap_ci_low": -3.5620098157786737,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -1.6585724395429502,
+          "median_effect_bps": -0.1673332106222336,
+          "observations": 743,
+          "permutation_p_value": 0.09238152369526095,
+          "positive_effect_rate": 0.49663526244952894,
+          "q_rank": 3,
+          "result_label": "Does not advance",
+          "short_label": "12:00-12:30 raw return"
+        },
+        {
+          "bh_q_value": 0.4438612277544491,
+          "bootstrap_ci_high": 3.354643694829651,
+          "bootstrap_ci_low": -0.4474655873527378,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 1.4960135260184353,
+          "median_effect_bps": 3.1344032096281005,
+          "observations": 743,
+          "permutation_p_value": 0.1297740451909618,
+          "positive_effect_rate": 0.5652759084791387,
+          "q_rank": 2,
+          "result_label": "Does not advance",
+          "short_label": "11:30-12:00 raw return"
+        },
+        {
+          "bh_q_value": 0.4438612277544491,
+          "bootstrap_ci_high": 3.368305797597567,
+          "bootstrap_ci_low": -0.3998291505189225,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 1.4600770960241367,
+          "median_effect_bps": 2.106184080488127,
+          "observations": 721,
+          "permutation_p_value": 0.1365726854629074,
+          "positive_effect_rate": 0.5478502080443828,
+          "q_rank": 4,
+          "result_label": "Does not advance",
+          "short_label": "13:30-14:00 raw return"
+        },
+        {
+          "bh_q_value": 0.5514147170565887,
+          "bootstrap_ci_high": 3.545654075813317,
+          "bootstrap_ci_low": -0.8715018043198058,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 1.3741316955186724,
+          "median_effect_bps": 1.260398285858333,
+          "observations": 743,
+          "permutation_p_value": 0.21255748850229955,
+          "positive_effect_rate": 0.5181695827725438,
+          "q_rank": 6,
+          "result_label": "Does not advance",
+          "short_label": "11:00-11:30 raw return"
+        },
+        {
+          "bh_q_value": 0.5514147170565887,
+          "bootstrap_ci_high": 0.8229499651106492,
+          "bootstrap_ci_low": -2.8548693166015546,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -0.9951772391916431,
+          "median_effect_bps": 1.3687172078169496,
+          "observations": 721,
+          "permutation_p_value": 0.28574285142971406,
+          "positive_effect_rate": 0.5270457697642164,
+          "q_rank": 8,
+          "result_label": "Does not advance",
+          "short_label": "13:00-13:30 raw return"
+        },
+        {
+          "bh_q_value": 0.5514147170565887,
+          "bootstrap_ci_high": 1.2740726309140957,
+          "bootstrap_ci_low": -3.6768146597303337,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -1.2264113471027127,
+          "median_effect_bps": 0.8690966609314899,
+          "observations": 743,
+          "permutation_p_value": 0.33653269346130776,
+          "positive_effect_rate": 0.5168236877523553,
+          "q_rank": 5,
+          "result_label": "Does not advance",
+          "short_label": "10:30-11:00 raw return"
+        },
+        {
+          "bh_q_value": 0.5514147170565887,
+          "bootstrap_ci_high": 2.3245073659481643,
+          "bootstrap_ci_low": -0.8583147004567468,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 0.7657208140024226,
+          "median_effect_bps": 2.3649607416520446,
+          "observations": 743,
+          "permutation_p_value": 0.33933213357328534,
+          "positive_effect_rate": 0.5612382234185733,
+          "q_rank": 7,
+          "result_label": "Does not advance",
+          "short_label": "12:30-13:00 raw return"
+        },
+        {
+          "bh_q_value": 0.6561521029127507,
+          "bootstrap_ci_high": 1.8791507722546315,
+          "bootstrap_ci_low": -3.7847737081316626,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -0.9332887393618555,
+          "median_effect_bps": 0.4292336748124015,
+          "observations": 743,
+          "permutation_p_value": 0.510497900419916,
+          "positive_effect_rate": 0.5047106325706595,
+          "q_rank": 10,
+          "result_label": "Does not advance",
+          "short_label": "10:00-10:30 raw return"
+        },
+        {
+          "bh_q_value": 0.6561521029127507,
+          "bootstrap_ci_high": 1.3636687667353395,
+          "bootstrap_ci_low": -2.530396631709082,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -0.584635032770292,
+          "median_effect_bps": 0.5531508857337109,
+          "observations": 721,
+          "permutation_p_value": 0.5484903019396121,
+          "positive_effect_rate": 0.507628294036061,
+          "q_rank": 11,
+          "result_label": "Does not advance",
+          "short_label": "14:00-14:30 raw return"
+        },
+        {
+          "bh_q_value": 0.6561521029127507,
+          "bootstrap_ci_high": 1.7206629018156945,
+          "bootstrap_ci_low": -3.079305684741818,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -0.6550109793184721,
+          "median_effect_bps": -1.4527041049272604,
+          "observations": 721,
+          "permutation_p_value": 0.5974805038992201,
+          "positive_effect_rate": 0.47711511789181693,
+          "q_rank": 12,
+          "result_label": "Does not advance",
+          "short_label": "15:30-16:00 raw return"
+        },
+        {
+          "bh_q_value": 0.6561521029127507,
+          "bootstrap_ci_high": 4.416705280308633,
+          "bootstrap_ci_low": -2.488361904508794,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 0.9202698835590398,
+          "median_effect_bps": 3.046829773620807,
+          "observations": 743,
+          "permutation_p_value": 0.6056788642271546,
+          "positive_effect_rate": 0.531628532974428,
+          "q_rank": 9,
+          "result_label": "Does not advance",
+          "short_label": "09:30-10:00 raw return"
+        },
+        {
+          "bh_q_value": 0.7868426314737053,
+          "bootstrap_ci_high": 3.3076347458257858,
+          "bootstrap_ci_low": -4.421097113748211,
+          "family_label": "Overnight gaps",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -0.6408407979534618,
+          "median_effect_bps": -1.9938892315640722,
+          "observations": 598,
+          "permutation_p_value": 0.7546490701859628,
+          "positive_effect_rate": 0.48494983277591974,
+          "q_rank": 13,
+          "result_label": "Does not advance",
+          "short_label": "Overnight gap \u00b7 30m"
+        },
+        {
+          "bh_q_value": 0.7868426314737053,
+          "bootstrap_ci_high": 4.5996812219245715,
+          "bootstrap_ci_low": -5.858521886561366,
+          "family_label": "Overnight gaps",
+          "horizon_minutes": 60,
+          "mean_effect_bps": -0.6826842866430891,
+          "median_effect_bps": 1.0193041222683608,
+          "observations": 598,
+          "permutation_p_value": 0.7868426314737053,
+          "positive_effect_rate": 0.5016722408026756,
+          "q_rank": 14,
+          "result_label": "Does not advance",
+          "short_label": "Overnight gap \u00b7 60m"
+        },
+        {
+          "bh_q_value": 0.8100379924015197,
+          "bootstrap_ci_high": 1.6968139048627182,
+          "bootstrap_ci_low": -2.2769682833090172,
+          "family_label": "RTH clock blocks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": -0.2470947659840724,
+          "median_effect_bps": 0.4973887092774021,
+          "observations": 721,
+          "permutation_p_value": 0.8100379924015197,
+          "positive_effect_rate": 0.5062413314840499,
+          "q_rank": 15,
+          "result_label": "Does not advance",
+          "short_label": "15:00-15:30 raw return"
+        },
+        {
+          "bh_q_value": 0.8620275944811038,
+          "bootstrap_ci_high": 1.2758594623708142,
+          "bootstrap_ci_low": -3.4792595568978313,
+          "family_label": "Reference breaks",
+          "horizon_minutes": 15,
+          "mean_effect_bps": -1.0830338030687252,
+          "median_effect_bps": 1.066202284367157,
+          "observations": 666,
+          "permutation_p_value": 0.38192361527694463,
+          "positive_effect_rate": 0.521021021021021,
+          "q_rank": 16,
+          "result_label": "Does not advance",
+          "short_label": "Overnight break \u00b7 15m"
+        },
+        {
+          "bh_q_value": 0.8620275944811038,
+          "bootstrap_ci_high": 4.236244883663165,
+          "bootstrap_ci_low": -3.1456405907278855,
+          "family_label": "Reference breaks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 0.6161925082905733,
+          "median_effect_bps": 1.81074475017029,
+          "observations": 600,
+          "permutation_p_value": 0.7486502699460108,
+          "positive_effect_rate": 0.5283333333333333,
+          "q_rank": 19,
+          "result_label": "Does not advance",
+          "short_label": "Prior RTH break \u00b7 30m"
+        },
+        {
+          "bh_q_value": 0.8620275944811038,
+          "bootstrap_ci_high": 3.7645038084257583,
+          "bootstrap_ci_low": -2.6976054473012687,
+          "family_label": "Reference breaks",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 0.5103922547817727,
+          "median_effect_bps": 0.6170273992484043,
+          "observations": 666,
+          "permutation_p_value": 0.7546490701859628,
+          "positive_effect_rate": 0.5075075075075075,
+          "q_rank": 17,
+          "result_label": "Does not advance",
+          "short_label": "Overnight break \u00b7 30m"
+        },
+        {
+          "bh_q_value": 0.8620275944811038,
+          "bootstrap_ci_high": 3.1060192070651067,
+          "bootstrap_ci_low": -2.689630246854295,
+          "family_label": "Reference breaks",
+          "horizon_minutes": 15,
+          "mean_effect_bps": 0.2599750425984149,
+          "median_effect_bps": 2.146001170765799,
+          "observations": 600,
+          "permutation_p_value": 0.8620275944811038,
+          "positive_effect_rate": 0.5466666666666666,
+          "q_rank": 18,
+          "result_label": "Does not advance",
+          "short_label": "Prior RTH break \u00b7 15m"
+        },
+        {
+          "bh_q_value": 0.9904019196160768,
+          "bootstrap_ci_high": 5.722352075336235,
+          "bootstrap_ci_low": -2.95063307121588,
+          "family_label": "Opening response",
+          "horizon_minutes": 60,
+          "mean_effect_bps": 1.3727221437475938,
+          "median_effect_bps": -0.23563046859020886,
+          "observations": 596,
+          "permutation_p_value": 0.5404919016196761,
+          "positive_effect_rate": 0.4983221476510067,
+          "q_rank": 21,
+          "result_label": "Does not advance",
+          "short_label": "Opening 30 \u00b7 60m"
+        },
+        {
+          "bh_q_value": 0.9904019196160768,
+          "bootstrap_ci_high": 3.3940185651596932,
+          "bootstrap_ci_low": -3.1583075519472366,
+          "family_label": "Opening response",
+          "horizon_minutes": 30,
+          "mean_effect_bps": 0.017175706189606132,
+          "median_effect_bps": 1.4645332450491377,
+          "observations": 596,
+          "permutation_p_value": 0.9904019196160768,
+          "positive_effect_rate": 0.5234899328859061,
+          "q_rank": 20,
+          "result_label": "Does not advance",
+          "short_label": "Opening 30 \u00b7 30m"
+        }
+      ]
+    },
+    "generatedAt": "2026-07-29T03:21:02.170132+00:00",
+    "status": "ready",
+    "version": 1
+  },
+  "sources": [
+    {
+      "id": "phase6_manifest",
+      "label": "Phase 6 analysis manifest",
+      "path": "data/manifests/phase6_manifest.json",
+      "query": {
+        "description": "Phase 6 coverage, method, gate checks, checksums, and null result.",
+        "engine": "duckdb",
+        "filters": [
+          "input_split = development"
+        ],
+        "language": "sql",
+        "metric_definitions": [
+          "bh_rejections = hypotheses whose within-family Benjamini-Hochberg q-value is at most 0.05",
+          "advancing_hypotheses = sample-sufficient BH rejections whose 95% session-bootstrap interval excludes zero",
+          "event_observations = eligible hypothesis-session outcome rows"
+        ],
+        "sql": "SELECT coverage, method, findings, validation FROM read_json_auto('data/manifests/phase6_manifest.json')",
+        "tables_used": [
+          "data/manifests/phase6_manifest.json"
+        ]
+      }
+    },
+    {
+      "id": "hypothesis_ledger",
+      "label": "Phase 6 complete hypothesis ledger",
+      "path": "results/phase6/hypothesis_ledger.parquet",
+      "query": {
+        "description": "All preregistered tests with effect estimates, session-bootstrap intervals, randomized-null p-values, adjusted q-values, and outcomes.",
+        "engine": "duckdb",
+        "filters": [
+          "development split only",
+          "all preregistered hypotheses retained"
+        ],
+        "language": "sql",
+        "metric_definitions": [
+          "mean_effect_bps = average raw forward return for fixed-clock tests or average event-direction times forward return for directional tests",
+          "bootstrap_ci_low/high = 95% percentile interval from 5,000 session resamples",
+          "permutation_p_value = plus-one two-sided randomized-null p-value from 5,000 replicates",
+          "bh_q_value = Benjamini-Hochberg adjusted p-value within the preregistered family"
+        ],
+        "sql": "SELECT hypothesis_label, family_id, horizon_minutes, observations, mean_effect_bps, median_effect_bps, positive_effect_rate, bootstrap_ci_low, bootstrap_ci_high, permutation_p_value, bh_q_value, result FROM read_parquet('results/phase6/hypothesis_ledger.parquet') ORDER BY bh_q_value, permutation_p_value",
+        "tables_used": [
+          "results/phase6/hypothesis_ledger.parquet"
+        ]
+      }
+    },
+    {
+      "id": "family_summary",
+      "label": "Phase 6 family summary",
+      "path": "results/phase6/family_summary.parquet",
+      "query": {
+        "description": "Hypothesis, sample-sufficiency, rejection, and survivor counts by preregistered family.",
+        "engine": "duckdb",
+        "filters": [
+          "all four preregistered families"
+        ],
+        "language": "sql",
+        "metric_definitions": [
+          "sample_sufficient_hypotheses = family tests with at least 100 eligible sessions",
+          "minimum_q_value = smallest within-family adjusted q-value"
+        ],
+        "sql": "SELECT * FROM read_parquet('results/phase6/family_summary.parquet') ORDER BY minimum_q_value",
+        "tables_used": [
+          "results/phase6/family_summary.parquet"
+        ]
+      }
+    },
+    {
+      "id": "phase6_config",
+      "label": "Phase 6 frozen preregistration",
+      "path": "config/phase6.yaml",
+      "query": {
+        "description": "Frozen event families, hypotheses, outcome semantics, inference rules, and advancement gate.",
+        "filters": [
+          "allowed_split = development",
+          "validation and final_untouched_test forbidden"
+        ],
+        "metric_definitions": [
+          "minimum_observations = 100",
+          "bootstrap_replicates = 5,000",
+          "permutation_replicates = 5,000",
+          "multiple-testing alpha = 0.05 within family"
+        ],
+        "tables_used": [
+          "config/phase6.yaml"
+        ]
+      }
+    }
+  ],
+  "surface": "report"
+}

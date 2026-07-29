@@ -1,0 +1,47 @@
+{
+  "version": "phase6_v2",
+  "analysis_class": "preregistered_second_wave_event_study_not_strategy",
+  "preregistered_at_utc": "2026-07-29T03:46:12.5621362Z",
+  "outcomes_computed_at_registration": false,
+  "hypotheses": 4,
+  "families": [
+    "volatility_state_transition",
+    "signed_pressure_burst"
+  ],
+  "source_hashes": {
+    "phase6_v2_config": "d5da295ea8928bd79e9a7b4a095ca15bdbbc6c45061c51b30eaa105f65ee3e99",
+    "phase6_v1_config": "e250c690e6826e586e21ac6876c6de6e2ecd05730eedd8e57e83e192de98ea3b",
+    "feature_manifest": "2a0a0ce757c08902282cecbb1a14a03991dd21311b05a7bd42f4f78ad70baeed",
+    "bar_features": "a7642c40cd8802c410bfc57c6a64c221d2313f2daee6778484f2af68f7a3f393",
+    "phase6_v1_hypothesis_ledger": "4497bde16bfd5d9da995467ab9c78a8fdd215851f04ee75965abdc10334317d1"
+  },
+  "frozen_decisions": {
+    "volatility_state_transition": {
+      "state_feature": "realized_vol_30",
+      "entry_minutes": [60, 90, 120, 150, 180, 210, 240, 270, 300, 330],
+      "baseline": "strictly prior 60 usable same-clock sessions, minimum 40",
+      "states": "low at or below lagged 20th percentile; high at or above lagged 80th percentile",
+      "horizons_minutes": [15, 30],
+      "effect": "high-state minus low-state mean forward RTH range in basis points"
+    },
+    "signed_pressure_burst": {
+      "feature": "five-minute (up_volume - down_volume) / total_volume",
+      "provider_semantics": "uptick/downtick volume pressure proxy, not bid/ask aggressor imbalance",
+      "eligible_trigger_minutes": [30, 330],
+      "baseline": "strictly prior 60 usable same-clock sessions, minimum 40",
+      "thresholds": "absolute pressure at or above lagged 90th percentile and activity at or above lagged median",
+      "selection": "first qualifying event per session",
+      "horizons_minutes": [5, 15],
+      "effect": "pressure direction times forward return in basis points"
+    }
+  },
+  "multiplicity": {
+    "primary": "Benjamini-Hochberg within each new family",
+    "sensitivity": "Benjamini-Hochberg across all Phase 6 v1 and v2 hypotheses",
+    "alpha": 0.05
+  },
+  "forbidden_data": [
+    "validation",
+    "final_untouched_test"
+  ]
+}
