@@ -27,11 +27,12 @@ The current MCP audit found usable minute and daily bars for individual MNQ cont
 
 ## Current Phase
 
-Phases 1 through 4 are complete. Phase 4 produced a reproducible
-1,701,735-row point-in-time feature table across all 1,241 usable sessions,
-with 101 catalogued calendar, prior-session, overnight, opening, level,
-volatility, and lagged-regime features. Every feature family has an explicit
-availability timestamp, excluded predecessors invalidate dependent features,
-and the analysis loader keeps the final-test split locked. Phase 5
-unconditional time analysis is next. The full sequence and phase gates are
-documented in `reports/project_execution_plan.md`.
+Phases 1 through 5 are complete. Phase 5 used the development split only to
+build separate full-session and RTH market clocks at five-minute anchors across
+1, 5, 15, 30, and 60-minute horizons. It produced 1,734 unconditional
+clock/horizon cells, 43,350 year/quarter/weekday/lagged-regime stability cuts,
+and session high/low timing distributions. All outputs passed split-lock,
+coverage, interval, uniqueness, and byte-reproducibility gates. No validation
+or final-test outcomes were inspected, and no strategy or tradable performance
+was produced. Phase 6 event studies are next. The full sequence and phase gates
+are documented in `reports/project_execution_plan.md`.

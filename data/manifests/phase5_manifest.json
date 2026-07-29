@@ -1,0 +1,266 @@
+{
+  "analysis_class": "descriptive_not_strategy",
+  "artifacts": {
+    "market_clock": {
+      "bytes": 206920,
+      "column_count": 26,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase5/market_clock.parquet",
+      "row_count": 1734,
+      "schema": "scope: large_string\nclock_minute: int16\nclock_label: large_string\nhorizon_minutes: int16\nend_clock_label: large_string\nobservations: int64\npositive_observations: int64\nmean_return_bps: double\nmedian_return_bps: double\nstandard_deviation_bps: double\nmean_return_points: double\nmedian_return_points: double\nmean_mfe_bps: double\nmedian_mfe_bps: double\nmean_mae_bps: double\nmedian_mae_bps: double\nmean_mfe_points: double\nmean_mae_points: double\nreturn_bps_p25: double\nreturn_bps_p75: double\npositive_rate: double\nmean_return_ci_low: double\nmean_return_ci_high: double\npositive_rate_ci_low: double\npositive_rate_ci_high: double\nstandard_error_bps: double\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 3492",
+      "sha256": "db743a2a141fbf0565b4d1b1d0e67754ddd5c897a8f1d0d65198cb611311cd55"
+    },
+    "market_clock_stability": {
+      "bytes": 4742894,
+      "column_count": 29,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase5/market_clock_stability.parquet",
+      "row_count": 43350,
+      "schema": "scope: large_string\nclock_minute: int16\nclock_label: large_string\ncut_type: large_string\nhorizon_minutes: int16\nend_clock_label: large_string\ncut_value: large_string\nobservations: int64\npositive_observations: int64\nmean_return_bps: double\nmedian_return_bps: double\nstandard_deviation_bps: double\nmean_return_points: double\nmedian_return_points: double\nmean_mfe_bps: double\nmedian_mfe_bps: double\nmean_mae_bps: double\nmedian_mae_bps: double\nmean_mfe_points: double\nmean_mae_points: double\nreturn_bps_p25: double\nreturn_bps_p75: double\npositive_rate: double\nmean_return_ci_low: double\nmean_return_ci_high: double\npositive_rate_ci_low: double\npositive_rate_ci_high: double\nstandard_error_bps: double\nsample_sufficient: bool\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 3847",
+      "sha256": "6f27e9b1ba51922f418d2e74763a9af7b99138924641205d72c6a2218d15245f"
+    },
+    "market_clock_stability_summary": {
+      "bytes": 182809,
+      "column_count": 14,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase5/market_clock_stability_summary.parquet",
+      "row_count": 10404,
+      "schema": "scope: large_string\nclock_minute: int16\nclock_label: large_string\nhorizon_minutes: int16\nend_clock_label: large_string\ncut_type: large_string\neligible_groups: int64\npositive_groups: int64\nnegative_groups: int64\nzero_groups: int64\nminimum_group_mean_bps: double\nmaximum_group_mean_bps: double\nmajority_sign: large_string\nmajority_sign_share: double\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 1854",
+      "sha256": "6115d3ee42eb06871c72274e344296df81c1506df7f07cdf3cfe10194d6db1b4"
+    },
+    "phase5_manifest": {
+      "path": "data/manifests/phase5_manifest.json"
+    },
+    "report_clock_blocks": {
+      "bytes": 23149,
+      "column_count": 26,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase5/report_clock_blocks.parquet",
+      "row_count": 36,
+      "schema": "scope: large_string\nclock_minute: int16\nclock_label: large_string\nhorizon_minutes: int16\nend_clock_label: large_string\nobservations: int64\npositive_observations: int64\nmean_return_bps: double\nmedian_return_bps: double\nstandard_deviation_bps: double\nmean_return_points: double\nmedian_return_points: double\nmean_mfe_bps: double\nmedian_mfe_bps: double\nmean_mae_bps: double\nmedian_mae_bps: double\nmean_mfe_points: double\nmean_mae_points: double\nreturn_bps_p25: double\nreturn_bps_p75: double\npositive_rate: double\nmean_return_ci_low: double\nmean_return_ci_high: double\npositive_rate_ci_low: double\npositive_rate_ci_high: double\nstandard_error_bps: double\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 3492",
+      "sha256": "5c2e2943b8df477bbe5591366ef7a4dd95e12f89ef9fd838e13acd419ffce0e7"
+    },
+    "session_timing": {
+      "bytes": 56743,
+      "column_count": 14,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase5/session_timing.parquet",
+      "row_count": 1487,
+      "schema": "scope: large_string\nsession_date: timestamp[us]\ncalendar_year: int64\ncalendar_quarter: int64\ncalendar_weekday: int64\nhigh_clock_minute: int64\nlow_clock_minute: int64\nhigh_clock_label: large_string\nlow_clock_label: large_string\nhigh_before_low: bool\nsame_bar_extremes: bool\nrange_points: double\nrange_bps: double\nclose_location_in_range: double\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 1872",
+      "sha256": "62bc37448314a9d7b0c1ee1e8deb2b5e359ff2b582e1b4733b3db777d2fcd2ce"
+    },
+    "turning_point_timing": {
+      "bytes": 8639,
+      "column_count": 10,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "results/phase5/turning_point_timing.parquet",
+      "row_count": 72,
+      "schema": "scope: large_string\nextreme_type: large_string\nbin_start_minute: int64\nbin_end_minute: int64\nbin_label: large_string\nobservations: int64\ncount: int64\nshare: double\nshare_ci_low: double\nshare_ci_high: double\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 1278",
+      "sha256": "79c7becf65f47f1ca293d287ce9a0f1ff3577f779a2aa0d0f17c13a1a5d45552"
+    }
+  },
+  "coverage": {
+    "development_rows": 1021050,
+    "development_sessions": 744,
+    "forward_outcomes": 1280169,
+    "market_clock_cells": 1734,
+    "rth_sessions": 743,
+    "stability_cells": 43350
+  },
+  "created_at_utc": "2026-07-29T03:09:05.263658+00:00",
+  "created_by": "python -m src.pattern_scan run",
+  "findings": {
+    "interpretation": "These are unadjusted descriptive extrema among non-overlapping 30-minute RTH blocks. They are inputs to Phase 6 preregistration, not candidate signals or evidence of tradability.",
+    "rth_high_before_low_rate": 0.48048452220726784,
+    "rth_modal_high_bin": {
+      "bin_label": "09:30-10:00",
+      "observations": 743,
+      "share": 0.29878869448183043
+    },
+    "rth_modal_low_bin": {
+      "bin_label": "09:30-10:00",
+      "observations": 743,
+      "share": 0.32570659488559894
+    },
+    "rth_strongest_30m_block": {
+      "eligible_years": 4,
+      "end": "15:00",
+      "mean_mae_bps": -18.00357042704053,
+      "mean_mfe_bps": 19.689819004854687,
+      "mean_return_bps": 2.469245543460112,
+      "mean_return_ci_high": 4.606616936247391,
+      "mean_return_ci_low": 0.3318741506728329,
+      "median_return_bps": 3.0487804878043256,
+      "negative_years": 0,
+      "observations": 721,
+      "positive_rate": 0.5617198335644937,
+      "positive_years": 4,
+      "start": "14:30"
+    },
+    "rth_weakest_30m_block": {
+      "eligible_years": 4,
+      "end": "12:30",
+      "mean_mae_bps": -20.41449448110593,
+      "mean_mfe_bps": 16.540159461460068,
+      "mean_return_bps": -1.65857243954295,
+      "mean_return_ci_high": 0.2653018544605932,
+      "mean_return_ci_low": -3.582446733546493,
+      "median_return_bps": -0.1673332106222336,
+      "negative_years": 2,
+      "observations": 743,
+      "positive_rate": 0.49663526244952894,
+      "positive_years": 2,
+      "start": "12:00"
+    }
+  },
+  "forbidden_splits": [
+    "validation",
+    "final_untouched_test"
+  ],
+  "gate_passed": true,
+  "input_split": "development",
+  "limitations": [
+    "All results are exploratory, descriptive, and unadjusted for the many clock cells examined.",
+    "Overlapping forward horizons are correlated and must not be treated as independent tests.",
+    "One-minute OHLC bars do not reveal within-bar path or executable fill sequence.",
+    "The full-session and RTH clocks overlap because RTH is nested inside the Globex session.",
+    "Early-close sessions contribute only to clock cells whose entire horizon is observed.",
+    "No validation or final-test outcomes were inspected, and no strategy or tradable performance was produced."
+  ],
+  "method": {
+    "anchor_step_minutes": 5,
+    "confidence_level": 0.95,
+    "horizons_minutes": [
+      1,
+      5,
+      15,
+      30,
+      60
+    ],
+    "interval_definition": "Entry is the fixed clock bar open; exit is the final included bar close; MFE/MAE use the highs/lows of the included bars.",
+    "mean_interval": "Student-t",
+    "minimum_stability_observations": 30,
+    "positive_rate_interval": "Wilson",
+    "scopes": {
+      "eth_full_session": {
+        "clock_column": "session_minute",
+        "definition": "Entire contiguous CME Globex session from 18:00 to 17:00 Eastern.",
+        "include_predicate": "all",
+        "start_time": "18:00",
+        "turning_point_bin_minutes": 60
+      },
+      "rth": {
+        "clock_column": "rth_minute",
+        "definition": "Regular trading hours from 09:30 to 16:00 Eastern.",
+        "include_predicate": "is_rth",
+        "start_time": "09:30",
+        "turning_point_bin_minutes": 30
+      }
+    },
+    "stability_dimensions": [
+      "calendar_year",
+      "calendar_quarter",
+      "calendar_weekday",
+      "trend_regime",
+      "volatility_regime",
+      "volume_regime"
+    ]
+  },
+  "phase": 5,
+  "runtime_versions": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "pyarrow": "25.0.0",
+    "python": "3.12.13",
+    "pyyaml": "6.0.3",
+    "scipy": "1.18.0"
+  },
+  "source_hashes": {
+    "bar_features": "a7642c40cd8802c410bfc57c6a64c221d2313f2daee6778484f2af68f7a3f393",
+    "feature_manifest": "2a0a0ce757c08902282cecbb1a14a03991dd21311b05a7bd42f4f78ad70baeed",
+    "phase5_config": "7422079a56e5c6182a97cdcdd008a83d02edf1163d5a430b337741785dfde9dd",
+    "pipeline_code": "fd6e39500b862e414f354d2b2164812bfdcb7a2487aaa6e775ed99e02a1779b2",
+    "research_config": "1649e5716cfb8f51457499e57a3adfa5b74d2f90bf2b3255161ec45df4f26b4d",
+    "split_config": "4e23a0871ad107c3061855fab7c2e22aff034570ae9b4ca283a0f30ddc7021b9",
+    "statistics_code": "4e58ae861b71231742b15a5b4f786ebfb226d92da7ab471a13a29655ef19efe6"
+  },
+  "validation": {
+    "checks": {
+      "analysis_is_descriptive_only": true,
+      "byte_reproducible_rebuild": true,
+      "development_split_only": true,
+      "excursion_direction_valid": true,
+      "locked_final_rows_absent": true,
+      "market_clock_keys_unique": true,
+      "mean_confidence_intervals_valid": true,
+      "outcome_keys_unique": true,
+      "outcomes_nonempty": true,
+      "phase4_development_row_count_preserved": true,
+      "positive_rate_intervals_valid": true,
+      "required_horizons_complete": true,
+      "required_scopes_complete": true,
+      "sample_sizes_visible_and_bounded": true,
+      "stability_dimensions_complete": true,
+      "stability_keys_unique": true,
+      "timing_session_counts_valid": true,
+      "turning_point_shares_sum_to_one": true
+    },
+    "details": {
+      "development_rows": 1021050,
+      "development_sessions": 744,
+      "market_clock_cells": 1734,
+      "observed_splits": [
+        "development"
+      ],
+      "outcome_rows": 1280169,
+      "reproducibility": {
+        "artifacts": {
+          "market_clock": {
+            "byte_identical": true,
+            "original_sha256": "db743a2a141fbf0565b4d1b1d0e67754ddd5c897a8f1d0d65198cb611311cd55",
+            "rebuilt_sha256": "db743a2a141fbf0565b4d1b1d0e67754ddd5c897a8f1d0d65198cb611311cd55"
+          },
+          "market_clock_stability": {
+            "byte_identical": true,
+            "original_sha256": "6f27e9b1ba51922f418d2e74763a9af7b99138924641205d72c6a2218d15245f",
+            "rebuilt_sha256": "6f27e9b1ba51922f418d2e74763a9af7b99138924641205d72c6a2218d15245f"
+          },
+          "market_clock_stability_summary": {
+            "byte_identical": true,
+            "original_sha256": "6115d3ee42eb06871c72274e344296df81c1506df7f07cdf3cfe10194d6db1b4",
+            "rebuilt_sha256": "6115d3ee42eb06871c72274e344296df81c1506df7f07cdf3cfe10194d6db1b4"
+          },
+          "report_clock_blocks": {
+            "byte_identical": true,
+            "original_sha256": "5c2e2943b8df477bbe5591366ef7a4dd95e12f89ef9fd838e13acd419ffce0e7",
+            "rebuilt_sha256": "5c2e2943b8df477bbe5591366ef7a4dd95e12f89ef9fd838e13acd419ffce0e7"
+          },
+          "session_timing": {
+            "byte_identical": true,
+            "original_sha256": "62bc37448314a9d7b0c1ee1e8deb2b5e359ff2b582e1b4733b3db777d2fcd2ce",
+            "rebuilt_sha256": "62bc37448314a9d7b0c1ee1e8deb2b5e359ff2b582e1b4733b3db777d2fcd2ce"
+          },
+          "turning_point_timing": {
+            "byte_identical": true,
+            "original_sha256": "79c7becf65f47f1ca293d287ce9a0f1ff3577f779a2aa0d0f17c13a1a5d45552",
+            "rebuilt_sha256": "79c7becf65f47f1ca293d287ce9a0f1ff3577f779a2aa0d0f17c13a1a5d45552"
+          }
+        },
+        "byte_identical": true
+      },
+      "rth_sessions": 743,
+      "stability_cells": 43350,
+      "timing_rows": 1487,
+      "turning_point_rows": 72
+    },
+    "failed_checks": [],
+    "gate_passed": true
+  },
+  "version": "phase5_v1"
+}

@@ -1,0 +1,2022 @@
+{
+  "manifest": {
+    "blocks": [
+      {
+        "body": "# MNQ Phase 5 Unconditional Time Analysis",
+        "id": "title",
+        "type": "markdown"
+      },
+      {
+        "body": "## Technical summary\n\nThe Phase 5 gate **passed** on **1.02M development bars** across **744 Globex sessions**. The pipeline produced **1,734 clock/horizon cells** and **43,350 stability cuts**. Validation and final-test rows used: **zero**. This is descriptive research, not a strategy or a tradability claim.",
+        "id": "technical_summary",
+        "sourceId": "phase5_manifest",
+        "type": "markdown"
+      },
+      {
+        "cardIds": [
+          "development_bars",
+          "clock_cells",
+          "locked_rows",
+          "largest_30m_mean"
+        ],
+        "id": "headline_metrics",
+        "type": "metric-strip"
+      },
+      {
+        "body": "## The late-afternoon block is the clearest descriptive RTH feature\n\nAmong the 13 non-overlapping 30-minute RTH blocks, **14:30-15:00** had the largest mean at **2.47 bps** (95% CI 0.33 to 4.61; n=721). The 12:00-12:30 block was lowest at **-1.66 bps**, with an interval that includes zero. These are unadjusted development-sample extrema.",
+        "id": "rth_block_finding",
+        "sourceId": "clock_blocks",
+        "type": "markdown"
+      },
+      {
+        "chartId": "rth_blocks_chart",
+        "id": "rth_blocks_chart_block",
+        "type": "chart"
+      },
+      {
+        "body": "## Five-minute returns are noisy across the RTH clock\n\nThe finer five-minute profile shows alternating positive and negative averages rather than a smooth one-way drift. The backing data retain confidence intervals, medians, positive rates, observations, and excursions for every start time. Overlapping cells are correlated and should not be read as independent discoveries.",
+        "id": "rth_clock_finding",
+        "sourceId": "market_clock",
+        "type": "markdown"
+      },
+      {
+        "chartId": "rth_five_chart",
+        "id": "rth_five_chart_block",
+        "type": "chart"
+      },
+      {
+        "body": "## The 14:30 mean keeps its sign by year, but annual uncertainty remains wide\n\nAll four sufficiently populated calendar-year cuts have a positive mean for 14:30-15:00. **Every individual annual 95% interval crosses zero**, so the pooled result is not enough to establish a stable event. Quarter, weekday, and strictly lagged regime cuts remain available for Phase 6 design.",
+        "id": "stability_finding",
+        "sourceId": "stability",
+        "type": "markdown"
+      },
+      {
+        "id": "year_stability_table_block",
+        "tableId": "year_stability_table",
+        "type": "table"
+      },
+      {
+        "body": "## RTH extremes cluster at the open and close\n\nThe first RTH high appears in **09:30-10:00** in **29.9%** of sessions; the first RTH low appears there in **32.6%**. The final half-hour is the second-largest bin for both. This U-shaped timing concentration describes when extremes occur; it does not define an entry.",
+        "id": "turning_point_finding",
+        "sourceId": "turning_points",
+        "type": "markdown"
+      },
+      {
+        "chartId": "turning_chart",
+        "id": "turning_chart_block",
+        "type": "chart"
+      },
+      {
+        "body": "## Scope and metric definitions\n\n- **Population:** frozen development split only, 2021-07-29 through 2024-07-26.\n- **Full-session clock:** contiguous 18:00-17:00 Eastern Globex session.\n- **RTH clock:** 09:30-16:00 Eastern, analyzed separately but nested inside Globex.\n- **Anchors and horizons:** five-minute start grid; 1, 5, 15, 30, and 60-minute intervals.\n- **Return:** fixed-clock bar open to final included bar close, in basis points.\n- **MFE/MAE:** interval high and low relative to the entry-bar open; these are not simulated fills.",
+        "id": "scope_definitions",
+        "sourceId": "phase5_config",
+        "type": "markdown"
+      },
+      {
+        "body": "## Methodology and validation\n\nMeans use two-sided 95% Student-t intervals; positive rates use Wilson intervals. Stability is measured by year, quarter, weekday, and strictly lagged trend, volatility, and volume regimes, with 30 observations as the sufficiency marker. Gate checks cover split lock, source-row preservation, scope/horizon completeness, unique keys, interval bounds, excursion direction, timing shares, and byte-identical Parquet rebuilds.",
+        "id": "methodology",
+        "sourceId": "phase5_manifest",
+        "type": "markdown"
+      },
+      {
+        "body": "## Limitations keep every finding exploratory\n\n- No multiplicity adjustment is applied to the many clock cells in Phase 5.\n- Overlapping forward horizons are correlated.\n- One-minute OHLC bars cannot reveal within-bar path or executable fill sequence.\n- Early-close sessions enter only complete intervals, so late-day sample sizes are smaller.\n- Full-session and RTH views overlap.\n- No validation or final-test outcome was inspected.",
+        "id": "limitations",
+        "sourceId": "phase5_manifest",
+        "type": "markdown"
+      },
+      {
+        "body": "## Recommended next step\n\nUse this map only to preregister a restrained set of interpretable Phase 6 event families. Record every test, use session-aware bootstrap intervals and permuted nulls, and apply Benjamini-Hochberg correction within each family before anything advances to candidate generation.",
+        "id": "next_steps",
+        "type": "markdown"
+      },
+      {
+        "body": "## Further questions\n\n- Does the late-afternoon tendency survive a preregistered event definition and within-family multiplicity control?\n- Are opening/closing extreme concentrations conditional on lagged volatility without being driven by a few years?\n- Do any descriptive effects remain large enough to matter after Phase 7 costs and conservative execution?",
+        "id": "further_questions",
+        "type": "markdown"
+      }
+    ],
+    "cards": [
+      {
+        "dataset": "headline",
+        "description": "One-minute rows from the development split; later splits are prohibited.",
+        "id": "development_bars",
+        "metrics": [
+          {
+            "field": "development_rows",
+            "format": "number",
+            "label": "Development bars"
+          },
+          {
+            "field": "development_sessions",
+            "format": "number",
+            "label": "Globex sessions"
+          },
+          {
+            "field": "rth_sessions",
+            "format": "number",
+            "label": "RTH sessions"
+          }
+        ],
+        "sourceId": "phase5_manifest"
+      },
+      {
+        "dataset": "headline",
+        "description": "Fixed-clock summaries plus calendar and lagged-regime cuts.",
+        "id": "clock_cells",
+        "metrics": [
+          {
+            "field": "market_clock_cells",
+            "format": "number",
+            "label": "Clock/horizon cells"
+          },
+          {
+            "field": "stability_cells",
+            "format": "number",
+            "label": "Stability cuts"
+          }
+        ],
+        "sourceId": "phase5_manifest"
+      },
+      {
+        "dataset": "headline",
+        "description": "Rows from later chronological splits used by Phase 5.",
+        "id": "locked_rows",
+        "metrics": [
+          {
+            "field": "final_test_rows_used",
+            "format": "number",
+            "label": "Final-test rows used"
+          },
+          {
+            "field": "validation_rows_used",
+            "format": "number",
+            "label": "Validation rows used"
+          }
+        ],
+        "sourceId": "phase5_manifest"
+      },
+      {
+        "dataset": "headline",
+        "description": "Largest mean among non-overlapping 30-minute RTH blocks; unadjusted and descriptive.",
+        "id": "largest_30m_mean",
+        "metrics": [
+          {
+            "field": "strongest_30m_mean_bps",
+            "format": "number",
+            "label": "Largest 30m mean",
+            "unit": "bps"
+          },
+          {
+            "field": "strongest_30m_ci_low",
+            "format": "number",
+            "label": "95% CI low",
+            "unit": "bps"
+          },
+          {
+            "field": "strongest_30m_ci_high",
+            "format": "number",
+            "label": "95% CI high",
+            "unit": "bps"
+          }
+        ],
+        "sourceId": "clock_blocks"
+      }
+    ],
+    "charts": [
+      {
+        "dataset": "rth_blocks",
+        "description": "Thirteen non-overlapping development-sample blocks; 14:30-15:00 has the largest mean.",
+        "encodings": {
+          "x": {
+            "field": "interval",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "mean_return_bps",
+            "type": "quantitative"
+          }
+        },
+        "id": "rth_blocks_chart",
+        "options": {
+          "grouping": "single",
+          "orientation": "vertical"
+        },
+        "showDescription": true,
+        "sourceId": "clock_blocks",
+        "title": "Mean return across 30-minute RTH blocks",
+        "type": "bar"
+      },
+      {
+        "dataset": "rth_five",
+        "description": "Development sample; the alternating profile is noisy and unadjusted for multiple clock-cell inspection.",
+        "encodings": {
+          "x": {
+            "field": "clock_label",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "mean_return_bps",
+            "type": "quantitative"
+          }
+        },
+        "id": "rth_five_chart",
+        "options": {
+          "points": "never"
+        },
+        "showDescription": true,
+        "sourceId": "market_clock",
+        "title": "Mean five-minute RTH return by start time",
+        "type": "line"
+      },
+      {
+        "dataset": "rth_turning",
+        "description": "Share of sessions whose first RTH high or low occurs in each 30-minute bin.",
+        "encodings": {
+          "color": {
+            "field": "extreme",
+            "type": "nominal"
+          },
+          "x": {
+            "field": "bin_label",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "share",
+            "type": "quantitative"
+          }
+        },
+        "id": "turning_chart",
+        "options": {
+          "grouping": "grouped",
+          "orientation": "vertical"
+        },
+        "showDescription": true,
+        "sourceId": "turning_points",
+        "title": "RTH session-extreme timing",
+        "type": "bar"
+      }
+    ],
+    "description": "Development-only descriptive market-clock analysis for MNQ, with uncertainty, stability cuts, and session-extreme timing.",
+    "sources": [
+      {
+        "id": "phase5_manifest",
+        "label": "Phase 5 analysis manifest",
+        "path": "data/manifests/phase5_manifest.json",
+        "query": {
+          "description": "Phase 5 coverage, method, gate checks, checksums, and descriptive findings.",
+          "engine": "duckdb",
+          "filters": [
+            "input_split = development"
+          ],
+          "language": "sql",
+          "metric_definitions": [
+            "development_rows = one-minute feature rows whose frozen split is development",
+            "market_clock_cells = unique scope, fixed start, and horizon aggregates",
+            "stability_cells = market-clock cells further cut by one calendar or lagged-regime value"
+          ],
+          "sql": "SELECT coverage, method, findings, validation FROM read_json_auto('data/manifests/phase5_manifest.json')",
+          "tables_used": [
+            "data/manifests/phase5_manifest.json"
+          ]
+        }
+      },
+      {
+        "id": "clock_blocks",
+        "label": "Phase 5 non-overlapping clock blocks",
+        "path": "results/phase5/report_clock_blocks.parquet",
+        "query": {
+          "description": "Non-overlapping 30-minute RTH and hourly full-session blocks selected from the complete market clock.",
+          "engine": "duckdb",
+          "filters": [
+            "scope = rth",
+            "horizon_minutes = 30",
+            "non-overlapping 30-minute starts",
+            "development split only"
+          ],
+          "language": "sql",
+          "metric_definitions": [
+            "mean_return_bps = average of (final included bar close / fixed-clock entry bar open - 1) * 10,000",
+            "mean_mfe_bps = average interval maximum high relative to entry open, in basis points",
+            "mean_mae_bps = average interval minimum low relative to entry open, in basis points"
+          ],
+          "sql": "SELECT clock_label || '-' || end_clock_label AS interval, clock_minute, observations, mean_return_bps, median_return_bps, mean_return_ci_low, mean_return_ci_high, positive_rate, mean_mfe_bps, mean_mae_bps FROM read_parquet('results/phase5/report_clock_blocks.parquet') WHERE scope = 'rth' ORDER BY clock_minute",
+          "tables_used": [
+            "results/phase5/report_clock_blocks.parquet"
+          ]
+        }
+      },
+      {
+        "id": "market_clock",
+        "label": "Phase 5 complete market-clock aggregates",
+        "path": "results/phase5/market_clock.parquet",
+        "query": {
+          "description": "Five-minute RTH forward-return profile with sample size, uncertainty, positive rates, and excursions.",
+          "engine": "duckdb",
+          "filters": [
+            "scope = rth",
+            "horizon_minutes = 5",
+            "development split only"
+          ],
+          "language": "sql",
+          "metric_definitions": [
+            "mean_return_ci_low/high = two-sided 95% Student-t confidence interval for the cell mean",
+            "positive_rate = observations with return_bps > 0 / observations"
+          ],
+          "sql": "SELECT clock_label, clock_minute, observations, mean_return_bps, median_return_bps, mean_return_ci_low, mean_return_ci_high, positive_rate, mean_mfe_bps, mean_mae_bps FROM read_parquet('results/phase5/market_clock.parquet') WHERE scope = 'rth' AND horizon_minutes = 5 ORDER BY clock_minute",
+          "tables_used": [
+            "results/phase5/market_clock.parquet"
+          ]
+        }
+      },
+      {
+        "id": "stability",
+        "label": "Phase 5 calendar and lagged-regime stability cuts",
+        "path": "results/phase5/market_clock_stability.parquet",
+        "query": {
+          "description": "Calendar-year cuts for the strongest non-overlapping 30-minute RTH development-sample block.",
+          "engine": "duckdb",
+          "filters": [
+            "scope = rth",
+            "horizon_minutes = 30",
+            "clock_minute = 300",
+            "cut_type = calendar_year",
+            "development split only"
+          ],
+          "language": "sql",
+          "metric_definitions": [
+            "sample_sufficient = observations >= 30",
+            "year means use the same fixed-clock return definition as the overall market clock"
+          ],
+          "sql": "SELECT cut_value, observations, mean_return_bps, median_return_bps, mean_return_ci_low, mean_return_ci_high, positive_rate, mean_mfe_bps, mean_mae_bps FROM read_parquet('results/phase5/market_clock_stability.parquet') WHERE scope = 'rth' AND horizon_minutes = 30 AND clock_minute = 300 AND cut_type = 'calendar_year' ORDER BY cut_value",
+          "tables_used": [
+            "results/phase5/market_clock_stability.parquet"
+          ]
+        }
+      },
+      {
+        "id": "turning_points",
+        "label": "Phase 5 RTH session-extreme timing",
+        "path": "results/phase5/turning_point_timing.parquet",
+        "query": {
+          "description": "Distribution of the first RTH session high and low across 30-minute clock bins.",
+          "engine": "duckdb",
+          "filters": [
+            "scope = rth",
+            "30-minute timing bins",
+            "development split only"
+          ],
+          "language": "sql",
+          "metric_definitions": [
+            "share = sessions whose first occurrence of the RTH high or low falls in the bin / RTH sessions",
+            "share_ci_low/high = two-sided 95% Wilson interval"
+          ],
+          "sql": "SELECT bin_label, bin_start_minute, CASE extreme_type WHEN 'high' THEN 'Session high' ELSE 'Session low' END AS extreme, observations, count, share, share_ci_low, share_ci_high FROM read_parquet('results/phase5/turning_point_timing.parquet') WHERE scope = 'rth' ORDER BY bin_start_minute, extreme",
+          "tables_used": [
+            "results/phase5/turning_point_timing.parquet"
+          ]
+        }
+      },
+      {
+        "id": "phase5_config",
+        "label": "Phase 5 frozen analysis configuration",
+        "path": "config/phase5.yaml",
+        "query": {
+          "description": "Frozen scopes, horizons, uncertainty method, stability dimensions, and descriptive-only reporting policy.",
+          "filters": [
+            "allowed_split = development",
+            "validation and final_untouched_test forbidden"
+          ],
+          "metric_definitions": [
+            "anchor_step_minutes = 5",
+            "horizons_minutes = 1, 5, 15, 30, and 60"
+          ],
+          "tables_used": [
+            "config/phase5.yaml"
+          ]
+        }
+      }
+    ],
+    "surface": "report",
+    "tables": [
+      {
+        "columns": [
+          {
+            "field": "cut_value",
+            "label": "Year",
+            "type": "text"
+          },
+          {
+            "field": "observations",
+            "format": "number",
+            "label": "Observations",
+            "type": "number"
+          },
+          {
+            "field": "mean_return_bps",
+            "format": "number",
+            "label": "Mean return",
+            "type": "number",
+            "unit": "bps"
+          },
+          {
+            "field": "mean_return_ci_low",
+            "format": "number",
+            "label": "95% CI low",
+            "type": "number",
+            "unit": "bps"
+          },
+          {
+            "field": "mean_return_ci_high",
+            "format": "number",
+            "label": "95% CI high",
+            "type": "number",
+            "unit": "bps"
+          },
+          {
+            "field": "positive_rate",
+            "format": "percent",
+            "label": "Positive rate",
+            "type": "number"
+          }
+        ],
+        "dataset": "strongest_years",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "cut_value"
+        },
+        "description": "Development-only year cuts; all annual intervals include zero.",
+        "id": "year_stability_table",
+        "showDescription": true,
+        "sourceId": "stability",
+        "title": "14:30-15:00 RTH return by calendar year"
+      }
+    ],
+    "title": "MNQ Phase 5 Unconditional Time Analysis",
+    "version": 1
+  },
+  "snapshot": {
+    "datasets": {
+      "headline": [
+        {
+          "development_rows": 1021050,
+          "development_sessions": 744,
+          "final_test_rows_used": 0,
+          "market_clock_cells": 1734,
+          "rth_sessions": 743,
+          "stability_cells": 43350,
+          "strongest_30m_ci_high": 4.606616936247391,
+          "strongest_30m_ci_low": 0.3318741506728329,
+          "strongest_30m_mean_bps": 2.469245543460112,
+          "validation_rows_used": 0
+        }
+      ],
+      "rth_blocks": [
+        {
+          "clock_minute": 0,
+          "interval": "09:30-10:00",
+          "mean_mae_bps": -35.86084947018156,
+          "mean_mfe_bps": 36.047559454891534,
+          "mean_return_bps": 0.9202698835590399,
+          "mean_return_ci_high": 4.365267708459088,
+          "mean_return_ci_low": -2.5247279413410086,
+          "median_return_bps": 3.046829773620807,
+          "observations": 743,
+          "positive_rate": 0.531628532974428
+        },
+        {
+          "clock_minute": 30,
+          "interval": "10:00-10:30",
+          "mean_mae_bps": -31.5845743542917,
+          "mean_mfe_bps": 28.276570939023603,
+          "mean_return_bps": -0.9332887393618554,
+          "mean_return_ci_high": 1.9294007852499977,
+          "mean_return_ci_low": -3.7959782639737085,
+          "median_return_bps": 0.4292336748124015,
+          "observations": 743,
+          "positive_rate": 0.5047106325706595
+        },
+        {
+          "clock_minute": 60,
+          "interval": "10:30-11:00",
+          "mean_mae_bps": -26.115998734870594,
+          "mean_mfe_bps": 24.035985875693246,
+          "mean_return_bps": -1.2264113471027125,
+          "mean_return_ci_high": 1.2625061502149504,
+          "mean_return_ci_low": -3.7153288444203754,
+          "median_return_bps": 0.8690966609314899,
+          "observations": 743,
+          "positive_rate": 0.5168236877523553
+        },
+        {
+          "clock_minute": 90,
+          "interval": "11:00-11:30",
+          "mean_mae_bps": -21.756987028657427,
+          "mean_mfe_bps": 21.993478910451913,
+          "mean_return_bps": 1.3741316955186724,
+          "mean_return_ci_high": 3.5688270758967304,
+          "mean_return_ci_low": -0.8205636848593858,
+          "median_return_bps": 1.260398285858333,
+          "observations": 743,
+          "positive_rate": 0.5181695827725438
+        },
+        {
+          "clock_minute": 120,
+          "interval": "11:30-12:00",
+          "mean_mae_bps": -19.64844267541467,
+          "mean_mfe_bps": 19.932746055034404,
+          "mean_return_bps": 1.4960135260184353,
+          "mean_return_ci_high": 3.4419696686124817,
+          "mean_return_ci_low": -0.4499426165756111,
+          "median_return_bps": 3.1344032096281005,
+          "observations": 743,
+          "positive_rate": 0.5652759084791387
+        },
+        {
+          "clock_minute": 150,
+          "interval": "12:00-12:30",
+          "mean_mae_bps": -20.41449448110593,
+          "mean_mfe_bps": 16.540159461460068,
+          "mean_return_bps": -1.65857243954295,
+          "mean_return_ci_high": 0.2653018544605932,
+          "mean_return_ci_low": -3.582446733546493,
+          "median_return_bps": -0.1673332106222336,
+          "observations": 743,
+          "positive_rate": 0.49663526244952894
+        },
+        {
+          "clock_minute": 180,
+          "interval": "12:30-13:00",
+          "mean_mae_bps": -17.170712089662057,
+          "mean_mfe_bps": 16.648598528902465,
+          "mean_return_bps": 0.7657208140024226,
+          "mean_return_ci_high": 2.389475539780988,
+          "mean_return_ci_low": -0.8580339117761425,
+          "median_return_bps": 2.3649607416520446,
+          "observations": 743,
+          "positive_rate": 0.5612382234185733
+        },
+        {
+          "clock_minute": 210,
+          "interval": "13:00-13:30",
+          "mean_mae_bps": -19.460439825940348,
+          "mean_mfe_bps": 16.78929576038708,
+          "mean_return_bps": -0.9951772391916429,
+          "mean_return_ci_high": 0.850898266426064,
+          "mean_return_ci_low": -2.84125274480935,
+          "median_return_bps": 1.3687172078169496,
+          "observations": 721,
+          "positive_rate": 0.5270457697642164
+        },
+        {
+          "clock_minute": 240,
+          "interval": "13:30-14:00",
+          "mean_mae_bps": -16.703390683484933,
+          "mean_mfe_bps": 17.183380002241016,
+          "mean_return_bps": 1.4600770960241367,
+          "mean_return_ci_high": 3.361390866462426,
+          "mean_return_ci_low": -0.4412366744141525,
+          "median_return_bps": 2.106184080488127,
+          "observations": 721,
+          "positive_rate": 0.5478502080443828
+        },
+        {
+          "clock_minute": 270,
+          "interval": "14:00-14:30",
+          "mean_mae_bps": -19.723076283221758,
+          "mean_mfe_bps": 18.16951042677069,
+          "mean_return_bps": -0.584635032770292,
+          "mean_return_ci_high": 1.373165079050075,
+          "mean_return_ci_low": -2.542435144590659,
+          "median_return_bps": 0.5531508857337109,
+          "observations": 721,
+          "positive_rate": 0.507628294036061
+        },
+        {
+          "clock_minute": 300,
+          "interval": "14:30-15:00",
+          "mean_mae_bps": -18.00357042704053,
+          "mean_mfe_bps": 19.689819004854687,
+          "mean_return_bps": 2.469245543460112,
+          "mean_return_ci_high": 4.606616936247391,
+          "mean_return_ci_low": 0.3318741506728329,
+          "median_return_bps": 3.0487804878043256,
+          "observations": 721,
+          "positive_rate": 0.5617198335644937
+        },
+        {
+          "clock_minute": 330,
+          "interval": "15:00-15:30",
+          "mean_mae_bps": -19.605426365787032,
+          "mean_mfe_bps": 18.790797893659242,
+          "mean_return_bps": -0.24709476598407232,
+          "mean_return_ci_high": 1.768054239214793,
+          "mean_return_ci_low": -2.2622437711829377,
+          "median_return_bps": 0.4973887092774021,
+          "observations": 721,
+          "positive_rate": 0.5062413314840499
+        },
+        {
+          "clock_minute": 360,
+          "interval": "15:30-16:00",
+          "mean_mae_bps": -22.995778882786286,
+          "mean_mfe_bps": 20.869860781516124,
+          "mean_return_bps": -0.655010979318472,
+          "mean_return_ci_high": 1.7179717331633415,
+          "mean_return_ci_low": -3.0279936918002854,
+          "median_return_bps": -1.4527041049272604,
+          "observations": 721,
+          "positive_rate": 0.47711511789181693
+        }
+      ],
+      "rth_five": [
+        {
+          "clock_label": "09:30",
+          "clock_minute": 0,
+          "mean_mae_bps": -17.66710300193428,
+          "mean_mfe_bps": 19.05337476131549,
+          "mean_return_bps": 0.4838459326867041,
+          "mean_return_ci_high": 2.2101559231594288,
+          "mean_return_ci_low": -1.2424640577860204,
+          "median_return_bps": 0.6848376934676104,
+          "observations": 743,
+          "positive_rate": 0.5154777927321669
+        },
+        {
+          "clock_label": "09:35",
+          "clock_minute": 5,
+          "mean_mae_bps": -15.135849542041994,
+          "mean_mfe_bps": 14.721247353391812,
+          "mean_return_bps": 0.04498667904580311,
+          "mean_return_ci_high": 1.4522773237258395,
+          "mean_return_ci_low": -1.3623039656342333,
+          "median_return_bps": 0.4317230065198352,
+          "observations": 743,
+          "positive_rate": 0.5114401076716016
+        },
+        {
+          "clock_label": "09:40",
+          "clock_minute": 10,
+          "mean_mae_bps": -14.785566953735941,
+          "mean_mfe_bps": 14.04284184636947,
+          "mean_return_bps": -0.9629629319344244,
+          "mean_return_ci_high": 0.5297632848070037,
+          "mean_return_ci_low": -2.4556891486758525,
+          "median_return_bps": -0.9298000929802708,
+          "observations": 743,
+          "positive_rate": 0.4737550471063257
+        },
+        {
+          "clock_label": "09:45",
+          "clock_minute": 15,
+          "mean_mae_bps": -14.135992709725452,
+          "mean_mfe_bps": 14.62398018293173,
+          "mean_return_bps": -0.03320932249324858,
+          "mean_return_ci_high": 1.401612582569559,
+          "mean_return_ci_low": -1.468031227556056,
+          "median_return_bps": -0.32075441438239594,
+          "observations": 743,
+          "positive_rate": 0.48855989232839836
+        },
+        {
+          "clock_label": "09:50",
+          "clock_minute": 20,
+          "mean_mae_bps": -12.892271075930111,
+          "mean_mfe_bps": 13.18832479187477,
+          "mean_return_bps": 0.22797364728925018,
+          "mean_return_ci_high": 1.4669163828305285,
+          "mean_return_ci_low": -1.0109690882520281,
+          "median_return_bps": 0.797798077307732,
+          "observations": 743,
+          "positive_rate": 0.5208613728129206
+        },
+        {
+          "clock_label": "09:55",
+          "clock_minute": 25,
+          "mean_mae_bps": -11.444369946205994,
+          "mean_mfe_bps": 12.176206337460838,
+          "mean_return_bps": 0.8511577670474751,
+          "mean_return_ci_high": 1.9758974175607649,
+          "mean_return_ci_low": -0.2735818834658147,
+          "median_return_bps": 1.0306697881246052,
+          "observations": 743,
+          "positive_rate": 0.5356662180349933
+        },
+        {
+          "clock_label": "10:00",
+          "clock_minute": 30,
+          "mean_mae_bps": -16.049092760748756,
+          "mean_mfe_bps": 13.363216656704033,
+          "mean_return_bps": -2.1507397296150983,
+          "mean_return_ci_high": -0.7393032077878647,
+          "mean_return_ci_low": -3.562176251442332,
+          "median_return_bps": -1.1199641611470135,
+          "observations": 743,
+          "positive_rate": 0.4697173620457604
+        },
+        {
+          "clock_label": "10:05",
+          "clock_minute": 35,
+          "mean_mae_bps": -12.805445183681314,
+          "mean_mfe_bps": 12.376930931536421,
+          "mean_return_bps": -0.5379462108078543,
+          "mean_return_ci_high": 0.7239102046628596,
+          "mean_return_ci_low": -1.7998026262785682,
+          "median_return_bps": -0.4198946064537523,
+          "observations": 743,
+          "positive_rate": 0.48855989232839836
+        },
+        {
+          "clock_label": "10:10",
+          "clock_minute": 40,
+          "mean_mae_bps": -12.019233203283843,
+          "mean_mfe_bps": 12.583340123467398,
+          "mean_return_bps": 1.0064962405476052,
+          "mean_return_ci_high": 2.2183277333276483,
+          "mean_return_ci_low": -0.20533525223243787,
+          "median_return_bps": 0.3975747937579044,
+          "observations": 743,
+          "positive_rate": 0.5074024226110363
+        },
+        {
+          "clock_label": "10:15",
+          "clock_minute": 45,
+          "mean_mae_bps": -11.195779917793596,
+          "mean_mfe_bps": 11.887118498246133,
+          "mean_return_bps": 0.7328846485424017,
+          "mean_return_ci_high": 1.8562458203919956,
+          "mean_return_ci_low": -0.3904765233071923,
+          "median_return_bps": 0.8395953150586166,
+          "observations": 743,
+          "positive_rate": 0.5397039030955586
+        },
+        {
+          "clock_label": "10:20",
+          "clock_minute": 50,
+          "mean_mae_bps": -11.054822835156974,
+          "mean_mfe_bps": 11.150526965775153,
+          "mean_return_bps": 0.22043954223671225,
+          "mean_return_ci_high": 1.3030004632327372,
+          "mean_return_ci_low": -0.8621213787593127,
+          "median_return_bps": 0.48217557619967266,
+          "observations": 743,
+          "positive_rate": 0.5127860026917901
+        },
+        {
+          "clock_label": "10:25",
+          "clock_minute": 55,
+          "mean_mae_bps": -11.098800059928315,
+          "mean_mfe_bps": 10.532949086717958,
+          "mean_return_bps": -0.2022015949364708,
+          "mean_return_ci_high": 0.8463325212049662,
+          "mean_return_ci_low": -1.2507357110779078,
+          "median_return_bps": 0.0,
+          "observations": 743,
+          "positive_rate": 0.4979811574697174
+        },
+        {
+          "clock_label": "10:30",
+          "clock_minute": 60,
+          "mean_mae_bps": -11.608410748831828,
+          "mean_mfe_bps": 11.304112546590897,
+          "mean_return_bps": -0.3824169602737049,
+          "mean_return_ci_high": 0.714129564092784,
+          "mean_return_ci_low": -1.4789634846401938,
+          "median_return_bps": 0.13232063937440586,
+          "observations": 743,
+          "positive_rate": 0.5006729475100942
+        },
+        {
+          "clock_label": "10:35",
+          "clock_minute": 65,
+          "mean_mae_bps": -11.013385962548051,
+          "mean_mfe_bps": 10.122829384525634,
+          "mean_return_bps": -0.6030304289078529,
+          "mean_return_ci_high": 0.41379205822945064,
+          "mean_return_ci_low": -1.6198529160451565,
+          "median_return_bps": 0.3245172805454999,
+          "observations": 743,
+          "positive_rate": 0.5114401076716016
+        },
+        {
+          "clock_label": "10:40",
+          "clock_minute": 70,
+          "mean_mae_bps": -10.333985583192897,
+          "mean_mfe_bps": 9.824905402641223,
+          "mean_return_bps": 0.04946781021793359,
+          "mean_return_ci_high": 1.0121200264883827,
+          "mean_return_ci_low": -0.9131844060525156,
+          "median_return_bps": 0.49626970604288445,
+          "observations": 743,
+          "positive_rate": 0.5154777927321669
+        },
+        {
+          "clock_label": "10:45",
+          "clock_minute": 75,
+          "mean_mae_bps": -9.55028989593305,
+          "mean_mfe_bps": 10.611781689561376,
+          "mean_return_bps": 1.4133249539021757,
+          "mean_return_ci_high": 2.435567699948497,
+          "mean_return_ci_low": 0.391082207855854,
+          "median_return_bps": 1.3079019073569675,
+          "observations": 743,
+          "positive_rate": 0.5531628532974427
+        },
+        {
+          "clock_label": "10:50",
+          "clock_minute": 80,
+          "mean_mae_bps": -11.075799461799697,
+          "mean_mfe_bps": 8.45201176187589,
+          "mean_return_bps": -1.7000983681447535,
+          "mean_return_ci_high": -0.6968590356829034,
+          "mean_return_ci_low": -2.7033377006066033,
+          "median_return_bps": -1.232724732567192,
+          "observations": 743,
+          "positive_rate": 0.4522207267833109
+        },
+        {
+          "clock_label": "10:55",
+          "clock_minute": 85,
+          "mean_mae_bps": -8.993253737336525,
+          "mean_mfe_bps": 8.933664574748008,
+          "mean_return_bps": 0.051126390137847165,
+          "mean_return_ci_high": 0.9233906338511025,
+          "mean_return_ci_low": -0.8211378535754082,
+          "median_return_bps": 0.1562426761236857,
+          "observations": 743,
+          "positive_rate": 0.5020188425302826
+        },
+        {
+          "clock_label": "11:00",
+          "clock_minute": 90,
+          "mean_mae_bps": -9.990151429608922,
+          "mean_mfe_bps": 10.072382613482308,
+          "mean_return_bps": 0.16421935686730474,
+          "mean_return_ci_high": 1.1308767199658727,
+          "mean_return_ci_low": -0.8024380062312632,
+          "median_return_bps": 0.3420791571162596,
+          "observations": 743,
+          "positive_rate": 0.5087483176312247
+        },
+        {
+          "clock_label": "11:05",
+          "clock_minute": 95,
+          "mean_mae_bps": -9.503218150272557,
+          "mean_mfe_bps": 9.628729733955602,
+          "mean_return_bps": 0.4125750298795727,
+          "mean_return_ci_high": 1.3939200777482705,
+          "mean_return_ci_low": -0.5687700179891253,
+          "median_return_bps": 0.5018652659050105,
+          "observations": 743,
+          "positive_rate": 0.5100942126514132
+        },
+        {
+          "clock_label": "11:10",
+          "clock_minute": 100,
+          "mean_mae_bps": -9.015040373818495,
+          "mean_mfe_bps": 8.883280230783605,
+          "mean_return_bps": 0.36122194213524084,
+          "mean_return_ci_high": 1.2277333174615987,
+          "mean_return_ci_low": -0.5052894331911171,
+          "median_return_bps": 0.7088779879205198,
+          "observations": 743,
+          "positive_rate": 0.5275908479138627
+        },
+        {
+          "clock_label": "11:15",
+          "clock_minute": 105,
+          "mean_mae_bps": -8.981103422381072,
+          "mean_mfe_bps": 8.651533238148891,
+          "mean_return_bps": -0.009513924159670482,
+          "mean_return_ci_high": 0.8622594707588135,
+          "mean_return_ci_low": -0.8812873190781544,
+          "median_return_bps": 0.31976976576864047,
+          "observations": 743,
+          "positive_rate": 0.5127860026917901
+        },
+        {
+          "clock_label": "11:20",
+          "clock_minute": 110,
+          "mean_mae_bps": -8.456091667025415,
+          "mean_mfe_bps": 8.721320061876328,
+          "mean_return_bps": 0.3421807902590316,
+          "mean_return_ci_high": 1.1816833896942782,
+          "mean_return_ci_low": -0.49732180917621516,
+          "median_return_bps": 0.6960686045220932,
+          "observations": 743,
+          "positive_rate": 0.5275908479138627
+        },
+        {
+          "clock_label": "11:25",
+          "clock_minute": 115,
+          "mean_mae_bps": -8.394216140866437,
+          "mean_mfe_bps": 7.935917298525596,
+          "mean_return_bps": 0.0698404498770228,
+          "mean_return_ci_high": 0.8456466481929452,
+          "mean_return_ci_low": -0.7059657484388997,
+          "median_return_bps": 0.1708350416840254,
+          "observations": 743,
+          "positive_rate": 0.506056527590848
+        },
+        {
+          "clock_label": "11:30",
+          "clock_minute": 120,
+          "mean_mae_bps": -8.979839400044218,
+          "mean_mfe_bps": 8.674644908093967,
+          "mean_return_bps": 0.08548709194675945,
+          "mean_return_ci_high": 0.9457397421926572,
+          "mean_return_ci_low": -0.7747655582991384,
+          "median_return_bps": 0.32489684525183193,
+          "observations": 743,
+          "positive_rate": 0.5208613728129206
+        },
+        {
+          "clock_label": "11:35",
+          "clock_minute": 125,
+          "mean_mae_bps": -8.332753063355186,
+          "mean_mfe_bps": 8.356226645245961,
+          "mean_return_bps": 0.06622867854363089,
+          "mean_return_ci_high": 0.919330744327388,
+          "mean_return_ci_low": -0.7868733872401262,
+          "median_return_bps": 0.27877284195065855,
+          "observations": 743,
+          "positive_rate": 0.5127860026917901
+        },
+        {
+          "clock_label": "11:40",
+          "clock_minute": 130,
+          "mean_mae_bps": -8.252724238518889,
+          "mean_mfe_bps": 8.098150113604701,
+          "mean_return_bps": -0.12282567140770934,
+          "mean_return_ci_high": 0.7083940821368815,
+          "mean_return_ci_low": -0.9540454249523003,
+          "median_return_bps": 0.2193655947002604,
+          "observations": 743,
+          "positive_rate": 0.5141318977119784
+        },
+        {
+          "clock_label": "11:45",
+          "clock_minute": 135,
+          "mean_mae_bps": -7.721848545575059,
+          "mean_mfe_bps": 7.975004440948602,
+          "mean_return_bps": 0.40939849682593726,
+          "mean_return_ci_high": 1.1867469748467325,
+          "mean_return_ci_low": -0.36794998119485794,
+          "median_return_bps": 0.4079967360270942,
+          "observations": 743,
+          "positive_rate": 0.5181695827725438
+        },
+        {
+          "clock_label": "11:50",
+          "clock_minute": 140,
+          "mean_mae_bps": -7.676909864878918,
+          "mean_mfe_bps": 7.981661461253353,
+          "mean_return_bps": 0.5562211133910465,
+          "mean_return_ci_high": 1.330450370879233,
+          "mean_return_ci_low": -0.2180081440971401,
+          "median_return_bps": 0.8053215649006518,
+          "observations": 743,
+          "positive_rate": 0.5302826379542396
+        },
+        {
+          "clock_label": "11:55",
+          "clock_minute": 145,
+          "mean_mae_bps": -7.333158737527628,
+          "mean_mfe_bps": 7.527826441503745,
+          "mean_return_bps": 0.4806729292256462,
+          "mean_return_ci_high": 1.2092690106683337,
+          "mean_return_ci_low": -0.2479231522170413,
+          "median_return_bps": 0.6023279977118712,
+          "observations": 743,
+          "positive_rate": 0.5289367429340511
+        },
+        {
+          "clock_label": "12:00",
+          "clock_minute": 150,
+          "mean_mae_bps": -9.163916013476278,
+          "mean_mfe_bps": 7.230200375070983,
+          "mean_return_bps": -1.345072910698324,
+          "mean_return_ci_high": -0.5514450226496086,
+          "mean_return_ci_low": -2.1387007987470392,
+          "median_return_bps": -1.137203616307092,
+          "observations": 743,
+          "positive_rate": 0.43741588156123823
+        },
+        {
+          "clock_label": "12:05",
+          "clock_minute": 155,
+          "mean_mae_bps": -8.460482638918304,
+          "mean_mfe_bps": 7.221898281162402,
+          "mean_return_bps": -1.028690577564339,
+          "mean_return_ci_high": -0.18957133085332378,
+          "mean_return_ci_low": -1.867809824275354,
+          "median_return_bps": -0.32002048131030136,
+          "observations": 743,
+          "positive_rate": 0.47106325706594887
+        },
+        {
+          "clock_label": "12:10",
+          "clock_minute": 160,
+          "mean_mae_bps": -7.13253165193906,
+          "mean_mfe_bps": 7.3594546218902535,
+          "mean_return_bps": 0.5124448858718956,
+          "mean_return_ci_high": 1.2063392544389555,
+          "mean_return_ci_low": -0.18144948269516437,
+          "median_return_bps": 0.33363360357752114,
+          "observations": 743,
+          "positive_rate": 0.5195154777927322
+        },
+        {
+          "clock_label": "12:15",
+          "clock_minute": 165,
+          "mean_mae_bps": -7.417723876353362,
+          "mean_mfe_bps": 7.4900199680102855,
+          "mean_return_bps": 0.3053067629517611,
+          "mean_return_ci_high": 1.026427597437926,
+          "mean_return_ci_low": -0.4158140715344037,
+          "median_return_bps": 0.31128404669233944,
+          "observations": 743,
+          "positive_rate": 0.5141318977119784
+        },
+        {
+          "clock_label": "12:20",
+          "clock_minute": 170,
+          "mean_mae_bps": -7.846590544406949,
+          "mean_mfe_bps": 6.910784495191498,
+          "mean_return_bps": -0.30078872000615586,
+          "mean_return_ci_high": 0.46799699714300746,
+          "mean_return_ci_low": -1.0695744371553193,
+          "median_return_bps": -0.16500561019094917,
+          "observations": 743,
+          "positive_rate": 0.48855989232839836
+        },
+        {
+          "clock_label": "12:25",
+          "clock_minute": 175,
+          "mean_mae_bps": -6.950905789676603,
+          "mean_mfe_bps": 6.791637880833377,
+          "mean_return_bps": 0.2024806742248919,
+          "mean_return_ci_high": 0.8698289645257694,
+          "mean_return_ci_low": -0.4648676160759856,
+          "median_return_bps": 0.43423509487938716,
+          "observations": 743,
+          "positive_rate": 0.5208613728129206
+        },
+        {
+          "clock_label": "12:30",
+          "clock_minute": 180,
+          "mean_mae_bps": -7.398046838167121,
+          "mean_mfe_bps": 7.2952222679226155,
+          "mean_return_bps": 0.25482103016318025,
+          "mean_return_ci_high": 0.9865526387305302,
+          "mean_return_ci_low": -0.4769105784041697,
+          "median_return_bps": 0.6297923259812599,
+          "observations": 743,
+          "positive_rate": 0.5302826379542396
+        },
+        {
+          "clock_label": "12:35",
+          "clock_minute": 185,
+          "mean_mae_bps": -7.192897542134366,
+          "mean_mfe_bps": 6.916554191277155,
+          "mean_return_bps": -0.069144071514293,
+          "mean_return_ci_high": 0.624747889276353,
+          "mean_return_ci_low": -0.7630360323049391,
+          "median_return_bps": 0.3313617310340966,
+          "observations": 743,
+          "positive_rate": 0.5100942126514132
+        },
+        {
+          "clock_label": "12:40",
+          "clock_minute": 190,
+          "mean_mae_bps": -6.878241920023601,
+          "mean_mfe_bps": 6.706606300122037,
+          "mean_return_bps": 0.13122939512367038,
+          "mean_return_ci_high": 0.8024931198941558,
+          "mean_return_ci_low": -0.5400343296468151,
+          "median_return_bps": 0.17250301880267216,
+          "observations": 743,
+          "positive_rate": 0.5033647375504711
+        },
+        {
+          "clock_label": "12:45",
+          "clock_minute": 195,
+          "mean_mae_bps": -7.341545560769909,
+          "mean_mfe_bps": 6.49935632096022,
+          "mean_return_bps": -0.34244315262068065,
+          "mean_return_ci_high": 0.3505990492909456,
+          "mean_return_ci_low": -1.0354853545323068,
+          "median_return_bps": -0.1804956410300651,
+          "observations": 743,
+          "positive_rate": 0.477792732166891
+        },
+        {
+          "clock_label": "12:50",
+          "clock_minute": 200,
+          "mean_mae_bps": -6.9316220151314445,
+          "mean_mfe_bps": 6.651758446303182,
+          "mean_return_bps": 0.1251644659589705,
+          "mean_return_ci_high": 0.8043609319393571,
+          "mean_return_ci_low": -0.5540320000214162,
+          "median_return_bps": 0.8508465923595665,
+          "observations": 743,
+          "positive_rate": 0.5585464333781965
+        },
+        {
+          "clock_label": "12:55",
+          "clock_minute": 205,
+          "mean_mae_bps": -6.33911100786874,
+          "mean_mfe_bps": 6.673689603760446,
+          "mean_return_bps": 0.7064930498094825,
+          "mean_return_ci_high": 1.3180835958136887,
+          "mean_return_ci_low": 0.09490250380527632,
+          "median_return_bps": 1.0216293528708675,
+          "observations": 743,
+          "positive_rate": 0.5733512786002691
+        },
+        {
+          "clock_label": "13:00",
+          "clock_minute": 210,
+          "mean_mae_bps": -9.264781995553177,
+          "mean_mfe_bps": 7.34417808469847,
+          "mean_return_bps": -1.1056774197281092,
+          "mean_return_ci_high": -0.28797346660668743,
+          "mean_return_ci_low": -1.9233813728495308,
+          "median_return_bps": -0.5842958917623431,
+          "observations": 726,
+          "positive_rate": 0.47796143250688705
+        },
+        {
+          "clock_label": "13:05",
+          "clock_minute": 215,
+          "mean_mae_bps": -7.10416899025354,
+          "mean_mfe_bps": 7.67285166044108,
+          "mean_return_bps": 0.6611919083199324,
+          "mean_return_ci_high": 1.4014192208953873,
+          "mean_return_ci_low": -0.07903540425552258,
+          "median_return_bps": 0.5051799263622314,
+          "observations": 726,
+          "positive_rate": 0.5261707988980716
+        },
+        {
+          "clock_label": "13:10",
+          "clock_minute": 220,
+          "mean_mae_bps": -6.801798077808491,
+          "mean_mfe_bps": 6.963433270637481,
+          "mean_return_bps": 0.40178696526267166,
+          "mean_return_ci_high": 1.0901288134449132,
+          "mean_return_ci_low": -0.28655488291957,
+          "median_return_bps": 0.6390304448444795,
+          "observations": 726,
+          "positive_rate": 0.522038567493113
+        },
+        {
+          "clock_label": "13:15",
+          "clock_minute": 225,
+          "mean_mae_bps": -7.642745965620117,
+          "mean_mfe_bps": 6.44017148152702,
+          "mean_return_bps": -0.8465665192705867,
+          "mean_return_ci_high": -0.13318612814856878,
+          "mean_return_ci_low": -1.5599469103926045,
+          "median_return_bps": -0.2773771219344301,
+          "observations": 721,
+          "positive_rate": 0.4840499306518724
+        },
+        {
+          "clock_label": "13:20",
+          "clock_minute": 230,
+          "mean_mae_bps": -7.293815817814752,
+          "mean_mfe_bps": 6.855216566915402,
+          "mean_return_bps": -0.3662139924749542,
+          "mean_return_ci_high": 0.3796328618340579,
+          "mean_return_ci_low": -1.1120608467839663,
+          "median_return_bps": 0.41212470893725595,
+          "observations": 721,
+          "positive_rate": 0.521497919556172
+        },
+        {
+          "clock_label": "13:25",
+          "clock_minute": 235,
+          "mean_mae_bps": -7.081038998357937,
+          "mean_mfe_bps": 7.028464875988329,
+          "mean_return_bps": 0.21248760568753747,
+          "mean_return_ci_high": 0.9723395795025775,
+          "mean_return_ci_low": -0.5473643681275027,
+          "median_return_bps": 0.45097862361398455,
+          "observations": 721,
+          "positive_rate": 0.5298196948682385
+        },
+        {
+          "clock_label": "13:30",
+          "clock_minute": 240,
+          "mean_mae_bps": -7.307459046573164,
+          "mean_mfe_bps": 7.553155779887015,
+          "mean_return_bps": 0.24768079489979813,
+          "mean_return_ci_high": 1.0320253063266926,
+          "mean_return_ci_low": -0.5366637165270963,
+          "median_return_bps": 0.9145504984298114,
+          "observations": 721,
+          "positive_rate": 0.5436893203883495
+        },
+        {
+          "clock_label": "13:35",
+          "clock_minute": 245,
+          "mean_mae_bps": -7.060770366455493,
+          "mean_mfe_bps": 6.9016957678485795,
+          "mean_return_bps": 0.41784598094011616,
+          "mean_return_ci_high": 1.155738727472039,
+          "mean_return_ci_low": -0.32004676559180656,
+          "median_return_bps": 0.6323610781766575,
+          "observations": 721,
+          "positive_rate": 0.5284327323162274
+        },
+        {
+          "clock_label": "13:40",
+          "clock_minute": 250,
+          "mean_mae_bps": -7.022611932065017,
+          "mean_mfe_bps": 6.680674711431634,
+          "mean_return_bps": -0.13924072244422683,
+          "mean_return_ci_high": 0.512944037414503,
+          "mean_return_ci_low": -0.7914254823029566,
+          "median_return_bps": -0.16052910392638786,
+          "observations": 721,
+          "positive_rate": 0.4895977808599168
+        },
+        {
+          "clock_label": "13:45",
+          "clock_minute": 255,
+          "mean_mae_bps": -7.034908451038882,
+          "mean_mfe_bps": 6.778835565269972,
+          "mean_return_bps": 0.2285733725764017,
+          "mean_return_ci_high": 0.9703458014974915,
+          "mean_return_ci_low": -0.5131990563446882,
+          "median_return_bps": 0.0,
+          "observations": 721,
+          "positive_rate": 0.49514563106796117
+        },
+        {
+          "clock_label": "13:50",
+          "clock_minute": 260,
+          "mean_mae_bps": -6.448312481847011,
+          "mean_mfe_bps": 6.517262836514437,
+          "mean_return_bps": 0.23717359117600195,
+          "mean_return_ci_high": 0.8993714236536536,
+          "mean_return_ci_low": -0.4250242413016498,
+          "median_return_bps": 0.16571930464115425,
+          "observations": 721,
+          "positive_rate": 0.5048543689320388
+        },
+        {
+          "clock_label": "13:55",
+          "clock_minute": 265,
+          "mean_mae_bps": -6.614020583109042,
+          "mean_mfe_bps": 6.626693107150213,
+          "mean_return_bps": 0.43407735800002684,
+          "mean_return_ci_high": 1.111067506149874,
+          "mean_return_ci_low": -0.2429127901498203,
+          "median_return_bps": 0.9698537137325935,
+          "observations": 721,
+          "positive_rate": 0.5533980582524272
+        },
+        {
+          "clock_label": "14:00",
+          "clock_minute": 270,
+          "mean_mae_bps": -9.48180684304743,
+          "mean_mfe_bps": 8.98022891390412,
+          "mean_return_bps": -0.24829047292807965,
+          "mean_return_ci_high": 0.907423631260182,
+          "mean_return_ci_low": -1.4040045771163414,
+          "median_return_bps": -0.6133652283246693,
+          "observations": 721,
+          "positive_rate": 0.47018030513176146
+        },
+        {
+          "clock_label": "14:05",
+          "clock_minute": 275,
+          "mean_mae_bps": -8.219750916221344,
+          "mean_mfe_bps": 7.758268528011166,
+          "mean_return_bps": -0.2891935535722765,
+          "mean_return_ci_high": 0.5332103796429252,
+          "mean_return_ci_low": -1.111597486787478,
+          "median_return_bps": -0.13868086758739295,
+          "observations": 721,
+          "positive_rate": 0.4854368932038835
+        },
+        {
+          "clock_label": "14:10",
+          "clock_minute": 280,
+          "mean_mae_bps": -8.063719411822529,
+          "mean_mfe_bps": 7.149544263599346,
+          "mean_return_bps": -0.4963389664638675,
+          "mean_return_ci_high": 0.3261362626718422,
+          "mean_return_ci_low": -1.3188141955995771,
+          "median_return_bps": -0.30786281632888546,
+          "observations": 721,
+          "positive_rate": 0.4812760055478502
+        },
+        {
+          "clock_label": "14:15",
+          "clock_minute": 285,
+          "mean_mae_bps": -7.234117599170343,
+          "mean_mfe_bps": 7.5526395433199545,
+          "mean_return_bps": 0.5193896152658299,
+          "mean_return_ci_high": 1.2389343668036845,
+          "mean_return_ci_low": -0.20015513627202464,
+          "median_return_bps": 0.5386770092652426,
+          "observations": 721,
+          "positive_rate": 0.5284327323162274
+        },
+        {
+          "clock_label": "14:20",
+          "clock_minute": 290,
+          "mean_mae_bps": -7.897946050562934,
+          "mean_mfe_bps": 7.015873228216537,
+          "mean_return_bps": -0.36954091835267283,
+          "mean_return_ci_high": 0.42053527637395344,
+          "mean_return_ci_low": -1.1596171130792992,
+          "median_return_bps": -0.327434062965537,
+          "observations": 721,
+          "positive_rate": 0.47295423023578365
+        },
+        {
+          "clock_label": "14:25",
+          "clock_minute": 295,
+          "mean_mae_bps": -7.208933812998404,
+          "mean_mfe_bps": 7.4767033294463925,
+          "mean_return_bps": 0.3241703592683682,
+          "mean_return_ci_high": 1.0932908156418566,
+          "mean_return_ci_low": -0.4449500971051202,
+          "median_return_bps": 0.5102561485870183,
+          "observations": 721,
+          "positive_rate": 0.536754507628294
+        },
+        {
+          "clock_label": "14:30",
+          "clock_minute": 300,
+          "mean_mae_bps": -8.192867208534462,
+          "mean_mfe_bps": 8.143055058127434,
+          "mean_return_bps": 0.1859281496567374,
+          "mean_return_ci_high": 1.1133994526971718,
+          "mean_return_ci_low": -0.7415431533836969,
+          "median_return_bps": 0.6648346777771152,
+          "observations": 721,
+          "positive_rate": 0.5284327323162274
+        },
+        {
+          "clock_label": "14:35",
+          "clock_minute": 305,
+          "mean_mae_bps": -7.506347855310262,
+          "mean_mfe_bps": 8.101838373618548,
+          "mean_return_bps": 1.076997370283928,
+          "mean_return_ci_high": 1.960728694787555,
+          "mean_return_ci_low": 0.1932660457803007,
+          "median_return_bps": 0.6069679925535532,
+          "observations": 721,
+          "positive_rate": 0.5298196948682385
+        },
+        {
+          "clock_label": "14:40",
+          "clock_minute": 310,
+          "mean_mae_bps": -8.067921386818986,
+          "mean_mfe_bps": 7.851519565572647,
+          "mean_return_bps": 0.14983818486359526,
+          "mean_return_ci_high": 1.1263974005083008,
+          "mean_return_ci_low": -0.8267210307811104,
+          "median_return_bps": 0.3641262789932931,
+          "observations": 721,
+          "positive_rate": 0.5104022191400832
+        },
+        {
+          "clock_label": "14:45",
+          "clock_minute": 315,
+          "mean_mae_bps": -7.691187667803169,
+          "mean_mfe_bps": 7.917714899824795,
+          "mean_return_bps": 0.33508829477278834,
+          "mean_return_ci_high": 1.2021708977756642,
+          "mean_return_ci_low": -0.5319943082300874,
+          "median_return_bps": 0.6636470724874499,
+          "observations": 721,
+          "positive_rate": 0.5242718446601942
+        },
+        {
+          "clock_label": "14:50",
+          "clock_minute": 320,
+          "mean_mae_bps": -7.591846418938052,
+          "mean_mfe_bps": 7.456023237876932,
+          "mean_return_bps": 0.29933998672005946,
+          "mean_return_ci_high": 1.10765261811125,
+          "mean_return_ci_low": -0.5089726446711311,
+          "median_return_bps": 0.3314276244914538,
+          "observations": 721,
+          "positive_rate": 0.5201109570041609
+        },
+        {
+          "clock_label": "14:55",
+          "clock_minute": 325,
+          "mean_mae_bps": -7.029126332586776,
+          "mean_mfe_bps": 7.3078611144126935,
+          "mean_return_bps": 0.45884589446543783,
+          "mean_return_ci_high": 1.175173088695573,
+          "mean_return_ci_low": -0.2574812997646972,
+          "median_return_bps": 1.0090647651406215,
+          "observations": 721,
+          "positive_rate": 0.5381414701803051
+        },
+        {
+          "clock_label": "15:00",
+          "clock_minute": 330,
+          "mean_mae_bps": -8.924237161598427,
+          "mean_mfe_bps": 8.890136312664348,
+          "mean_return_bps": -0.024701125277544735,
+          "mean_return_ci_high": 0.9395911272469406,
+          "mean_return_ci_low": -0.9889933778020301,
+          "median_return_bps": 0.0,
+          "observations": 721,
+          "positive_rate": 0.49514563106796117
+        },
+        {
+          "clock_label": "15:05",
+          "clock_minute": 335,
+          "mean_mae_bps": -8.372352725754459,
+          "mean_mfe_bps": 7.639337228394675,
+          "mean_return_bps": -0.37055909463186343,
+          "mean_return_ci_high": 0.4595073670292309,
+          "mean_return_ci_low": -1.2006255562929578,
+          "median_return_bps": 0.3862793572317891,
+          "observations": 721,
+          "positive_rate": 0.5145631067961165
+        },
+        {
+          "clock_label": "15:10",
+          "clock_minute": 340,
+          "mean_mae_bps": -7.893246152742775,
+          "mean_mfe_bps": 7.608918306463205,
+          "mean_return_bps": 0.17524376622043847,
+          "mean_return_ci_high": 0.963383022630095,
+          "mean_return_ci_low": -0.6128954901892181,
+          "median_return_bps": 0.3187403381832432,
+          "observations": 721,
+          "positive_rate": 0.5131761442441054
+        },
+        {
+          "clock_label": "15:15",
+          "clock_minute": 345,
+          "mean_mae_bps": -7.647984907290547,
+          "mean_mfe_bps": 7.95437993675491,
+          "mean_return_bps": 0.30848947379446995,
+          "mean_return_ci_high": 1.0446630665083778,
+          "mean_return_ci_low": -0.42768411891943786,
+          "median_return_bps": 0.47356706498913326,
+          "observations": 721,
+          "positive_rate": 0.5228848821081831
+        },
+        {
+          "clock_label": "15:20",
+          "clock_minute": 350,
+          "mean_mae_bps": -8.144290526114506,
+          "mean_mfe_bps": 7.371188266656096,
+          "mean_return_bps": -0.25030731982301185,
+          "mean_return_ci_high": 0.5249612573685798,
+          "mean_return_ci_low": -1.0255758970146034,
+          "median_return_bps": -0.3238184673670652,
+          "observations": 721,
+          "positive_rate": 0.47156726768377255
+        },
+        {
+          "clock_label": "15:25",
+          "clock_minute": 355,
+          "mean_mae_bps": -7.378258587752345,
+          "mean_mfe_bps": 7.160834919789999,
+          "mean_return_bps": -0.09864904867997194,
+          "mean_return_ci_high": 0.6978352343251526,
+          "mean_return_ci_low": -0.8951333316850965,
+          "median_return_bps": 0.0,
+          "observations": 721,
+          "positive_rate": 0.49930651872399445
+        },
+        {
+          "clock_label": "15:30",
+          "clock_minute": 360,
+          "mean_mae_bps": -8.381599155834907,
+          "mean_mfe_bps": 8.09315746285894,
+          "mean_return_bps": -0.07566903388666996,
+          "mean_return_ci_high": 0.8265601438077581,
+          "mean_return_ci_low": -0.9778982115810979,
+          "median_return_bps": -0.13989731537100702,
+          "observations": 721,
+          "positive_rate": 0.492371705963939
+        },
+        {
+          "clock_label": "15:35",
+          "clock_minute": 365,
+          "mean_mae_bps": -8.176856635784153,
+          "mean_mfe_bps": 7.1620405957261175,
+          "mean_return_bps": -0.6595485471593232,
+          "mean_return_ci_high": 0.13005368770404602,
+          "mean_return_ci_low": -1.4491507820226923,
+          "median_return_bps": -0.6573469477189064,
+          "observations": 721,
+          "positive_rate": 0.4604715672676838
+        },
+        {
+          "clock_label": "15:40",
+          "clock_minute": 370,
+          "mean_mae_bps": -7.850039477834506,
+          "mean_mfe_bps": 8.008471364422007,
+          "mean_return_bps": -0.03657806234959697,
+          "mean_return_ci_high": 0.7628035636214715,
+          "mean_return_ci_low": -0.8359596883206654,
+          "median_return_bps": -0.31559181354889887,
+          "observations": 721,
+          "positive_rate": 0.478502080443828
+        },
+        {
+          "clock_label": "15:45",
+          "clock_minute": 375,
+          "mean_mae_bps": -8.832377765035247,
+          "mean_mfe_bps": 7.739031788531414,
+          "mean_return_bps": -0.8681536539501328,
+          "mean_return_ci_high": -0.10684696153386697,
+          "mean_return_ci_low": -1.6294603463663986,
+          "median_return_bps": -0.8098215153384825,
+          "observations": 721,
+          "positive_rate": 0.4549237170596394
+        },
+        {
+          "clock_label": "15:50",
+          "clock_minute": 380,
+          "mean_mae_bps": -11.241748539856387,
+          "mean_mfe_bps": 11.27301399076854,
+          "mean_return_bps": -0.017561494946648427,
+          "mean_return_ci_high": 1.1535050904782758,
+          "mean_return_ci_low": -1.1886280803715727,
+          "median_return_bps": 0.0,
+          "observations": 721,
+          "positive_rate": 0.49930651872399445
+        },
+        {
+          "clock_label": "15:55",
+          "clock_minute": 385,
+          "mean_mae_bps": -9.600054374840756,
+          "mean_mfe_bps": 10.163311485259813,
+          "mean_return_bps": 1.0442497577524104,
+          "mean_return_ci_high": 2.051686180047239,
+          "mean_return_ci_low": 0.0368133354575817,
+          "median_return_bps": 1.0028480885715396,
+          "observations": 721,
+          "positive_rate": 0.5395284327323162
+        }
+      ],
+      "rth_turning": [
+        {
+          "bin_label": "09:30-10:00",
+          "bin_start_minute": 0,
+          "count": 222,
+          "extreme": "Session high",
+          "observations": 743,
+          "share": 0.29878869448183043,
+          "share_ci_high": 0.3326676536730451,
+          "share_ci_low": 0.2669796389770733
+        },
+        {
+          "bin_label": "09:30-10:00",
+          "bin_start_minute": 0,
+          "count": 242,
+          "extreme": "Session low",
+          "observations": 743,
+          "share": 0.32570659488559894,
+          "share_ci_high": 0.3602252857991728,
+          "share_ci_low": 0.2929808974663144
+        },
+        {
+          "bin_label": "10:00-10:30",
+          "bin_start_minute": 30,
+          "count": 73,
+          "extreme": "Session high",
+          "observations": 743,
+          "share": 0.09825033647375504,
+          "share_ci_high": 0.12176390880849168,
+          "share_ci_low": 0.07886964875712936
+        },
+        {
+          "bin_label": "10:00-10:30",
+          "bin_start_minute": 30,
+          "count": 77,
+          "extreme": "Session low",
+          "observations": 743,
+          "share": 0.10363391655450875,
+          "share_ci_high": 0.12762639982390575,
+          "share_ci_low": 0.08371893586478907
+        },
+        {
+          "bin_label": "10:30-11:00",
+          "bin_start_minute": 60,
+          "count": 37,
+          "extreme": "Session high",
+          "observations": 743,
+          "share": 0.04979811574697174,
+          "share_ci_high": 0.06788555044852634,
+          "share_ci_low": 0.03634200400943089
+        },
+        {
+          "bin_label": "10:30-11:00",
+          "bin_start_minute": 60,
+          "count": 48,
+          "extreme": "Session low",
+          "observations": 743,
+          "share": 0.06460296096904442,
+          "share_ci_high": 0.08461437634892535,
+          "share_ci_low": 0.049070567947484746
+        },
+        {
+          "bin_label": "11:00-11:30",
+          "bin_start_minute": 90,
+          "count": 25,
+          "extreme": "Session high",
+          "observations": 743,
+          "share": 0.033647375504710635,
+          "share_ci_high": 0.04919903687592489,
+          "share_ci_low": 0.022893183212811086
+        },
+        {
+          "bin_label": "11:00-11:30",
+          "bin_start_minute": 90,
+          "count": 35,
+          "extreme": "Session low",
+          "observations": 743,
+          "share": 0.047106325706594884,
+          "share_ci_high": 0.06480818863282242,
+          "share_ci_low": 0.03406347676359794
+        },
+        {
+          "bin_label": "11:30-12:00",
+          "bin_start_minute": 120,
+          "count": 27,
+          "extreme": "Session high",
+          "observations": 743,
+          "share": 0.03633916554508748,
+          "share_ci_high": 0.05235526005418484,
+          "share_ci_low": 0.025092849096088013
+        },
+        {
+          "bin_label": "11:30-12:00",
+          "bin_start_minute": 120,
+          "count": 32,
+          "extreme": "Session low",
+          "observations": 743,
+          "share": 0.04306864064602961,
+          "share_ci_high": 0.06016717108928267,
+          "share_ci_low": 0.03067066071483238
+        },
+        {
+          "bin_label": "12:00-12:30",
+          "bin_start_minute": 150,
+          "count": 24,
+          "extreme": "Session high",
+          "observations": 743,
+          "share": 0.03230148048452221,
+          "share_ci_high": 0.047613203671360335,
+          "share_ci_low": 0.021801071886607196
+        },
+        {
+          "bin_label": "12:00-12:30",
+          "bin_start_minute": 150,
+          "count": 25,
+          "extreme": "Session low",
+          "observations": 743,
+          "share": 0.033647375504710635,
+          "share_ci_high": 0.04919903687592489,
+          "share_ci_low": 0.022893183212811086
+        },
+        {
+          "bin_label": "12:30-13:00",
+          "bin_start_minute": 180,
+          "count": 21,
+          "extreme": "Session high",
+          "observations": 743,
+          "share": 0.02826379542395693,
+          "share_ci_high": 0.04282102730575953,
+          "share_ci_low": 0.018559414659902684
+        },
+        {
+          "bin_label": "12:30-13:00",
+          "bin_start_minute": 180,
+          "count": 25,
+          "extreme": "Session low",
+          "observations": 743,
+          "share": 0.033647375504710635,
+          "share_ci_high": 0.04919903687592489,
+          "share_ci_low": 0.022893183212811086
+        },
+        {
+          "bin_label": "13:00-13:30",
+          "bin_start_minute": 210,
+          "count": 18,
+          "extreme": "Session high",
+          "observations": 743,
+          "share": 0.024226110363391656,
+          "share_ci_high": 0.037968415451741,
+          "share_ci_low": 0.01537819292161591
+        },
+        {
+          "bin_label": "13:00-13:30",
+          "bin_start_minute": 210,
+          "count": 20,
+          "extreme": "Session low",
+          "observations": 743,
+          "share": 0.026917900403768506,
+          "share_ci_high": 0.041210816990070204,
+          "share_ci_low": 0.017491680444823576
+        },
+        {
+          "bin_label": "13:30-14:00",
+          "bin_start_minute": 240,
+          "count": 18,
+          "extreme": "Session high",
+          "observations": 743,
+          "share": 0.024226110363391656,
+          "share_ci_high": 0.037968415451741,
+          "share_ci_low": 0.01537819292161591
+        },
+        {
+          "bin_label": "13:30-14:00",
+          "bin_start_minute": 240,
+          "count": 31,
+          "extreme": "Session low",
+          "observations": 743,
+          "share": 0.04172274562584118,
+          "share_ci_high": 0.05861293558338373,
+          "share_ci_low": 0.029546951689962873
+        },
+        {
+          "bin_label": "14:00-14:30",
+          "bin_start_minute": 270,
+          "count": 27,
+          "extreme": "Session high",
+          "observations": 743,
+          "share": 0.03633916554508748,
+          "share_ci_high": 0.05235526005418484,
+          "share_ci_low": 0.025092849096088013
+        },
+        {
+          "bin_label": "14:00-14:30",
+          "bin_start_minute": 270,
+          "count": 23,
+          "extreme": "Session low",
+          "observations": 743,
+          "share": 0.03095558546433378,
+          "share_ci_high": 0.046021823113166424,
+          "share_ci_low": 0.02071450791403268
+        },
+        {
+          "bin_label": "14:30-15:00",
+          "bin_start_minute": 300,
+          "count": 44,
+          "extreme": "Session high",
+          "observations": 743,
+          "share": 0.059219380888290714,
+          "share_ci_high": 0.07856590163388606,
+          "share_ci_low": 0.04440726453945025
+        },
+        {
+          "bin_label": "14:30-15:00",
+          "bin_start_minute": 300,
+          "count": 29,
+          "extreme": "Session low",
+          "observations": 743,
+          "share": 0.039030955585464336,
+          "share_ci_high": 0.05549263026190091,
+          "share_ci_low": 0.02731136794990883
+        },
+        {
+          "bin_label": "15:00-15:30",
+          "bin_start_minute": 330,
+          "count": 53,
+          "extreme": "Session high",
+          "observations": 743,
+          "share": 0.07133243606998654,
+          "share_ci_high": 0.09212752653683606,
+          "share_ci_low": 0.05494714041341623
+        },
+        {
+          "bin_label": "15:00-15:30",
+          "bin_start_minute": 330,
+          "count": 31,
+          "extreme": "Session low",
+          "observations": 743,
+          "share": 0.04172274562584118,
+          "share_ci_high": 0.05861293558338373,
+          "share_ci_low": 0.029546951689962873
+        },
+        {
+          "bin_label": "15:30-16:00",
+          "bin_start_minute": 360,
+          "count": 154,
+          "extreme": "Session high",
+          "observations": 743,
+          "share": 0.2072678331090175,
+          "share_ci_high": 0.23788370668886025,
+          "share_ci_low": 0.17966335786900436
+        },
+        {
+          "bin_label": "15:30-16:00",
+          "bin_start_minute": 360,
+          "count": 125,
+          "extreme": "Session low",
+          "observations": 743,
+          "share": 0.16823687752355315,
+          "share_ci_high": 0.19682592428433932,
+          "share_ci_low": 0.14306074888124054
+        }
+      ],
+      "strongest_years": [
+        {
+          "cut_value": "2021",
+          "mean_mae_bps": -11.236329388093951,
+          "mean_mfe_bps": 13.600457173775848,
+          "mean_return_bps": 3.0192221094073,
+          "mean_return_ci_high": 6.283917086729367,
+          "mean_return_ci_low": -0.24547286791476752,
+          "median_return_bps": 3.3853119498683526,
+          "observations": 104,
+          "positive_rate": 0.5961538461538461
+        },
+        {
+          "cut_value": "2022",
+          "mean_mae_bps": -26.18778316440922,
+          "mean_mfe_bps": 28.545303494404862,
+          "mean_return_bps": 3.0690384984625054,
+          "mean_return_ci_high": 8.295839719145441,
+          "mean_return_ci_low": -2.1577627222204305,
+          "median_return_bps": 4.518533241195666,
+          "observations": 242,
+          "positive_rate": 0.5495867768595041
+        },
+        {
+          "cut_value": "2023",
+          "mean_mae_bps": -15.286502032661142,
+          "mean_mfe_bps": 17.02294933995615,
+          "mean_return_bps": 2.4542702388763207,
+          "mean_return_ci_high": 5.406182146901669,
+          "mean_return_ci_low": -0.4976416691490271,
+          "median_return_bps": 2.665797814045412,
+          "observations": 239,
+          "positive_rate": 0.5774058577405857
+        },
+        {
+          "cut_value": "2024",
+          "mean_mae_bps": -13.390283161333869,
+          "mean_mfe_bps": 13.275467783323853,
+          "mean_return_bps": 1.0077134833604007,
+          "mean_return_ci_high": 4.188946641063719,
+          "mean_return_ci_low": -2.173519674342918,
+          "median_return_bps": 2.514354592194623,
+          "observations": 136,
+          "positive_rate": 0.5294117647058824
+        }
+      ]
+    },
+    "generatedAt": "2026-07-29T03:09:05.263658+00:00",
+    "status": "ready",
+    "version": 1
+  },
+  "sources": [
+    {
+      "id": "phase5_manifest",
+      "label": "Phase 5 analysis manifest",
+      "path": "data/manifests/phase5_manifest.json",
+      "query": {
+        "description": "Phase 5 coverage, method, gate checks, checksums, and descriptive findings.",
+        "engine": "duckdb",
+        "filters": [
+          "input_split = development"
+        ],
+        "language": "sql",
+        "metric_definitions": [
+          "development_rows = one-minute feature rows whose frozen split is development",
+          "market_clock_cells = unique scope, fixed start, and horizon aggregates",
+          "stability_cells = market-clock cells further cut by one calendar or lagged-regime value"
+        ],
+        "sql": "SELECT coverage, method, findings, validation FROM read_json_auto('data/manifests/phase5_manifest.json')",
+        "tables_used": [
+          "data/manifests/phase5_manifest.json"
+        ]
+      }
+    },
+    {
+      "id": "clock_blocks",
+      "label": "Phase 5 non-overlapping clock blocks",
+      "path": "results/phase5/report_clock_blocks.parquet",
+      "query": {
+        "description": "Non-overlapping 30-minute RTH and hourly full-session blocks selected from the complete market clock.",
+        "engine": "duckdb",
+        "filters": [
+          "scope = rth",
+          "horizon_minutes = 30",
+          "non-overlapping 30-minute starts",
+          "development split only"
+        ],
+        "language": "sql",
+        "metric_definitions": [
+          "mean_return_bps = average of (final included bar close / fixed-clock entry bar open - 1) * 10,000",
+          "mean_mfe_bps = average interval maximum high relative to entry open, in basis points",
+          "mean_mae_bps = average interval minimum low relative to entry open, in basis points"
+        ],
+        "sql": "SELECT clock_label || '-' || end_clock_label AS interval, clock_minute, observations, mean_return_bps, median_return_bps, mean_return_ci_low, mean_return_ci_high, positive_rate, mean_mfe_bps, mean_mae_bps FROM read_parquet('results/phase5/report_clock_blocks.parquet') WHERE scope = 'rth' ORDER BY clock_minute",
+        "tables_used": [
+          "results/phase5/report_clock_blocks.parquet"
+        ]
+      }
+    },
+    {
+      "id": "market_clock",
+      "label": "Phase 5 complete market-clock aggregates",
+      "path": "results/phase5/market_clock.parquet",
+      "query": {
+        "description": "Five-minute RTH forward-return profile with sample size, uncertainty, positive rates, and excursions.",
+        "engine": "duckdb",
+        "filters": [
+          "scope = rth",
+          "horizon_minutes = 5",
+          "development split only"
+        ],
+        "language": "sql",
+        "metric_definitions": [
+          "mean_return_ci_low/high = two-sided 95% Student-t confidence interval for the cell mean",
+          "positive_rate = observations with return_bps > 0 / observations"
+        ],
+        "sql": "SELECT clock_label, clock_minute, observations, mean_return_bps, median_return_bps, mean_return_ci_low, mean_return_ci_high, positive_rate, mean_mfe_bps, mean_mae_bps FROM read_parquet('results/phase5/market_clock.parquet') WHERE scope = 'rth' AND horizon_minutes = 5 ORDER BY clock_minute",
+        "tables_used": [
+          "results/phase5/market_clock.parquet"
+        ]
+      }
+    },
+    {
+      "id": "stability",
+      "label": "Phase 5 calendar and lagged-regime stability cuts",
+      "path": "results/phase5/market_clock_stability.parquet",
+      "query": {
+        "description": "Calendar-year cuts for the strongest non-overlapping 30-minute RTH development-sample block.",
+        "engine": "duckdb",
+        "filters": [
+          "scope = rth",
+          "horizon_minutes = 30",
+          "clock_minute = 300",
+          "cut_type = calendar_year",
+          "development split only"
+        ],
+        "language": "sql",
+        "metric_definitions": [
+          "sample_sufficient = observations >= 30",
+          "year means use the same fixed-clock return definition as the overall market clock"
+        ],
+        "sql": "SELECT cut_value, observations, mean_return_bps, median_return_bps, mean_return_ci_low, mean_return_ci_high, positive_rate, mean_mfe_bps, mean_mae_bps FROM read_parquet('results/phase5/market_clock_stability.parquet') WHERE scope = 'rth' AND horizon_minutes = 30 AND clock_minute = 300 AND cut_type = 'calendar_year' ORDER BY cut_value",
+        "tables_used": [
+          "results/phase5/market_clock_stability.parquet"
+        ]
+      }
+    },
+    {
+      "id": "turning_points",
+      "label": "Phase 5 RTH session-extreme timing",
+      "path": "results/phase5/turning_point_timing.parquet",
+      "query": {
+        "description": "Distribution of the first RTH session high and low across 30-minute clock bins.",
+        "engine": "duckdb",
+        "filters": [
+          "scope = rth",
+          "30-minute timing bins",
+          "development split only"
+        ],
+        "language": "sql",
+        "metric_definitions": [
+          "share = sessions whose first occurrence of the RTH high or low falls in the bin / RTH sessions",
+          "share_ci_low/high = two-sided 95% Wilson interval"
+        ],
+        "sql": "SELECT bin_label, bin_start_minute, CASE extreme_type WHEN 'high' THEN 'Session high' ELSE 'Session low' END AS extreme, observations, count, share, share_ci_low, share_ci_high FROM read_parquet('results/phase5/turning_point_timing.parquet') WHERE scope = 'rth' ORDER BY bin_start_minute, extreme",
+        "tables_used": [
+          "results/phase5/turning_point_timing.parquet"
+        ]
+      }
+    },
+    {
+      "id": "phase5_config",
+      "label": "Phase 5 frozen analysis configuration",
+      "path": "config/phase5.yaml",
+      "query": {
+        "description": "Frozen scopes, horizons, uncertainty method, stability dimensions, and descriptive-only reporting policy.",
+        "filters": [
+          "allowed_split = development",
+          "validation and final_untouched_test forbidden"
+        ],
+        "metric_definitions": [
+          "anchor_step_minutes = 5",
+          "horizons_minutes = 1, 5, 15, 30, and 60"
+        ],
+        "tables_used": [
+          "config/phase5.yaml"
+        ]
+      }
+    }
+  ],
+  "surface": "report"
+}

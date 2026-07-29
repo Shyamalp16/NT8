@@ -1,0 +1,56 @@
+version: phase5_v1
+analysis_class: descriptive_not_strategy
+timezone: America/New_York
+
+data_scope:
+  allowed_split: development
+  forbidden_splits:
+    - validation
+    - final_untouched_test
+  require_usable_sessions: true
+
+market_clock:
+  anchor_step_minutes: 5
+  horizons_minutes: [1, 5, 15, 30, 60]
+  scopes:
+    eth_full_session:
+      definition: Entire contiguous CME Globex session from 18:00 to 17:00 Eastern.
+      clock_column: session_minute
+      start_time: "18:00"
+      include_predicate: all
+      turning_point_bin_minutes: 60
+    rth:
+      definition: Regular trading hours from 09:30 to 16:00 Eastern.
+      clock_column: rth_minute
+      start_time: "09:30"
+      include_predicate: is_rth
+      turning_point_bin_minutes: 30
+
+statistics:
+  confidence_level: 0.95
+  min_stability_observations: 30
+  return_unit: basis_points
+  excursion_reference: interval_entry_open
+  interval_exit: final_bar_close
+  positive_return_rule: strictly_greater_than_zero
+  confidence_interval:
+    mean: student_t
+    positive_rate: wilson
+
+stability:
+  dimensions:
+    - calendar_year
+    - calendar_quarter
+    - calendar_weekday
+    - trend_regime
+    - volatility_regime
+    - volume_regime
+  missing_regime_label: unavailable
+
+reporting:
+  rth_summary_horizon_minutes: 30
+  rth_summary_start_step_minutes: 30
+  full_session_summary_horizon_minutes: 60
+  full_session_summary_start_step_minutes: 60
+  emphasize_unadjusted_exploratory_results: true
+  prohibit_strategy_language: true

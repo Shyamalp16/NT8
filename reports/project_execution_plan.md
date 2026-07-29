@@ -78,12 +78,18 @@ Gate passed.
 
 ## Phase 5: Unconditional time analysis
 
+Status: complete as of 2026-07-28. The development-only pipeline measured
+1,280,169 fixed-clock forward outcomes across the full Globex and RTH clocks,
+produced 1,734 clock/horizon cells and 43,350 stability cuts, quantified
+session-extreme timing, rejected validation and final-test rows, and passed a
+byte-for-byte rebuild check. See `reports/unconditional_time_analysis.md`.
+
 Using development data only, create the intraday market clock across prescribed
 horizons. Measure returns, excursions, timing, uncertainty, and stability by
 year, quarter, weekday, and lagged regime.
 
 Gate: descriptive results are complete, sample sizes are visible, and no result
-is presented as a strategy.
+is presented as a strategy. Gate passed.
 
 ## Phase 6: Event studies
 
