@@ -1,0 +1,130 @@
+{
+  "analysis_policy": {
+    "allowed_pre_final_splits": [
+      "development",
+      "validation"
+    ],
+    "analysis_loader_default_excludes_locked_final_split": true,
+    "construction_includes_locked_final_split": true,
+    "final_evaluation_unlock_required": true,
+    "forbidden_split": "final_untouched_test"
+  },
+  "artifacts": {
+    "bar_features": {
+      "bytes": 160531894,
+      "column_count": 128,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "data/features/mnq_1m_features.parquet",
+      "row_count": 1701735,
+      "schema": "timestamp_utc: timestamp[us, tz=UTC]\nbar_available_at_utc: timestamp[us, tz=UTC]\ntimestamp_et: string\nsession_date: date32[day]\nsplit: string\nfinal_test_locked: bool\nsymbol: string\nopen: double\nhigh: double\nlow: double\nclose: double\nup_volume: int64\ndown_volume: int64\ntotal_volume: int64\nup_ticks: int64\ndown_ticks: int64\ntotal_ticks: int64\nis_rth: bool\ncalendar_available_at_utc: timestamp[us, tz=UTC]\ncalendar_year: int16\ncalendar_quarter: int8\ncalendar_month: int8\ncalendar_iso_week: int8\ncalendar_weekday: int8\ncalendar_is_month_end_session: bool\nsession_minute: int16\nrth_minute: int16\nsession_segment: string\nprior_session_date: date32[day]\nprior_session_available_at_utc: timestamp[us, tz=UTC]\nprior_session_valid: bool\nprior_full_open: double\nprior_full_high: double\nprior_full_low: double\nprior_full_close: double\nprior_full_range: double\nprior_full_return: double\nprior_full_volume: double\nprior_rth_open: double\nprior_rth_high: double\nprior_rth_low: double\nprior_rth_close: double\nprior_rth_range: double\nprior_rth_return: double\nprior_rth_volume: double\novernight_available_at_utc: timestamp[us, tz=UTC]\novernight_valid: bool\novernight_open: double\novernight_high: double\novernight_low: double\novernight_close: double\novernight_range: double\novernight_return: double\novernight_volume: double\novernight_gap_from_prior_rth: double\nrth_open_gap_from_prior_rth: double\nopening_5_available_at_utc: timestamp[us, tz=UTC]\nopening_5_valid: bool\nopening_5_open: double\nopening_5_high: double\nopening_5_low: double\nopening_5_close: double\nopening_5_range: double\nopening_5_return: double\nopening_5_volume: double\nopening_15_available_at_utc: timestamp[us, tz=UTC]\nopening_15_valid: bool\nopening_15_open: double\nopening_15_high: double\nopening_15_low: double\nopening_15_close: double\nopening_15_range: double\nopening_15_return: double\nopening_15_volume: double\nopening_30_available_at_utc: timestamp[us, tz=UTC]\nopening_30_valid: bool\nopening_30_open: double\nopening_30_high: double\nopening_30_low: double\nopening_30_close: double\nopening_30_range: double\nopening_30_return: double\nopening_30_volume: double\nopening_60_available_at_utc: timestamp[us, tz=UTC]\nopening_60_valid: bool\nopening_60_open: double\nopening_60_high: double\nopening_60_low: double\nopening_60_close: double\nopening_60_range: double\nopening_60_return: double\nopening_60_volume: double\nbar_return_1: double\nbar_return_5: double\nbar_return_15: double\nbar_return_30: double\nbar_return_60: double\nrealized_vol_15: double\nrealized_vol_30: double\nrealized_vol_60: double\nrolling_range_15: double\nrolling_range_60: double\nsession_high_so_far: double\nsession_low_so_far: double\nsession_range_so_far: double\nsession_cumulative_volume: double\nclose_minus_prior_rth_high: double\nclose_minus_prior_rth_low: double\nclose_minus_prior_rth_close: double\nclose_minus_overnight_high: double\nclose_minus_overnight_low: double\nclose_minus_opening_30_high: double\nclose_minus_opening_30_low: double\nclose_vs_prior_rth_range: double\nabove_prior_rth_high: bool\nbelow_prior_rth_low: bool\nabove_overnight_high: bool\nbelow_overnight_low: bool\nregime_available_at_utc: timestamp[us, tz=UTC]\nlagged_rth_range_mean_20: double\nlagged_rth_range_std_20: double\nlagged_rth_volume_mean_20: double\nlagged_close_return_5: double\nlagged_volatility_ratio: double\nlagged_volume_ratio: double\ntrend_regime: string\nvolatility_regime: string\nvolume_regime: string",
+      "sha256": "a7642c40cd8802c410bfc57c6a64c221d2313f2daee6778484f2af68f7a3f393"
+    },
+    "feature_catalog": {
+      "bytes": 33404,
+      "path": "data/manifests/feature_catalog.json",
+      "sha256": "d26f3614955078d30d734be680819f4c91bfd8543e345ab7c8088f859fd1de1f"
+    },
+    "session_features": {
+      "bytes": 467067,
+      "column_count": 89,
+      "compression": "zstd",
+      "format": "parquet",
+      "path": "data/features/mnq_session_features.parquet",
+      "row_count": 1241,
+      "schema": "session_date: date32[day]\nsplit: large_string\nsession_usable: bool\nis_early_close: bool\nexpected_open_utc: timestamp[us, tz=UTC]\nexpected_close_utc: timestamp[us, tz=UTC]\nrth_open_utc: timestamp[us, tz=UTC]\ncalendar_available_at_utc: timestamp[us, tz=UTC]\ncalendar_year: int16\ncalendar_quarter: int8\ncalendar_month: int8\ncalendar_iso_week: int8\ncalendar_weekday: int8\ncalendar_is_month_end_session: bool\nprior_session_date: date32[day]\nprior_session_available_at_utc: timestamp[us, tz=UTC]\nprior_full_open: double\nprior_full_high: double\nprior_full_low: double\nprior_full_close: double\nprior_full_volume: double\nprior_rth_open: double\nprior_rth_high: double\nprior_rth_low: double\nprior_rth_close: double\nprior_rth_volume: double\nprior_full_range: double\nprior_full_return: double\nprior_rth_range: double\nprior_rth_return: double\nprior_session_valid: bool\novernight_available_at_utc: timestamp[us, tz=UTC]\novernight_valid: bool\novernight_open: double\novernight_high: double\novernight_low: double\novernight_close: double\novernight_range: double\novernight_return: double\novernight_volume: double\novernight_gap_from_prior_rth: double\nrth_open_gap_from_prior_rth: double\nopening_5_available_at_utc: timestamp[us, tz=UTC]\nopening_5_valid: bool\nopening_5_open: double\nopening_5_high: double\nopening_5_low: double\nopening_5_close: double\nopening_5_range: double\nopening_5_return: double\nopening_5_volume: double\nopening_15_available_at_utc: timestamp[us, tz=UTC]\nopening_15_valid: bool\nopening_15_open: double\nopening_15_high: double\nopening_15_low: double\nopening_15_close: double\nopening_15_range: double\nopening_15_return: double\nopening_15_volume: double\nopening_30_available_at_utc: timestamp[us, tz=UTC]\nopening_30_valid: bool\nopening_30_open: double\nopening_30_high: double\nopening_30_low: double\nopening_30_close: double\nopening_30_range: double\nopening_30_return: double\nopening_30_volume: double\nopening_60_available_at_utc: timestamp[us, tz=UTC]\nopening_60_valid: bool\nopening_60_open: double\nopening_60_high: double\nopening_60_low: double\nopening_60_close: double\nopening_60_range: double\nopening_60_return: double\nopening_60_volume: double\nregime_available_at_utc: timestamp[us, tz=UTC]\nlagged_rth_range_mean_20: double\nlagged_rth_range_std_20: double\nlagged_rth_volume_mean_20: double\nlagged_close_return_5: double\nlagged_volatility_ratio: double\nlagged_volume_ratio: double\ntrend_regime: large_string\nvolatility_regime: large_string\nvolume_regime: large_string\nfinal_test_locked: bool\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 12283",
+      "sha256": "17e75b24f71ef322a170494e75a1be674ff208ea827e182440a8821852d74cd9"
+    }
+  },
+  "created_at_utc": "2026-07-29T02:47:06.308707+00:00",
+  "created_by": "python -m src.features run",
+  "feature_count": 101,
+  "feature_families": [
+    "calendar",
+    "level",
+    "opening",
+    "overnight",
+    "prior_session",
+    "regime",
+    "volatility"
+  ],
+  "gate_passed": true,
+  "limitations": [
+    "Opening-window features are null on sessions that close before the window ends.",
+    "Prior-session, overnight, and lagged-regime features are null whenever required expected predecessor sessions are excluded.",
+    "One-minute bars imply next-bar-open availability for bar-close-derived features."
+  ],
+  "phase": 4,
+  "runtime_versions": {
+    "duckdb": "1.5.5",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "pyarrow": "25.0.0",
+    "python": "3.12.13",
+    "pyyaml": "6.0.3"
+  },
+  "source_hashes": {
+    "feature_config": "63e45f8100807d6edca72bed08178a4c5034e73aab7f3e5a1c975d1770c72df6",
+    "normalized": "0f3b5fe3153c77fc0c28bdee34656a82905ada011822d1bb0adce6a99fe02157",
+    "research_config": "1649e5716cfb8f51457499e57a3adfa5b74d2f90bf2b3255161ec45df4f26b4d",
+    "session_quality": "bd575649c146914dd9e9b600f6bb20be8e8ea1e73e169f848313249386e0ae06",
+    "split_config": "4e23a0871ad107c3061855fab7c2e22aff034570ae9b4ca283a0f30ddc7021b9"
+  },
+  "source_normalization_policy": "phase3_v1",
+  "validation": {
+    "checks": {
+      "bar_close_features_delayed_one_minute": true,
+      "bar_timestamps_unique": true,
+      "byte_reproducible_rebuild": true,
+      "calculation_spot_checks": true,
+      "catalog_matches_bar_schema": true,
+      "deliberate_leakage_injection_rejected": true,
+      "excluded_predecessors_invalidate_features": true,
+      "frozen_split_labels_preserved": true,
+      "locked_final_split_analysis_rejected": true,
+      "point_in_time_availability": true,
+      "research_boundaries_preserved": true,
+      "usable_row_count_preserved": true,
+      "usable_session_count_preserved": true
+    },
+    "details": {
+      "availability_violations": {
+        "bar_available_at_utc": 0,
+        "calendar_available_at_utc": 0,
+        "opening_15_available_at_utc": 0,
+        "opening_30_available_at_utc": 0,
+        "opening_5_available_at_utc": 0,
+        "opening_60_available_at_utc": 0,
+        "overnight_available_at_utc": 0,
+        "prior_session_available_at_utc": 0,
+        "regime_available_at_utc": 0,
+        "timestamp_utc": 0
+      },
+      "bar_feature_rows": 1701735,
+      "bar_feature_sessions": 1241,
+      "calculation_spot_check_violations": 0,
+      "expected_usable_sessions": 1241,
+      "feature_max_session_date": "2026-07-27",
+      "feature_min_session_date": "2021-07-29",
+      "missing_availability_columns": [],
+      "missing_catalog_columns": [],
+      "predecessor_violations": 0,
+      "reproducibility": {
+        "bar_original_sha256": "a7642c40cd8802c410bfc57c6a64c221d2313f2daee6778484f2af68f7a3f393",
+        "bar_rebuilt_sha256": "a7642c40cd8802c410bfc57c6a64c221d2313f2daee6778484f2af68f7a3f393",
+        "byte_identical": true,
+        "session_original_sha256": "17e75b24f71ef322a170494e75a1be674ff208ea827e182440a8821852d74cd9",
+        "session_rebuilt_sha256": "17e75b24f71ef322a170494e75a1be674ff208ea827e182440a8821852d74cd9"
+      },
+      "source_usable_rows": 1701735,
+      "split_row_counts": {
+        "development": 1021050,
+        "final_untouched_test": 338490,
+        "validation": 342195
+      }
+    },
+    "failed_checks": [],
+    "gate_passed": true
+  },
+  "version": "phase4_v1"
+}

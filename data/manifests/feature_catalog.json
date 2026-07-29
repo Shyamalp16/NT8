@@ -1,0 +1,919 @@
+{
+  "bar_semantics": {
+    "bar_duration_minutes": 1,
+    "decision_time": "next_bar_open",
+    "timestamp_meaning": "bar_open"
+  },
+  "features": [
+    {
+      "availability_column": "calendar_available_at_utc",
+      "definition": "Eastern trade-date year",
+      "dtype": "int16",
+      "family": "calendar",
+      "name": "calendar_year",
+      "source_window": "known calendar and current bar timestamp",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "calendar_available_at_utc",
+      "definition": "Eastern trade-date quarter",
+      "dtype": "int8",
+      "family": "calendar",
+      "name": "calendar_quarter",
+      "source_window": "known calendar and current bar timestamp",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "calendar_available_at_utc",
+      "definition": "Eastern trade-date month",
+      "dtype": "int8",
+      "family": "calendar",
+      "name": "calendar_month",
+      "source_window": "known calendar and current bar timestamp",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "calendar_available_at_utc",
+      "definition": "ISO week of the Eastern trade date",
+      "dtype": "int8",
+      "family": "calendar",
+      "name": "calendar_iso_week",
+      "source_window": "known calendar and current bar timestamp",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "calendar_available_at_utc",
+      "definition": "Monday=0 through Friday=4",
+      "dtype": "int8",
+      "family": "calendar",
+      "name": "calendar_weekday",
+      "source_window": "known calendar and current bar timestamp",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "calendar_available_at_utc",
+      "definition": "Last expected CME equity session in the trade-date month",
+      "dtype": "bool",
+      "family": "calendar",
+      "name": "calendar_is_month_end_session",
+      "source_window": "known calendar and current bar timestamp",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "timestamp_utc",
+      "definition": "Zero-based minute from the session open",
+      "dtype": "int16",
+      "family": "calendar",
+      "name": "session_minute",
+      "source_window": "known calendar and current bar timestamp",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "timestamp_utc",
+      "definition": "Minute offset from 09:30 Eastern",
+      "dtype": "int16",
+      "family": "calendar",
+      "name": "rth_minute",
+      "source_window": "known calendar and current bar timestamp",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "timestamp_utc",
+      "definition": "Overnight, opening, morning, afternoon, or post-RTH segment",
+      "dtype": "string",
+      "family": "calendar",
+      "name": "session_segment",
+      "source_window": "known calendar and current bar timestamp",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Immediate expected predecessor is usable",
+      "dtype": "bool",
+      "family": "prior_session",
+      "name": "prior_session_valid",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior full-session open",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_full_open",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior full-session high",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_full_high",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior full-session low",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_full_low",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior full-session close",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_full_close",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior full-session high minus low",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_full_range",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior full-session close/open minus one",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_full_return",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior full-session total volume",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_full_volume",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior RTH open",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_rth_open",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior RTH high",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_rth_high",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior RTH low",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_rth_low",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior RTH close",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_rth_close",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior RTH high minus low",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_rth_range",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior RTH close/open minus one",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_rth_return",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "prior_session_available_at_utc",
+      "definition": "Prior RTH total volume",
+      "dtype": "float64",
+      "family": "prior_session",
+      "name": "prior_rth_volume",
+      "source_window": "immediate previous expected session only",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "overnight_available_at_utc",
+      "definition": "Complete overnight window and usable predecessor",
+      "dtype": "bool",
+      "family": "overnight",
+      "name": "overnight_valid",
+      "source_window": "current session open through 09:29 Eastern plus immediate predecessor",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "overnight_available_at_utc",
+      "definition": "Current session 18:00 Eastern open",
+      "dtype": "float64",
+      "family": "overnight",
+      "name": "overnight_open",
+      "source_window": "current session open through 09:29 Eastern plus immediate predecessor",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "overnight_available_at_utc",
+      "definition": "High before 09:30 Eastern",
+      "dtype": "float64",
+      "family": "overnight",
+      "name": "overnight_high",
+      "source_window": "current session open through 09:29 Eastern plus immediate predecessor",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "overnight_available_at_utc",
+      "definition": "Low before 09:30 Eastern",
+      "dtype": "float64",
+      "family": "overnight",
+      "name": "overnight_low",
+      "source_window": "current session open through 09:29 Eastern plus immediate predecessor",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "overnight_available_at_utc",
+      "definition": "Last close before 09:30 Eastern",
+      "dtype": "float64",
+      "family": "overnight",
+      "name": "overnight_close",
+      "source_window": "current session open through 09:29 Eastern plus immediate predecessor",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "overnight_available_at_utc",
+      "definition": "Overnight high minus low",
+      "dtype": "float64",
+      "family": "overnight",
+      "name": "overnight_range",
+      "source_window": "current session open through 09:29 Eastern plus immediate predecessor",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "overnight_available_at_utc",
+      "definition": "Overnight close/open minus one",
+      "dtype": "float64",
+      "family": "overnight",
+      "name": "overnight_return",
+      "source_window": "current session open through 09:29 Eastern plus immediate predecessor",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "overnight_available_at_utc",
+      "definition": "Overnight total volume",
+      "dtype": "float64",
+      "family": "overnight",
+      "name": "overnight_volume",
+      "source_window": "current session open through 09:29 Eastern plus immediate predecessor",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "overnight_available_at_utc",
+      "definition": "Overnight close/prior RTH close minus one",
+      "dtype": "float64",
+      "family": "overnight",
+      "name": "overnight_gap_from_prior_rth",
+      "source_window": "current session open through 09:29 Eastern plus immediate predecessor",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "overnight_available_at_utc",
+      "definition": "Current RTH open/prior RTH close minus one",
+      "dtype": "float64",
+      "family": "overnight",
+      "name": "rth_open_gap_from_prior_rth",
+      "source_window": "current session open through 09:29 Eastern plus immediate predecessor",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_5_available_at_utc",
+      "definition": "Complete first 5 RTH minutes",
+      "dtype": "bool",
+      "family": "opening",
+      "name": "opening_5_valid",
+      "source_window": "09:30 through 5 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_5_available_at_utc",
+      "definition": "Open of the first 5 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_5_open",
+      "source_window": "09:30 through 5 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_5_available_at_utc",
+      "definition": "High of the first 5 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_5_high",
+      "source_window": "09:30 through 5 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_5_available_at_utc",
+      "definition": "Low of the first 5 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_5_low",
+      "source_window": "09:30 through 5 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_5_available_at_utc",
+      "definition": "Close of the first 5 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_5_close",
+      "source_window": "09:30 through 5 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_5_available_at_utc",
+      "definition": "High minus low over the first 5 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_5_range",
+      "source_window": "09:30 through 5 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_5_available_at_utc",
+      "definition": "Close/open minus one over the first 5 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_5_return",
+      "source_window": "09:30 through 5 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_5_available_at_utc",
+      "definition": "Volume in the first 5 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_5_volume",
+      "source_window": "09:30 through 5 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_15_available_at_utc",
+      "definition": "Complete first 15 RTH minutes",
+      "dtype": "bool",
+      "family": "opening",
+      "name": "opening_15_valid",
+      "source_window": "09:30 through 15 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_15_available_at_utc",
+      "definition": "Open of the first 15 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_15_open",
+      "source_window": "09:30 through 15 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_15_available_at_utc",
+      "definition": "High of the first 15 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_15_high",
+      "source_window": "09:30 through 15 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_15_available_at_utc",
+      "definition": "Low of the first 15 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_15_low",
+      "source_window": "09:30 through 15 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_15_available_at_utc",
+      "definition": "Close of the first 15 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_15_close",
+      "source_window": "09:30 through 15 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_15_available_at_utc",
+      "definition": "High minus low over the first 15 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_15_range",
+      "source_window": "09:30 through 15 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_15_available_at_utc",
+      "definition": "Close/open minus one over the first 15 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_15_return",
+      "source_window": "09:30 through 15 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_15_available_at_utc",
+      "definition": "Volume in the first 15 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_15_volume",
+      "source_window": "09:30 through 15 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_30_available_at_utc",
+      "definition": "Complete first 30 RTH minutes",
+      "dtype": "bool",
+      "family": "opening",
+      "name": "opening_30_valid",
+      "source_window": "09:30 through 30 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_30_available_at_utc",
+      "definition": "Open of the first 30 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_30_open",
+      "source_window": "09:30 through 30 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_30_available_at_utc",
+      "definition": "High of the first 30 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_30_high",
+      "source_window": "09:30 through 30 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_30_available_at_utc",
+      "definition": "Low of the first 30 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_30_low",
+      "source_window": "09:30 through 30 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_30_available_at_utc",
+      "definition": "Close of the first 30 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_30_close",
+      "source_window": "09:30 through 30 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_30_available_at_utc",
+      "definition": "High minus low over the first 30 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_30_range",
+      "source_window": "09:30 through 30 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_30_available_at_utc",
+      "definition": "Close/open minus one over the first 30 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_30_return",
+      "source_window": "09:30 through 30 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_30_available_at_utc",
+      "definition": "Volume in the first 30 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_30_volume",
+      "source_window": "09:30 through 30 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_60_available_at_utc",
+      "definition": "Complete first 60 RTH minutes",
+      "dtype": "bool",
+      "family": "opening",
+      "name": "opening_60_valid",
+      "source_window": "09:30 through 60 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_60_available_at_utc",
+      "definition": "Open of the first 60 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_60_open",
+      "source_window": "09:30 through 60 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_60_available_at_utc",
+      "definition": "High of the first 60 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_60_high",
+      "source_window": "09:30 through 60 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_60_available_at_utc",
+      "definition": "Low of the first 60 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_60_low",
+      "source_window": "09:30 through 60 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_60_available_at_utc",
+      "definition": "Close of the first 60 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_60_close",
+      "source_window": "09:30 through 60 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_60_available_at_utc",
+      "definition": "High minus low over the first 60 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_60_range",
+      "source_window": "09:30 through 60 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_60_available_at_utc",
+      "definition": "Close/open minus one over the first 60 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_60_return",
+      "source_window": "09:30 through 60 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "opening_60_available_at_utc",
+      "definition": "Volume in the first 60 RTH minutes",
+      "dtype": "float64",
+      "family": "opening",
+      "name": "opening_60_volume",
+      "source_window": "09:30 through 60 minutes after RTH open",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Close minus prior RTH high in points",
+      "dtype": "float64",
+      "family": "level",
+      "name": "close_minus_prior_rth_high",
+      "source_window": "current bar close and the named point-in-time reference level",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Close minus prior RTH low in points",
+      "dtype": "float64",
+      "family": "level",
+      "name": "close_minus_prior_rth_low",
+      "source_window": "current bar close and the named point-in-time reference level",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Close minus prior RTH close in points",
+      "dtype": "float64",
+      "family": "level",
+      "name": "close_minus_prior_rth_close",
+      "source_window": "current bar close and the named point-in-time reference level",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Close minus overnight high in points",
+      "dtype": "float64",
+      "family": "level",
+      "name": "close_minus_overnight_high",
+      "source_window": "current bar close and the named point-in-time reference level",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Close minus overnight low in points",
+      "dtype": "float64",
+      "family": "level",
+      "name": "close_minus_overnight_low",
+      "source_window": "current bar close and the named point-in-time reference level",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Close minus 30-minute opening high in points",
+      "dtype": "float64",
+      "family": "level",
+      "name": "close_minus_opening_30_high",
+      "source_window": "current bar close and the named point-in-time reference level",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Close minus 30-minute opening low in points",
+      "dtype": "float64",
+      "family": "level",
+      "name": "close_minus_opening_30_low",
+      "source_window": "current bar close and the named point-in-time reference level",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Distance from prior RTH close in prior-range units",
+      "dtype": "float64",
+      "family": "level",
+      "name": "close_vs_prior_rth_range",
+      "source_window": "current bar close and the named point-in-time reference level",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Close is above prior RTH high",
+      "dtype": "bool",
+      "family": "level",
+      "name": "above_prior_rth_high",
+      "source_window": "current bar close and the named point-in-time reference level",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Close is below prior RTH low",
+      "dtype": "bool",
+      "family": "level",
+      "name": "below_prior_rth_low",
+      "source_window": "current bar close and the named point-in-time reference level",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Close is above overnight high",
+      "dtype": "bool",
+      "family": "level",
+      "name": "above_overnight_high",
+      "source_window": "current bar close and the named point-in-time reference level",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Close is below overnight low",
+      "dtype": "bool",
+      "family": "level",
+      "name": "below_overnight_low",
+      "source_window": "current bar close and the named point-in-time reference level",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Current close / close 1 session bars earlier minus one",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "bar_return_1",
+      "source_window": "current and 1-bar lagged closes within the same session",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Current close / close 5 session bars earlier minus one",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "bar_return_5",
+      "source_window": "current and 5-bar lagged closes within the same session",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Current close / close 15 session bars earlier minus one",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "bar_return_15",
+      "source_window": "current and 15-bar lagged closes within the same session",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Current close / close 30 session bars earlier minus one",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "bar_return_30",
+      "source_window": "current and 30-bar lagged closes within the same session",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Current close / close 60 session bars earlier minus one",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "bar_return_60",
+      "source_window": "current and 60-bar lagged closes within the same session",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Sample standard deviation of one-minute log returns over 15 bars",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "realized_vol_15",
+      "source_window": "trailing 15 bars in the current session including current close",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Sample standard deviation of one-minute log returns over 30 bars",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "realized_vol_30",
+      "source_window": "trailing 30 bars in the current session including current close",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Sample standard deviation of one-minute log returns over 60 bars",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "realized_vol_60",
+      "source_window": "trailing 60 bars in the current session including current close",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Trailing 15-bar maximum high minus minimum low",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "rolling_range_15",
+      "source_window": "trailing 15 current-session bars including the current bar",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Trailing 60-bar maximum high minus minimum low",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "rolling_range_60",
+      "source_window": "trailing 60 current-session bars including the current bar",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Maximum high from session open through current bar",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "session_high_so_far",
+      "source_window": "current session from open through current bar",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Minimum low from session open through current bar",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "session_low_so_far",
+      "source_window": "current session from open through current bar",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Session high so far minus session low so far",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "session_range_so_far",
+      "source_window": "current session from open through current bar",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "bar_available_at_utc",
+      "definition": "Volume from session open through current bar",
+      "dtype": "float64",
+      "family": "volatility",
+      "name": "session_cumulative_volume",
+      "source_window": "current session from open through current bar",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "regime_available_at_utc",
+      "definition": "Mean RTH range across the prior 20 expected sessions",
+      "dtype": "float64",
+      "family": "regime",
+      "name": "lagged_rth_range_mean_20",
+      "source_window": "strictly lagged expected-session window ending at the prior close",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "regime_available_at_utc",
+      "definition": "Sample standard deviation of RTH range across prior 20 sessions",
+      "dtype": "float64",
+      "family": "regime",
+      "name": "lagged_rth_range_std_20",
+      "source_window": "strictly lagged expected-session window ending at the prior close",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "regime_available_at_utc",
+      "definition": "Mean RTH volume across the prior 20 expected sessions",
+      "dtype": "float64",
+      "family": "regime",
+      "name": "lagged_rth_volume_mean_20",
+      "source_window": "strictly lagged expected-session window ending at the prior close",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "regime_available_at_utc",
+      "definition": "Return ending at the prior RTH close across 5 sessions",
+      "dtype": "float64",
+      "family": "regime",
+      "name": "lagged_close_return_5",
+      "source_window": "strictly lagged expected-session window ending at the prior close",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "regime_available_at_utc",
+      "definition": "Prior RTH range divided by its lagged rolling mean",
+      "dtype": "float64",
+      "family": "regime",
+      "name": "lagged_volatility_ratio",
+      "source_window": "strictly lagged expected-session window ending at the prior close",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "regime_available_at_utc",
+      "definition": "Prior RTH volume divided by its lagged rolling mean",
+      "dtype": "float64",
+      "family": "regime",
+      "name": "lagged_volume_ratio",
+      "source_window": "strictly lagged expected-session window ending at the prior close",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "regime_available_at_utc",
+      "definition": "down, flat, or up from lagged close return",
+      "dtype": "string",
+      "family": "regime",
+      "name": "trend_regime",
+      "source_window": "strictly lagged expected-session window ending at the prior close",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "regime_available_at_utc",
+      "definition": "low, normal, or high from lagged volatility ratio",
+      "dtype": "string",
+      "family": "regime",
+      "name": "volatility_regime",
+      "source_window": "strictly lagged expected-session window ending at the prior close",
+      "uses_future_data": false
+    },
+    {
+      "availability_column": "regime_available_at_utc",
+      "definition": "low, normal, or high from lagged volume ratio",
+      "dtype": "string",
+      "family": "regime",
+      "name": "volume_regime",
+      "source_window": "strictly lagged expected-session window ending at the prior close",
+      "uses_future_data": false
+    }
+  ],
+  "version": "phase4_v1"
+}

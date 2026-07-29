@@ -27,9 +27,11 @@ The current MCP audit found usable minute and daily bars for individual MNQ cont
 
 ## Current Phase
 
-Phases 1 through 3 are complete. Phase 2 acquired all 265 planned one-minute
-discovery chunks and all 40 paired daily roll requests. Phase 3 verified every
-raw checksum, produced a normalized 1,769,795-row MNQ dataset, created a quality
-record for all 1,294 expected sessions, and retained 1,241 usable sessions after
-explicit exclusions. Phase 4 feature construction is next. The full sequence
-and phase gates are documented in `reports/project_execution_plan.md`.
+Phases 1 through 4 are complete. Phase 4 produced a reproducible
+1,701,735-row point-in-time feature table across all 1,241 usable sessions,
+with 101 catalogued calendar, prior-session, overnight, opening, level,
+volatility, and lagged-regime features. Every feature family has an explicit
+availability timestamp, excluded predecessors invalidate dependent features,
+and the analysis loader keeps the final-test split locked. Phase 5
+unconditional time analysis is next. The full sequence and phase gates are
+documented in `reports/project_execution_plan.md`.

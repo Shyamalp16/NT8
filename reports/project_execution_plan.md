@@ -63,11 +63,18 @@ record. Gate passed.
 
 ## Phase 4: Feature construction
 
+Status: complete as of 2026-07-28. The reproducible pipeline retained all
+1,701,735 usable bars and all 1,241 usable sessions, catalogued 101
+point-in-time features, rejected deliberate leakage injection, preserved the
+locked final-test split, and passed an exact byte-for-byte rebuild check. See
+`reports/feature_construction_report.md`.
+
 Build point-in-time calendar, prior-day, overnight, opening, level, volatility,
 and regime features. Feature timestamps must state when values become
 available. Add deliberate leakage tests that must fail.
 
 Gate: features reproduce from normalized data and pass point-in-time tests.
+Gate passed.
 
 ## Phase 5: Unconditional time analysis
 

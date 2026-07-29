@@ -1,0 +1,28 @@
+version: phase4_v1
+timezone: America/New_York
+
+bar_semantics:
+  timestamp_meaning: bar_open
+  bar_duration_minutes: 1
+  decision_time: next_bar_open
+
+windows:
+  opening_minutes: [5, 15, 30, 60]
+  return_minutes: [1, 5, 15, 30, 60]
+  realized_volatility_minutes: [15, 30, 60]
+  rolling_range_minutes: [15, 60]
+  daily_regime_sessions: 20
+  short_regime_sessions: 5
+
+regime_thresholds:
+  trend_return: 0.005
+  volatility_ratio_low: 0.75
+  volatility_ratio_high: 1.25
+  volume_ratio_low: 0.75
+  volume_ratio_high: 1.25
+
+analysis_policy:
+  allowed_pre_final_splits: [development, validation]
+  forbidden_split: final_untouched_test
+  final_evaluation_unlock_required: true
+
