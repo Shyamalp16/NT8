@@ -1,6 +1,6 @@
 # Data Acquisition Report
 
-Status: Phase 2 in progress as of 2026-07-28.
+Status: Phase 2 acquisition complete as of 2026-07-28.
 
 ## Acquisition design
 
@@ -38,13 +38,17 @@ avoid decade ambiguity.
 ## Minute acquisition progress
 
 - Planned minute chunks: 265
-- Completed discovery chunks: 7
-- Pending discovery chunks: 258
-- Completed contract segment: `MNQU1`, 2021-07-28 through the selected
-  2021-09-14 roll boundary
-- Rows in the completed MNQU1 segment: 46,678
+- Completed discovery chunks: 265
+- Pending discovery chunks: 0
+- Successful responses: 265
+- Empty or failed responses: 0
+- Completed contract span: `MNQU1` through `MNQU6`, from
+  `2021-07-28T04:00:00Z` through `2026-07-28T03:59:00Z`
+- Total discovery rows: 1,770,155
 - Duplicate timestamps reported during ingestion: 0
-- Provider-order breaks reported during ingestion: 34
+- Provider-order breaks reported during ingestion: 1,290
+- Immutable raw response files: 265
+- Raw response bytes: 279,543,350
 - Pilot session rows: 1,380
 
 The raw responses are deliberately not sorted. The provider returns each
@@ -53,20 +57,20 @@ request, producing one order break per returned session. For example, the pilot
 placed the `22:00-03:59 UTC` block before the `04:00-20:59 UTC` block. Phase 3
 will sort and audit timestamps while retaining the immutable provider response.
 
-One seven-day chunk returned 6,899 rather than 6,900 rows, and the Labor Day
-week returned fewer bars. These differences are not silently repaired during
-acquisition; Phase 3 will classify the exact missing minute and expected holiday
-closures.
+Seven-day chunk row counts range from 1,380 to 6,901 because the manifest
+contains partial contract-boundary intervals, holiday weeks, maintenance gaps,
+and provider variations. These differences are not silently repaired during
+acquisition; Phase 3 will classify exact missing minutes and expected closures.
 
 ## Current limitations and remaining work
 
-The full one-minute acquisition is intentionally incomplete. Raw responses for
-the roll study, pilot, and first contract segment are cached locally; large raw
-JSON files are excluded from Git, while their request manifests, row counts,
-timestamp bounds, paths, and checksums are tracked.
+The full planned one-minute MNQ discovery acquisition is complete. Raw
+responses for the roll study, pilot, and all 265 discovery chunks are cached
+locally. Large raw JSON files are excluded from Git, while request manifests,
+row counts, timestamp bounds, paths, and checksums are tracked.
 
-Phase 2 completes only when all remaining minute chunks are successful, empty
-for a documented reason, or present in the failure log after retries. NQ
-confirmation data will be requested later for strong candidates rather than
-doubling the broad discovery download before an MNQ edge exists.
-
+Phase 3 must sort and normalize the provider's session-ordered bars, audit
+calendar and roll-boundary gaps, and construct the chronological development,
+validation, and untouched final-test datasets without leakage. NQ confirmation
+data remains deferred until strong MNQ candidates exist rather than doubling
+the broad discovery download before an edge is demonstrated.

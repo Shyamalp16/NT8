@@ -27,6 +27,8 @@ The current MCP audit found usable minute and daily bars for individual MNQ cont
 
 ## Current Phase
 
-Phase 1 is complete at Git checkpoint `3eadb90`. Phase 2 data-acquisition
-infrastructure is in progress. The full sequence and phase gates are documented
-in `reports/project_execution_plan.md`.
+Phase 1 is complete at Git checkpoint `3eadb90`. Phase 2 data acquisition is
+complete: all 265 planned one-minute discovery chunks and all 40 paired daily
+roll requests were acquired successfully and verified against the immutable
+ledger. Phase 3 data-quality audit is next. The full sequence and phase gates
+are documented in `reports/project_execution_plan.md`.

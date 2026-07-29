@@ -23,6 +23,10 @@ specifications, and limitations are documented from small read-only probes.
 
 ## Phase 2: Data acquisition
 
+Status: complete as of 2026-07-28. All 265 planned one-minute discovery chunks
+and 40 paired daily roll requests succeeded, with immutable raw responses and
+verified SHA-256 ledger entries.
+
 Build a restartable request planner and immutable response cache. Inventory each
 quarterly MNQ contract in the research period, acquire daily bars around rolls,
 select executable rolls from lagged volume crossover when possible, and use a
@@ -130,4 +134,3 @@ conservative warranted recommendation.
 
 Gate: every headline claim traces to a machine-readable result and the report
 does not recommend live deployment from historical research alone.
-
