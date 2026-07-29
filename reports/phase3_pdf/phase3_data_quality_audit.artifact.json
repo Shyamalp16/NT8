@@ -1,0 +1,440 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "title": "Phase 3 Data-Quality Audit",
+    "description": "Technical audit of the normalized MNQ one-minute discovery dataset.",
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# Phase 3 Data-Quality Audit"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "quality_summary",
+        "body": "## Technical summary\n\nThe Phase 3 gate passed. The normalized MNQ dataset is suitable for feature construction only when downstream code filters to `session_usable = true`. The audit retained **1,241 of 1,294 expected sessions (95.9%)** and **1,701,735 of 1,769,795 normalized bars (96.2%)**. All 265 raw responses passed checksum verification, with no invalid OHLCV rows or duplicate keys."
+      },
+      {
+        "id": "headline_metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "usable_sessions",
+          "usable_bars",
+          "excluded_sessions"
+        ]
+      },
+      {
+        "id": "coverage_finding",
+        "type": "markdown",
+        "sourceId": "session_quality",
+        "body": "## Usable coverage is consistently high, with explicit exclusions every year\n\nUsable sessions exceed excluded sessions by a wide margin in every calendar year. The chart keeps exclusions visible instead of hiding them through imputation. The 53 excluded sessions consist of 20 mixed-contract roll sessions plus conservative exclusions for provider gaps or timestamps outside the expected interval."
+      },
+      {
+        "id": "quality_chart_block",
+        "type": "chart",
+        "chartId": "quality_by_year"
+      },
+      {
+        "id": "split_finding",
+        "type": "markdown",
+        "sourceId": "session_quality",
+        "body": "## The locked final-test boundary remains intact\n\nDevelopment retains 744 usable sessions, validation retains 250, and the final untouched test retains 247. Excluded sessions stay inside their original chronological split; the boundaries were not moved in response to prices, returns, or strategy results."
+      },
+      {
+        "id": "split_table_block",
+        "type": "table",
+        "tableId": "split_quality_table"
+      },
+      {
+        "id": "definitions",
+        "type": "markdown",
+        "body": "## Scope and definitions\n\nThe source population is 265 immutable one-minute MNQ responses covering trade dates July 28, 2021 through July 27, 2026. A CME Globex Equity session normally runs from 18:00 Eastern on the prior calendar day through 17:00 Eastern on the trade date. Bar timestamps denote the start of a half-open one-minute interval. RTH is 09:30-15:59 Eastern."
+      },
+      {
+        "id": "methods",
+        "type": "markdown",
+        "body": "## Deterministic normalization and audit method\n\nEach raw SHA-256 was recalculated before parsing. Bars were validated for schema, numeric finiteness, OHLC ordering, positive prices, non-negative volume and ticks, minute alignment, and 0.25-point tick alignment. UTC was preserved, Eastern timestamps include their DST offset, and every observed minute was reconciled to the product calendar. Exact duplicates would retain the lexicographically first request and source row; none were found."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Limitations and robustness boundaries\n\nNQ confirmation remains deferred under the Phase 2 scope. Two Good Friday sessions have no provider bars relative to the product calendar and are excluded without imputation. All roll-date sessions are excluded because Phase 2 changed contracts at midnight Eastern rather than the session open. The final-test interval was audited only for structural quality - no signals or performance were examined."
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Phase 4 requirements\n\n1. Filter all research inputs to `session_usable = true`.\n2. Keep the finalized split labels and locked final-test boundary unchanged.\n3. Make every feature's availability timestamp explicit.\n4. Invalidate prior-session and overnight features whenever a prerequisite session is excluded.\n5. Prevent feature-analysis output from consulting the final-test split."
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## Further questions\n\nSession-aligned roll data can be reacquired later if a frozen finalist depends on roll weeks. Likewise, missing non-roll sessions can be re-requested before granular finalist validation without changing the chronological boundaries."
+      }
+    ],
+    "cards": [
+      {
+        "id": "usable_sessions",
+        "description": "Expected CME sessions that passed all session-level quality gates.",
+        "dataset": "headline",
+        "sourceId": "quality_summary",
+        "metrics": [
+          {
+            "label": "Usable sessions",
+            "field": "usable_sessions",
+            "format": "number"
+          },
+          {
+            "label": "Coverage",
+            "field": "usable_session_rate",
+            "format": "percent"
+          },
+          {
+            "label": "Expected",
+            "field": "expected_sessions",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "usable_bars",
+        "description": "Normalized rows whose session passed the quality gate.",
+        "dataset": "headline",
+        "sourceId": "quality_summary",
+        "metrics": [
+          {
+            "label": "Usable bars",
+            "field": "usable_bars",
+            "format": "number"
+          },
+          {
+            "label": "Coverage",
+            "field": "usable_bar_rate",
+            "format": "percent"
+          },
+          {
+            "label": "Normalized",
+            "field": "normalized_bars",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "excluded_sessions",
+        "description": "Sessions retained for traceability but prohibited from downstream research.",
+        "dataset": "headline",
+        "sourceId": "quality_summary",
+        "metrics": [
+          {
+            "label": "Excluded sessions",
+            "field": "excluded_sessions",
+            "format": "number"
+          },
+          {
+            "label": "Roll sessions",
+            "field": "roll_sessions",
+            "format": "number"
+          },
+          {
+            "label": "Missing minutes",
+            "field": "missing_minutes",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "quality_by_year",
+        "title": "Session quality by calendar year",
+        "description": "Expected CME Globex Equity sessions from July 2021 through July 2026.",
+        "type": "bar",
+        "dataset": "year_quality",
+        "sourceId": "session_quality",
+        "encodings": {
+          "x": {
+            "field": "year",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "session_count",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "status",
+            "type": "nominal"
+          }
+        },
+        "options": {
+          "grouping": "stacked",
+          "orientation": "vertical"
+        },
+        "showDescription": true
+      }
+    ],
+    "tables": [
+      {
+        "id": "split_quality_table",
+        "title": "Session quality by chronological split",
+        "description": "Frozen date boundaries; exact session counts after structural audit.",
+        "dataset": "split_quality",
+        "sourceId": "session_quality",
+        "columns": [
+          {
+            "field": "split",
+            "label": "Split",
+            "type": "text"
+          },
+          {
+            "field": "quality_records",
+            "label": "Quality records",
+            "type": "number",
+            "format": "number"
+          },
+          {
+            "field": "usable_sessions",
+            "label": "Usable sessions",
+            "type": "number",
+            "format": "number"
+          },
+          {
+            "field": "excluded_sessions",
+            "label": "Excluded sessions",
+            "type": "number",
+            "format": "number"
+          },
+          {
+            "field": "usable_rate",
+            "label": "Usable rate",
+            "type": "number",
+            "format": "percent"
+          }
+        ],
+        "defaultSort": {
+          "field": "quality_records",
+          "direction": "desc"
+        },
+        "showDescription": true
+      }
+    ],
+    "sources": [
+      {
+        "id": "quality_summary",
+        "label": "Phase 3 aggregate quality results",
+        "path": "data/manifests/data_quality_summary.json",
+        "query": {
+          "description": "Aggregate session and normalized-bar coverage emitted by the reproducible pipeline.",
+          "engine": "duckdb",
+          "language": "sql",
+          "sql": "WITH sessions AS (SELECT count(*) FILTER (WHERE expected_session) AS expected_sessions, count(*) FILTER (WHERE session_usable) AS usable_sessions, count(*) FILTER (WHERE NOT session_usable) AS excluded_sessions, sum(missing_minutes) AS missing_minutes FROM read_csv_auto('data/manifests/session_quality.csv')), bars AS (SELECT count(*) AS normalized_bars, count(*) FILTER (WHERE session_usable) AS usable_bars FROM read_parquet('data/normalized/mnq_1m.parquet')) SELECT *, usable_sessions::DOUBLE / expected_sessions AS usable_session_rate, usable_bars::DOUBLE / normalized_bars AS usable_bar_rate, 20 AS roll_sessions FROM sessions CROSS JOIN bars",
+          "tables_used": [
+            "data/manifests/session_quality.csv",
+            "data/normalized/mnq_1m.parquet"
+          ],
+          "filters": [
+            "trade_date from 2021-07-28 through 2026-07-27",
+            "current incomplete session excluded"
+          ],
+          "metric_definitions": [
+            "usable_session_rate = usable expected sessions / expected sessions",
+            "usable_bar_rate = normalized rows in usable sessions / all normalized rows"
+          ]
+        }
+      },
+      {
+        "id": "session_quality",
+        "label": "Phase 3 session-quality records",
+        "path": "data/manifests/session_quality.csv",
+        "query": {
+          "description": "Session rows used for annual coverage and chronological split summaries.",
+          "engine": "duckdb",
+          "language": "sql",
+          "sql": "SELECT session_date, year(session_date) AS year, split, quality_status, session_usable, expected_session, observed_rows, missing_minutes FROM read_csv_auto('data/manifests/session_quality.csv')",
+          "tables_used": [
+            "data/manifests/session_quality.csv"
+          ],
+          "filters": [
+            "session_date from 2021-07-28 through 2026-07-27"
+          ],
+          "metric_definitions": [
+            "usable session = expected session with no roll, missing-minute, outside-interval, or duplicate-session exclusion"
+          ]
+        }
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "usable_sessions": 1241,
+          "expected_sessions": 1294,
+          "usable_session_rate": 0.9590417311,
+          "usable_bars": 1701735,
+          "normalized_bars": 1769795,
+          "usable_bar_rate": 0.9615435686,
+          "excluded_sessions": 53,
+          "roll_sessions": 20,
+          "missing_minutes": 2969
+        }
+      ],
+      "year_quality": [
+        {
+          "year": "2021",
+          "status": "Usable",
+          "session_count": 106,
+          "total_sessions": 112,
+          "usable_rate": 0.9464285714
+        },
+        {
+          "year": "2021",
+          "status": "Excluded",
+          "session_count": 6,
+          "total_sessions": 112,
+          "usable_rate": 0.9464285714
+        },
+        {
+          "year": "2022",
+          "status": "Usable",
+          "session_count": 249,
+          "total_sessions": 258,
+          "usable_rate": 0.9651162791
+        },
+        {
+          "year": "2022",
+          "status": "Excluded",
+          "session_count": 9,
+          "total_sessions": 258,
+          "usable_rate": 0.9651162791
+        },
+        {
+          "year": "2023",
+          "status": "Usable",
+          "session_count": 248,
+          "total_sessions": 258,
+          "usable_rate": 0.9612403101
+        },
+        {
+          "year": "2023",
+          "status": "Excluded",
+          "session_count": 10,
+          "total_sessions": 258,
+          "usable_rate": 0.9612403101
+        },
+        {
+          "year": "2024",
+          "status": "Usable",
+          "session_count": 249,
+          "total_sessions": 260,
+          "usable_rate": 0.9576923077
+        },
+        {
+          "year": "2024",
+          "status": "Excluded",
+          "session_count": 11,
+          "total_sessions": 260,
+          "usable_rate": 0.9576923077
+        },
+        {
+          "year": "2025",
+          "status": "Usable",
+          "session_count": 248,
+          "total_sessions": 259,
+          "usable_rate": 0.9575289575
+        },
+        {
+          "year": "2025",
+          "status": "Excluded",
+          "session_count": 11,
+          "total_sessions": 259,
+          "usable_rate": 0.9575289575
+        },
+        {
+          "year": "2026",
+          "status": "Usable",
+          "session_count": 141,
+          "total_sessions": 147,
+          "usable_rate": 0.9591836735
+        },
+        {
+          "year": "2026",
+          "status": "Excluded",
+          "session_count": 6,
+          "total_sessions": 147,
+          "usable_rate": 0.9591836735
+        }
+      ],
+      "split_quality": [
+        {
+          "split": "Development",
+          "quality_records": 777,
+          "usable_sessions": 744,
+          "excluded_sessions": 33,
+          "usable_rate": 0.9575289575
+        },
+        {
+          "split": "Validation",
+          "quality_records": 258,
+          "usable_sessions": 250,
+          "excluded_sessions": 8,
+          "usable_rate": 0.9689922481
+        },
+        {
+          "split": "Final untouched test",
+          "quality_records": 259,
+          "usable_sessions": 247,
+          "excluded_sessions": 12,
+          "usable_rate": 0.9536679537
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "quality_summary",
+      "label": "Phase 3 aggregate quality results",
+      "path": "data/manifests/data_quality_summary.json",
+      "query": {
+        "description": "Aggregate session and normalized-bar coverage emitted by the reproducible pipeline.",
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "WITH sessions AS (SELECT count(*) FILTER (WHERE expected_session) AS expected_sessions, count(*) FILTER (WHERE session_usable) AS usable_sessions, count(*) FILTER (WHERE NOT session_usable) AS excluded_sessions, sum(missing_minutes) AS missing_minutes FROM read_csv_auto('data/manifests/session_quality.csv')), bars AS (SELECT count(*) AS normalized_bars, count(*) FILTER (WHERE session_usable) AS usable_bars FROM read_parquet('data/normalized/mnq_1m.parquet')) SELECT *, usable_sessions::DOUBLE / expected_sessions AS usable_session_rate, usable_bars::DOUBLE / normalized_bars AS usable_bar_rate, 20 AS roll_sessions FROM sessions CROSS JOIN bars",
+        "tables_used": [
+          "data/manifests/session_quality.csv",
+          "data/normalized/mnq_1m.parquet"
+        ],
+        "filters": [
+          "trade_date from 2021-07-28 through 2026-07-27",
+          "current incomplete session excluded"
+        ],
+        "metric_definitions": [
+          "usable_session_rate = usable expected sessions / expected sessions",
+          "usable_bar_rate = normalized rows in usable sessions / all normalized rows"
+        ]
+      }
+    },
+    {
+      "id": "session_quality",
+      "label": "Phase 3 session-quality records",
+      "path": "data/manifests/session_quality.csv",
+      "query": {
+        "description": "Session rows used for annual coverage and chronological split summaries.",
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT session_date, year(session_date) AS year, split, quality_status, session_usable, expected_session, observed_rows, missing_minutes FROM read_csv_auto('data/manifests/session_quality.csv')",
+        "tables_used": [
+          "data/manifests/session_quality.csv"
+        ],
+        "filters": [
+          "session_date from 2021-07-28 through 2026-07-27"
+        ],
+        "metric_definitions": [
+          "usable session = expected session with no roll, missing-minute, outside-interval, or duplicate-session exclusion"
+        ]
+      }
+    }
+  ]
+}
